@@ -3,409 +3,277 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Qcipher | AI-Powered Quantum Security</title>
+    <title>QCipher - Automated Quantum Cryptography</title>
     <style>
         :root {
             --black: #0a0a0a;
             --dark: #121212;
-            --darker: #080808;
             --gold: #FFD700;
-            --gold-light: rgba(255, 215, 0, 0.3);
-            --gold-dark: #B8860B;
+            --gold-light: rgba(255, 215, 0, 0.1);
             --text: #e0e0e0;
             --text-secondary: #a0a0a0;
-            --card-bg: rgba(30, 30, 30, 0.8);
-            --glass: rgba(255, 255, 255, 0.05);
-        }
-
-        @keyframes particle-move {
-            0% { transform: translateY(0) translateX(0); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
-        }
-
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-
-        .particle {
-            position: absolute;
-            background: var(--gold-light);
-            border-radius: 50%;
-            animation: particle-move linear infinite;
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: var(--black);
+            background: var(--black);
             color: var(--text);
             line-height: 1.6;
-            overflow-x: hidden;
         }
 
-        header {
-            background-color: rgba(10, 10, 10, 0.95);
-            padding: 1.5rem 5%;
+        /* Header with Logo */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 5%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: fixed;
-            width: 90%;
-            top: 0;
-            z-index: 1000;
-            backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--gold-light);
         }
 
         .logo-container {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 1rem;
+            text-decoration: none;
         }
 
-        .logo {
+        .logo-img {
             height: 40px;
-            transition: transform 0.3s;
+            width: auto;
         }
 
-        .logo-text {
+        .company-name {
             font-weight: 700;
             font-size: 1.5rem;
-            background: linear-gradient(90deg, var(--gold) 0%, var(--gold-dark) 100%);
+            background: linear-gradient(90deg, var(--gold), #B8860B);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
         }
 
-        nav ul {
-            display: flex;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            gap: 2rem;
-        }
-
-        nav ul li a {
-            color: var(--text);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: all 0.3s;
-            position: relative;
-            padding: 0.5rem 0;
-        }
-
-        nav ul li a:hover {
-            color: var(--gold);
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background: linear-gradient(90deg, var(--gold) 0%, var(--gold-dark) 100%);
-            transition: width 0.3s;
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
+        /* Hero Section */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
+            text-align: center;
             padding: 0 5%;
             position: relative;
+            margin-top: 80px;
         }
 
-        .hero-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-            padding-top: 100px;
+        .particle {
+            position: absolute;
+            background: var(--gold-light);
+            border-radius: 50%;
+            pointer-events: none;
         }
 
-        .hero h1 {
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
-            margin-bottom: 1.5rem;
-            font-weight: 800;
-            line-height: 1.1;
-        }
-
-        .hero h1 .ai-text {
-            background: linear-gradient(90deg, var(--gold) 0%, var(--gold-dark) 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .hero p {
-            font-size: clamp(1rem, 2vw, 1.3rem);
-            max-width: 700px;
-            margin: 0 auto 3rem;
-            color: var(--text-secondary);
-        }
-
-        .cta-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: linear-gradient(90deg, var(--gold) 0%, var(--gold-dark) 100%);
-            color: var(--black);
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
-        }
-
-        .section {
-            padding: 8rem 5%;
-            position: relative;
-        }
-
-        .section-title {
-            font-size: clamp(1.8rem, 4vw, 3rem);
-            margin-bottom: 4rem;
-            font-weight: 800;
-            text-align: center;
-        }
-
-        .features-grid {
+        /* Value Proposition */
+        .value-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            max-width: 1300px;
-            margin: 0 auto;
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 5%;
         }
 
-        .feature-card {
-            background: var(--card-bg);
-            border-radius: 15px;
+        .value-card {
+            background: rgba(30, 30, 30, 0.8);
+            border-radius: 16px;
             padding: 2rem;
             border: 1px solid var(--gold-light);
             transition: all 0.3s;
         }
 
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        .value-card:hover {
+            transform: translateY(-5px);
         }
 
-        .feature-icon {
-            font-size: 2rem;
+        /* CTAs */
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            margin: 1rem 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .primary-cta {
+            background: var(--gold);
+            color: var(--black);
+            border: 2px solid var(--gold);
+        }
+
+        .secondary-cta {
+            border: 2px solid var(--gold);
             color: var(--gold);
-            margin-bottom: 1rem;
+            background: transparent;
         }
 
-        .process-flow {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .contact-form {
+        /* Waitlist Form */
+        .waitlist-section {
             max-width: 600px;
-            margin: 0 auto;
-            background: var(--card-bg);
-            border-radius: 15px;
-            padding: 3rem;
-            border: 1px solid var(--gold-light);
+            margin: 4rem auto;
+            padding: 2rem;
+            background: rgba(30, 30, 30, 0.8);
+            border-radius: 16px;
+            text-align: center;
         }
 
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
+        .form-input {
             width: 100%;
             padding: 1rem;
+            margin: 1rem 0;
             background: rgba(0,0,0,0.3);
-            border: 1px solid var(--gold-light);
-            color: var(--text);
+            border: 1px solid var(--gold);
             border-radius: 8px;
+            color: var(--text);
+        }
+
+        /* Demo Section */
+        .demo-container {
+            max-width: 800px;
+            margin: 4rem auto;
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .demo-thumbnail {
+            width: 100%;
+            height: 450px;
+            background: var(--dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         footer {
-            background: var(--darker);
-            padding: 3rem 5%;
             text-align: center;
+            padding: 2rem;
             border-top: 1px solid var(--gold-light);
-        }
-
-        @media (max-width: 768px) {
-            header {
-                padding: 1rem;
-                width: 93%;
-            }
-            nav ul {
-                gap: 1rem;
-            }
-            .section {
-                padding: 5rem 5%;
-            }
+            margin-top: 4rem;
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <div class="particles" id="particles"></div>
-    
-    <header>
-        <div class="logo-container">
-            <img src="qcipher-logo.png" alt="Qcipher Logo" class="logo">
-            <span class="logo-text">Qcipher</span>
-        </div>
+    <header class="header">
+        <a href="#" class="logo-container">
+            <img src="qcipher-logo.png" alt="Qcipher Logo" class="logo-img">
+            <span class="company-name">Qcipher</span>
+        </a>
         <nav>
-            <ul>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#process">Process</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+            <a href="#demo" class="secondary-cta">View Demo</a>
         </nav>
     </header>
 
     <section class="hero">
+        <div id="particles"></div>
         <div class="hero-content">
-            <h1>AI-Powered <span class="ai-text">Quantum Security</span></h1>
-            <p>Autonomous AI agents securing your transition to post-quantum cryptography</p>
-            <a href="#contact" class="cta-button">
-                <i class="fas fa-shield-alt"></i> Get Protected
-            </a>
-        </div>
-    </section>
-
-    <section class="section" id="features">
-        <h2 class="section-title">Our Solutions</h2>
-        <div class="features-grid">
-            <div class="feature-card">
-                <i class="fas fa-robot feature-icon"></i>
-                <h3>AI Migration Agents</h3>
-                <p>Autonomous systems implementing PQC with zero manual effort</p>
-            </div>
-            <div class="feature-card">
-                <i class="fas fa-search-location feature-icon"></i>
-                <h3>Crypto Inventory</h3>
-                <p>Automated discovery of all cryptographic assets</p>
-            </div>
-            <div class="feature-card">
-                <i class="fas fa-radar feature-icon"></i>
-                <h3>Quantum Risk Assessment</h3>
-                <p>AI-powered vulnerability scoring and prioritization</p>
-            </div>
-            <div class="feature-card">
-                <i class="fas fa-project-diagram feature-icon"></i>
-                <h3>CBOM Management</h3>
-                <p>Automated cryptographic bill of materials generation</p>
+            <h1 style="font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 2rem;">
+                <span style="color: var(--gold);">Quantum-Safe</span> Cryptography<br>
+                <span style="font-weight: 300;">Automated Migration Platform</span>
+            </h1>
+            
+            <div class="cta-group">
+                <a href="#waitlist" class="cta-button primary-cta">
+                    <i class="fas fa-robot"></i> Join Waitlist
+                </a>
+                <a href="#demo" class="cta-button secondary-cta">
+                    <i class="fas fa-play"></i> Watch Demo
+                </a>
             </div>
         </div>
     </section>
 
-    <section class="section" id="process">
-        <h2 class="section-title">Our Process</h2>
-        <div class="process-flow">
-            <div class="feature-card">
-                <i class="fas fa-search feature-icon"></i>
-                <h3>Discover</h3>
-                <p>Complete cryptographic asset inventory</p>
-            </div>
-            <div class="feature-card">
-                <i class="fas fa-analytics feature-icon"></i>
-                <h3>Assess</h3>
-                <p>Quantum risk scoring & analysis</p>
-            </div>
-            <div class="feature-card">
-                <i class="fas fa-robot feature-icon"></i>
-                <h3>Migrate</h3>
-                <p>AI-driven PQC implementation</p>
-            </div>
+    <section class="value-grid">
+        <div class="value-card">
+            <h3><i class="fas fa-shield-alt" style="color: var(--gold);"></i> Future-Proof Security</h3>
+            <p style="color: var(--text-secondary);">Automated migration to quantum-resistant cryptographic standards</p>
+        </div>
+        <div class="value-card">
+            <h3><i class="fas fa-brain" style="color: var(--gold);"></i> AI-Powered Analysis</h3>
+            <p style="color: var(--text-secondary);">Smart threat detection and vulnerability prioritization</p>
+        </div>
+        <div class="value-card">
+            <h3><i class="fas fa-cogs" style="color: var(--gold);"></i> Enterprise-Ready</h3>
+            <p style="color: var(--text-secondary);">Seamless integration with existing infrastructure</p>
         </div>
     </section>
 
-    <section class="section" id="contact">
-        <h2 class="section-title">Get Protected</h2>
-        <div class="contact-form">
-            <form>
-                <div class="form-group">
-                    <input type="text" placeholder="Your Name" required>
-                </div>
-                <div class="form-group">
-                    <input type="email" placeholder="Email Address" required>
-                </div>
-                <div class="form-group">
-                    <select>
-                        <option>Quantum Risk Assessment</option>
-                        <option>PQC Migration</option>
-                        <option>Crypto Inventory</option>
-                    </select>
-                </div>
-                <button class="cta-button" style="width: 100%">
-                    <i class="fas fa-paper-plane"></i> Request Demo
-                </button>
-            </form>
+    <section class="demo-container">
+        <div class="demo-thumbnail">
+            <i class="fas fa-play-circle" style="font-size: 4rem; color: var(--gold);"></i>
         </div>
+    </section>
+
+    <section class="waitlist-section">
+        <h2>Join Early Access Program</h2>
+        <form>
+            <input type="email" class="form-input" placeholder="m.yassine.ferjani@qcipher.xyz" required>
+            <button type="submit" class="cta-button primary-cta" style="width: 100%;">
+                Request Priority Access
+            </button>
+        </form>
     </section>
 
     <footer>
-        <div class="footer-content">
-            <p>© 2025 Qcipher. All rights reserved</p>
-            <div class="social-links">
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-github"></i></a>
-            </div>
+        <div class="logo-container" style="justify-content: center; margin-bottom: 1rem;">
+            <img src="qcipher-logo.png" alt="Qcipher Logo" class="logo-img" style="height: 30px;">
+            <span class="company-name" style="font-size: 1.2rem;">Qcipher</span>
+        </div>
+        <p style="color: var(--text-secondary);">© 2025 Qcipher Technologies</p>
+        <div style="margin-top: 1rem;">
+            <a href="#" style="color: var(--gold); margin: 0 1rem;">Privacy Policy</a>
+            <a href="#" style="color: var(--gold); margin: 0 1rem;">Terms of Service</a>
         </div>
     </footer>
 
     <script>
+        // Particle animation
         function createParticles() {
             const container = document.getElementById('particles');
-            const particleCount = window.innerWidth < 768 ? 30 : 100;
-            
-            for(let i = 0; i < particleCount; i++) {
+            for(let i = 0; i < 50; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'particle';
-                
-                particle.style.width = `${Math.random() * 5 + 1}px`;
+                particle.style.width = `${Math.random() * 5 + 2}px`;
                 particle.style.height = particle.style.width;
                 particle.style.left = `${Math.random() * 100}%`;
-                particle.style.animationDuration = `${Math.random() * 20 + 10}s`;
-                particle.style.animationDelay = `${Math.random() * 10}s`;
-                particle.style.opacity = Math.random() * 0.3 + 0.1;
-                
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.animation = `float ${Math.random() * 20 + 10}s infinite`;
                 container.appendChild(particle);
             }
         }
 
+        // Floating animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes float {
+                0%, 100% { transform: translate(0, 0); }
+                25% { transform: translate(10px, 10px); }
+                50% { transform: translate(-10px, 20px); }
+                75% { transform: translate(-20px, -10px); }
+            }
+        `;
+        document.head.appendChild(style);
+
         window.addEventListener('load', createParticles);
-        window.addEventListener('resize', () => {
-            document.getElementById('particles').innerHTML = '';
-            createParticles();
-        });
     </script>
 </body>
 </html>
