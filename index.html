@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qcipher | AI for Quantum-Safe Security</title>
+    <style>
+        :root {
+            --black: #0a0a0a;
+            --dark: #121212;
+            --gold: #FFD700;
+            --gold-light: rgba(255, 215, 0, 0.3);
+            --text: #e0e0e0;
+            --text-secondary: #a0a0a0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--black);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Header with Gold Accent */
+        header {
+            background-color: rgba(10, 10, 10, 0.9);
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 90%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--gold-light);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--gold);
+        }
+
+        .cta-button {
+            background: var(--gold);
+            color: var(--black);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            background: radial-gradient(ellipse at center, var(--dark) 0%, var(--black) 100%);
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle fill="rgba(255,215,0,0.05)" cx="50" cy="50" r="40"/></svg>');
+            background-size: 100px 100px;
+            opacity: 0.5;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            padding-top: 100px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            color: var(--gold);
+            position: relative;
+        }
+
+        .hero h1 span::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gold);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 2rem;
+            color: var(--text-secondary);
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .secondary-button {
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .secondary-button:hover {
+            background: rgba(255, 215, 0, 0.1);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 5%;
+            background: var(--dark);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: rgba(30, 30, 30, 0.8);
+            border-radius: 10px;
+            padding: 2rem;
+            border-left: 3px solid var(--gold);
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-card h3 {
+            color: var(--gold);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="qcipher-logo.png" alt="Qcipher" height="40">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#get-started" class="cta-button">Get Started</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>AI Agents for <span>Quantum-Safe Security</span></h1>
+            <p>Our autonomous AI agents replicate cybersecurity expertise to protect your systems against quantum computing threats.</p>
+            <div class="hero-actions">
+                <a href="#get-started" class="cta-button">Get Started <i class="fas fa-arrow-right"></i></a>
+                <a href="#learn-more" class="secondary-button">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3><i class="fas fa-robot"></i> AI Agents</h3>
+                <p>Autonomous systems that replicate cybersecurity expertise to defend against quantum threats.</p>
+            </div>
+            <div class="feature-card">
+                <h3><i class="fas fa-shield-alt"></i> Quantum-Safe Security</h3>
+                <p>Advanced protection against emerging quantum computing threats to your critical infrastructure.</p>
+            </div>
+            <div class="feature-card">
+                <h3><i class="fas fa-exchange-alt"></i> Automated Migration</h3>
+                <p>Seamless transition to post-quantum cryptography with zero manual effort.</p>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
