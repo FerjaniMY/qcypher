@@ -3,29 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Qcipher | AI for Quantum-Safe Security</title>
+    <title>Qcipher | AI-Powered Quantum Security</title>
     <style>
         :root {
             --black: #0a0a0a;
             --dark: #121212;
+            --darker: #080808;
             --gold: #FFD700;
             --gold-light: rgba(255, 215, 0, 0.3);
+            --gold-dark: #B8860B;
             --text: #e0e0e0;
             --text-secondary: #a0a0a0;
+            --card-bg: rgba(30, 30, 30, 0.8);
+            --glass: rgba(255, 255, 255, 0.05);
+        }
+
+        @keyframes particle-move {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            background: var(--gold-light);
+            border-radius: 50%;
+            animation: particle-move linear infinite;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             margin: 0;
             padding: 0;
             background-color: var(--black);
             color: var(--text);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* Header with Gold Accent */
         header {
-            background-color: rgba(10, 10, 10, 0.9);
+            background-color: rgba(10, 10, 10, 0.95);
             padding: 1.5rem 5%;
             display: flex;
             justify-content: space-between;
@@ -38,58 +66,69 @@
             border-bottom: 1px solid var(--gold-light);
         }
 
-        nav ul {
+        .logo-container {
             display: flex;
-            gap: 2rem;
-            list-style: none;
+            align-items: center;
+            gap: 15px;
         }
 
-        nav a {
+        .logo {
+            height: 40px;
+            transition: transform 0.3s;
+        }
+
+        .logo-text {
+            font-weight: 700;
+            font-size: 1.5rem;
+            background: linear-gradient(90deg, var(--gold) 0%, var(--gold-dark) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 2rem;
+        }
+
+        nav ul li a {
             color: var(--text);
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            position: relative;
+            padding: 0.5rem 0;
         }
 
-        nav a:hover {
+        nav ul li a:hover {
             color: var(--gold);
         }
 
-        .cta-button {
-            background: var(--gold);
-            color: var(--black);
-            padding: 0.8rem 1.5rem;
-            border-radius: 50px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s;
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(90deg, var(--gold) 0%, var(--gold-dark) 100%);
+            transition: width 0.3s;
         }
 
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+        nav ul li a:hover::after {
+            width: 100%;
         }
 
-        /* Hero Section */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
             padding: 0 5%;
-            background: radial-gradient(ellipse at center, var(--dark) 0%, var(--black) 100%);
             position: relative;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle fill="rgba(255,215,0,0.05)" cx="50" cy="50" r="40"/></svg>');
-            background-size: 100px 100px;
-            opacity: 0.5;
         }
 
         .hero-content {
@@ -101,131 +140,272 @@
         }
 
         .hero h1 {
-            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
             margin-bottom: 1.5rem;
-            line-height: 1.2;
+            font-weight: 800;
+            line-height: 1.1;
         }
 
-        .hero h1 span {
-            color: var(--gold);
-            position: relative;
-        }
-
-        .hero h1 span::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: var(--gold);
+        .hero h1 .ai-text {
+            background: linear-gradient(90deg, var(--gold) 0%, var(--gold-dark) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
         .hero p {
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin-bottom: 2rem;
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            max-width: 700px;
+            margin: 0 auto 3rem;
             color: var(--text-secondary);
         }
 
-        .hero-actions {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .secondary-button {
-            border: 1px solid var(--gold);
-            color: var(--gold);
-            padding: 0.8rem 1.5rem;
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(90deg, var(--gold) 0%, var(--gold-dark) 100%);
+            color: var(--black);
+            padding: 1rem 2rem;
             border-radius: 50px;
             text-decoration: none;
+            font-weight: 600;
             transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
         }
 
-        .secondary-button:hover {
-            background: rgba(255, 215, 0, 0.1);
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
         }
 
-        /* Features Section */
-        .features {
-            padding: 6rem 5%;
-            background: var(--dark);
+        .section {
+            padding: 8rem 5%;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            margin-bottom: 4rem;
+            font-weight: 800;
+            text-align: center;
         }
 
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
         }
 
         .feature-card {
-            background: rgba(30, 30, 30, 0.8);
-            border-radius: 10px;
+            background: var(--card-bg);
+            border-radius: 15px;
             padding: 2rem;
-            border-left: 3px solid var(--gold);
+            border: 1px solid var(--gold-light);
             transition: all 0.3s;
         }
 
         .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
         }
 
-        .feature-card h3 {
+        .feature-icon {
+            font-size: 2rem;
             color: var(--gold);
             margin-bottom: 1rem;
-            font-size: 1.3rem;
         }
 
-        .feature-card p {
-            color: var(--text-secondary);
+        .process-flow {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 3rem;
+            border: 1px solid var(--gold-light);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--gold-light);
+            color: var(--text);
+            border-radius: 8px;
+        }
+
+        footer {
+            background: var(--darker);
+            padding: 3rem 5%;
+            text-align: center;
+            border-top: 1px solid var(--gold-light);
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem;
+                width: 93%;
+            }
+            nav ul {
+                gap: 1rem;
+            }
+            .section {
+                padding: 5rem 5%;
+            }
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+    <div class="particles" id="particles"></div>
+    
     <header>
-        <div class="logo">
-            <img src="qcipher-logo.png" alt="Qcipher" height="40">
+        <div class="logo-container">
+            <img src="qcipher-logo.png" alt="Qcipher Logo" class="logo">
+            <span class="logo-text">Qcipher</span>
         </div>
         <nav>
             <ul>
-                <li><a href="#about">About</a></li>
                 <li><a href="#features">Features</a></li>
+                <li><a href="#process">Process</a></li>
                 <li><a href="#contact">Contact</a></li>
-                <li><a href="#get-started" class="cta-button">Get Started</a></li>
             </ul>
         </nav>
     </header>
 
     <section class="hero">
         <div class="hero-content">
-            <h1>AI Agents for <span>Quantum-Safe Security</span></h1>
-            <p>Our autonomous AI agents replicate cybersecurity expertise to protect your systems against quantum computing threats.</p>
-            <div class="hero-actions">
-                <a href="#get-started" class="cta-button">Get Started <i class="fas fa-arrow-right"></i></a>
-                <a href="#learn-more" class="secondary-button">Learn More</a>
+            <h1>AI-Powered <span class="ai-text">Quantum Security</span></h1>
+            <p>Autonomous AI agents securing your transition to post-quantum cryptography</p>
+            <a href="#contact" class="cta-button">
+                <i class="fas fa-shield-alt"></i> Get Protected
+            </a>
+        </div>
+    </section>
+
+    <section class="section" id="features">
+        <h2 class="section-title">Our Solutions</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <i class="fas fa-robot feature-icon"></i>
+                <h3>AI Migration Agents</h3>
+                <p>Autonomous systems implementing PQC with zero manual effort</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-search-location feature-icon"></i>
+                <h3>Crypto Inventory</h3>
+                <p>Automated discovery of all cryptographic assets</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-radar feature-icon"></i>
+                <h3>Quantum Risk Assessment</h3>
+                <p>AI-powered vulnerability scoring and prioritization</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-project-diagram feature-icon"></i>
+                <h3>CBOM Management</h3>
+                <p>Automated cryptographic bill of materials generation</p>
             </div>
         </div>
     </section>
 
-    <section class="features" id="features">
-        <div class="features-grid">
+    <section class="section" id="process">
+        <h2 class="section-title">Our Process</h2>
+        <div class="process-flow">
             <div class="feature-card">
-                <h3><i class="fas fa-robot"></i> AI Agents</h3>
-                <p>Autonomous systems that replicate cybersecurity expertise to defend against quantum threats.</p>
+                <i class="fas fa-search feature-icon"></i>
+                <h3>Discover</h3>
+                <p>Complete cryptographic asset inventory</p>
             </div>
             <div class="feature-card">
-                <h3><i class="fas fa-shield-alt"></i> Quantum-Safe Security</h3>
-                <p>Advanced protection against emerging quantum computing threats to your critical infrastructure.</p>
+                <i class="fas fa-analytics feature-icon"></i>
+                <h3>Assess</h3>
+                <p>Quantum risk scoring & analysis</p>
             </div>
             <div class="feature-card">
-                <h3><i class="fas fa-exchange-alt"></i> Automated Migration</h3>
-                <p>Seamless transition to post-quantum cryptography with zero manual effort.</p>
+                <i class="fas fa-robot feature-icon"></i>
+                <h3>Migrate</h3>
+                <p>AI-driven PQC implementation</p>
             </div>
         </div>
     </section>
+
+    <section class="section" id="contact">
+        <h2 class="section-title">Get Protected</h2>
+        <div class="contact-form">
+            <form>
+                <div class="form-group">
+                    <input type="text" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Email Address" required>
+                </div>
+                <div class="form-group">
+                    <select>
+                        <option>Quantum Risk Assessment</option>
+                        <option>PQC Migration</option>
+                        <option>Crypto Inventory</option>
+                    </select>
+                </div>
+                <button class="cta-button" style="width: 100%">
+                    <i class="fas fa-paper-plane"></i> Request Demo
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <p>© 2025 Qcipher. All rights reserved</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function createParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = window.innerWidth < 768 ? 30 : 100;
+            
+            for(let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                particle.style.width = `${Math.random() * 5 + 1}px`;
+                particle.style.height = particle.style.width;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.animationDuration = `${Math.random() * 20 + 10}s`;
+                particle.style.animationDelay = `${Math.random() * 10}s`;
+                particle.style.opacity = Math.random() * 0.3 + 0.1;
+                
+                container.appendChild(particle);
+            }
+        }
+
+        window.addEventListener('load', createParticles);
+        window.addEventListener('resize', () => {
+            document.getElementById('particles').innerHTML = '';
+            createParticles();
+        });
+    </script>
 </body>
 </html>
