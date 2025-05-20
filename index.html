@@ -207,7 +207,43 @@
             font-size: 0.95rem;
         }
 
-        /* Product Features (Simplified) */
+        /* Why Now Section */
+        .stats-container {
+            margin-top: 40px;
+            background: rgba(255,215,0,0.05);
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 4px solid var(--gold);
+        }
+        .stats-title {
+            color: var(--gold);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 2rem;
+            color: var(--gold);
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .stat-desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        .stat-source {
+            text-align: center;
+            margin-top: 20px;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+
+        /* Product Features */
         .features-detail-section {
             background: var(--dark);
             padding: 80px 5%;
@@ -242,7 +278,7 @@
             font-size: 0.95rem;
         }
 
-        /* Features / AI Agents Section */
+        /* AI Agents Section */
         .features-section {
             padding: 80px 5%;
             background: var(--black);
@@ -277,22 +313,6 @@
         .feature-card p {
             color: var(--text-secondary);
             margin-bottom: 12px;
-        }
-        .feature-card ul {
-            margin-top: 10px;
-            list-style: none;
-        }
-        .feature-card ul li {
-            margin-bottom: 8px;
-            padding-left: 1.2rem;
-            position: relative;
-            color: var(--text);
-        }
-        .feature-card ul li::before {
-            content: "•";
-            position: absolute;
-            left: 0;
-            color: var(--gold);
         }
 
         /* Demo Container */
@@ -397,9 +417,12 @@
             .features-grid {
                 grid-template-columns: 1fr;
             }
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
-    <link rel="stylesheet"
+    <link rel="stylesheet" 
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -418,7 +441,7 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-content" style="z-index: 1;">
+        <div class="hero-content">
             <h1>Revolutionizing Quantum‑Safe Security<br>with Tailored AI Agents</h1>
             <p>AI-driven solutions that assess, plan, and automate your migration to post-quantum cryptography.</p>
             <div>
@@ -454,7 +477,7 @@
         </div>
     </section>
 
-    <!-- Value Proposition Section -->
+    <!-- Value Proposition -->
     <section class="value-section">
         <div class="value-card">
             <h2>Why Enterprises Choose Qcipher</h2>
@@ -475,7 +498,53 @@
         </div>
     </section>
 
-    <!-- Product Features (Simplified) -->
+    <!-- Why Now Section -->
+    <section class="value-section">
+        <div class="value-card">
+            <h2>Why Act Now? The Store Now, Decrypt Later Threat</h2>
+            <div class="value-grid">
+                <div class="value-point">
+                    <h3><i class="fas fa-database"></i> Data Harvesting is Active</h3>
+                    <p>Nation-states are conducting "harvest now, decrypt later" attacks (NSA Cybersecurity Advisory, 2022).</p>
+                </div>
+                <div class="value-point">
+                    <h3><i class="fas fa-clock"></i> Migration Timelines</h3>
+                    <p>NIST estimates 5+ years for full migration (NIST IR 8413, 2023).</p>
+                </div>
+                <div class="value-point">
+                    <h3><i class="fas fa-shield-alt"></i> Compliance Deadlines</h3>
+                    <p>US agencies required to complete migration by 2035 (White House M-23-02).</p>
+                </div>
+            </div>
+            
+            <div class="stats-container">
+                <h3 class="stats-title"><i class="fas fa-chart-bar"></i> Verified Quantum Security Statistics</h3>
+                <div class="stats-grid">
+                    <div>
+                        <div class="stat-number">50%</div>
+                        <div class="stat-desc">Organizations in planning phase (PQC Forum, 2023)</div>
+                    </div>
+                    <div>
+                        <div class="stat-number">$3T+</div>
+                        <div class="stat-desc">At-risk financial value (MITRE, 2023)</div>
+                    </div>
+                    <div>
+                        <div class="stat-number">2030</div>
+                        <div class="stat-desc">RSA-2048 vulnerability estimate (NIST)</div>
+                    </div>
+                    <div>
+                        <div class="stat-number">2-5 years</div>
+                        <div class="stat-desc">Recommended lead time (WEF, 2023)</div>
+                    </div>
+                </div>
+                <p class="stat-source">
+                    Sources: NIST, NSA, MITRE, PQC Forum, World Economic Forum
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Features -->
     <section class="features-detail-section">
         <div class="features-detail-card">
             <h2>Key Platform Features</h2>
@@ -496,23 +565,18 @@
         </div>
     </section>
 
-    <!-- Features / AI Agents Section -->
+    <!-- AI Agents Section -->
     <section class="features-section">
         <h2>Our Tailored AI Agents</h2>
         <div class="features-grid">
-            <!-- Migration Architect Agent -->
             <div class="feature-card">
                 <h3><i class="fas fa-cogs"></i> Migration Architect</h3>
                 <p>Generates a clear, customized roadmap for your post‑quantum migration.</p>
             </div>
-
-            <!-- Automation Orchestrator Agent -->
             <div class="feature-card">
                 <h3><i class="fas fa-robot"></i> Automation Orchestrator</h3>
-                <p>Executes and monitors your migration seamlessly, with minimal manual effort.</p>
+                <p>Executes and monitors your migration seamlessly.</p>
             </div>
-
-            <!-- Continuous Learning Agent -->
             <div class="feature-card">
                 <h3><i class="fas fa-sync-alt"></i> Continuous Learning</h3>
                 <p>Keeps your defenses up to date as quantum threats evolve.</p>
@@ -520,14 +584,13 @@
         </div>
     </section>
 
-    <!-- Demo Container -->
+    <!-- Demo Section -->
     <section class="demo-container" id="demo">
         <iframe 
             class="demo-iframe"
             src="https://www.youtube.com/embed/Y0VI_iyR6yY" 
             title="Qcipher Demo" 
             frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
             allowfullscreen>
         </iframe>
     </section>
@@ -535,35 +598,17 @@
     <!-- Waitlist Section -->
     <section class="waitlist-section" id="waitlist">
         <h2>Join Quantum Security Waitlist</h2>
-        <p>Be among the first to experience automated quantum-safe migration. Enter your details below:</p>
-        <form action="mailto:m.yassine.ferjani@qcipher.xyz" method="post" enctype="text/plain">
-            <input 
-                type="text" 
-                class="form-input" 
-                name="name"
-                placeholder="Your Name" 
-                required>
-            
-            <input 
-                type="email" 
-                class="form-input" 
-                name="email"
-                placeholder="Email Address" 
-                required>
-            
-            <input 
-                type="text" 
-                class="form-input" 
-                name="company"
-                placeholder="Organization (Optional)">
-            
+        <p>Be among the first to experience automated quantum-safe migration.</p>
+        <form action="mailto:your@company.com" method="post" enctype="text/plain">
+            <input type="text" class="form-input" name="name" placeholder="Your Name" required>
+            <input type="email" class="form-input" name="email" placeholder="Email Address" required>
+            <input type="text" class="form-input" name="company" placeholder="Organization (Optional)">
             <select class="form-input" name="interest">
                 <option value="Security Professional">Security Professional</option>
                 <option value="Technical Leader">Technical Leader</option>
                 <option value="Enterprise Buyer">Enterprise Buyer</option>
                 <option value="Other">Other</option>
             </select>
-            
             <button type="submit" class="waitlist-btn">Join Waitlist Now</button>
         </form>
     </section>
@@ -582,7 +627,7 @@
     </footer>
 
     <script>
-        // Animated background particles
+        // Particles animation
         function createParticles() {
             const container = document.getElementById('particles');
             for (let i = 0; i < 50; i++) {
@@ -614,4 +659,3 @@
     </style>
 </body>
 </html>
-
