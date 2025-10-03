@@ -1,745 +1,458 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Qcipher - AI-Powered Quantum Security</title>
-    <style>
-        :root {
-            --black: #050505;
-            --dark: #0f0f0f;
-            --gold: #daa520;
-            --gold-light: rgba(218, 165, 32, 0.1);
-            --text: #f5f5f5;
-            --text-secondary: #b0b0b0;
-            --gradient-1: linear-gradient(45deg, var(--gold) 0%, #B8860B 100%);
-            --gradient-2: radial-gradient(circle at top right, rgba(218, 165, 32, 0.1), transparent 70%);
-            --gradient-3: radial-gradient(circle at bottom left, rgba(218, 165, 32, 0.05), transparent 70%);
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>QCipher — AI‑Enhanced Quantum‑Safe Security</title>
+  <meta name="description" content="QCipher discovers your cryptography, generates AI‑assisted migration playbooks, and orchestrates post‑quantum rollout — without data leaving your environment." />
+  <meta name="theme-color" content="#0f0f0f" />
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="QCipher — AI‑Enhanced Quantum‑Safe Security" />
+  <meta property="og:description" content="Agentic AI for crypto inventory, PQC migration planning, and automated rollout." />
+  <meta property="og:image" content="/og-image.jpg" />
+  <meta property="og:url" content="https://qcipher.xyz/" />
+  <meta name="twitter:card" content="summary_large_image" />
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background: 
-                radial-gradient(circle at center, var(--dark) 0%, var(--black) 100%),
-                linear-gradient(120deg, rgba(218, 165, 32, 0.05) 0%, transparent 50%),
-                linear-gradient(-120deg, rgba(218, 165, 32, 0.05) 0%, transparent 50%);
-            color: var(--text);
-            line-height: 1.6;
-            position: relative;
-            overflow-x: hidden;
-        }
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
+  <style>
+    :root {
+      --black: #050505;
+      --dark: #0f0f0f;
+      --gold: #daa520;
+      --gold-2: #b8860b;
+      --gold-ghost: rgba(218,165,32,.14);
+      --gold-ghost-2: rgba(218,165,32,.06);
+      --text: #f5f5f5;
+      --muted: #b0b0b0;
+      --radius: 16px;
+      --shadow: 0 10px 40px rgba(0,0,0,.35);
+    }
 
-        /* Background Animation */
-        .animated-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: 
-                radial-gradient(circle at center, var(--dark) 0%, var(--black) 100%),
-                linear-gradient(120deg, rgba(218, 165, 32, 0.05) 0%, transparent 50%),
-                linear-gradient(-120deg, rgba(218, 165, 32, 0.05) 0%, transparent 50%);
-            background-size: 100% 100%, 60vw 60vw, 60vw 60vw;
-            animation: backgroundShift 30s ease-in-out infinite alternate;
-        }
+    * { box-sizing:border-box; margin:0; padding:0 }
+    html, body { height:100% }
+    body {
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(1200px 800px at 70% -10%, rgba(218,165,32,.05), transparent 60%),
+        radial-gradient(900px 600px at 10% 110%, rgba(218,165,32,.04), transparent 60%),
+        linear-gradient(180deg, var(--dark), var(--black) 60%);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+    }
 
-        @keyframes backgroundShift {
-            0% {
-                background-position: center center, 0% 0%, 100% 100%;
-            }
-            100% {
-                background-position: center center, 100% 100%, 0% 0%;
-            }
-        }
+    a { color: inherit; text-decoration: none }
+    img { max-width:100%; display:block }
+    button { font: inherit }
 
-        .glow {
-            position: absolute;
-            width: 50vw;
-            height: 50vw;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(218, 165, 32, 0.1) 0%, transparent 70%);
-            filter: blur(40px);
-            animation: glowPulse 8s ease-in-out infinite alternate;
-        }
+    /* Header */
+    .header { position: sticky; top:0; z-index:50; background: rgba(10,10,10,.85); backdrop-filter: blur(8px); border-bottom: 1px solid var(--gold-ghost) }
+    .nav { max-width:1200px; margin:0 auto; padding: 14px 5%; display:flex; align-items:center; justify-content:space-between }
+    .brand { display:flex; align-items:center; gap:.75rem }
+    .brand img { height:34px; width:auto }
+    .brand .name { font-weight:700; letter-spacing:.3px; background: linear-gradient(90deg, var(--gold), var(--gold-2)); -webkit-background-clip:text; background-clip:text; color:transparent }
+    .links { display:flex; gap:1rem; align-items:center }
+    .nav a.btn, .nav button.btn { padding:.65rem 1rem; border-radius:999px; border:1.5px solid var(--gold); transition:.25s; cursor:pointer; background: transparent; color: var(--text) }
+    .nav .ghost { color: var(--gold) }
+    .nav .solid { background: var(--gold); color:#0b0b0b }
+    .nav a.btn:hover, .nav button.btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(218,165,32,.15) }
 
-        .glow:nth-child(1) {
-            top: -25%;
-            right: -25%;
-        }
+    .menu-toggle { display:none; border:1px solid var(--gold); border-radius:12px; padding:.5rem .7rem; background: transparent; color: var(--gold) }
+    @media (max-width: 840px){
+      .links { display:none }
+      .menu-toggle { display:block }
+      .mobile-panel { display:none; border-top:1px solid var(--gold-ghost) }
+      .mobile-panel.open { display:block }
+      .mobile-panel a, .mobile-panel button { display:block; width:100%; text-align:left; background:transparent; color:var(--text); padding:1rem 5%; border:0; border-bottom:1px solid rgba(255,255,255,.04) }
+      .mobile-panel .solid { display:inline-flex; align-items:center; gap:.5rem; margin: .75rem 5% }
+    }
 
-        .glow:nth-child(2) {
-            bottom: -25%;
-            left: -25%;
-        }
+    /* Hero */
+    .hero { min-height: 84vh; display:grid; place-items:center; padding: 120px 5% 60px; position: relative }
+    .hero-inner { max-width: 1100px; text-align:center }
+    .eyebrow { display:inline-flex; gap:.5rem; align-items:center; padding:.3rem .6rem; border:1px solid var(--gold-ghost); border-radius:999px; background: rgba(255,215,0,.06); color: var(--gold); font-weight:600; font-size:.9rem }
+    .hero h1 { font-size: clamp(2rem, 6vw, 4rem); margin:.9rem 0; letter-spacing:.2px }
+    .hero p.lead { color: var(--muted); max-width: 900px; margin: 0 auto 1.2rem; font-size: clamp(1rem, 2.2vw, 1.25rem) }
+    .cta-row { display:flex; flex-wrap:wrap; gap:.75rem; justify-content:center; margin-top:1.1rem }
+    .btn { display:inline-flex; align-items:center; gap:.6rem; padding:.9rem 1.2rem; border-radius:999px; border:1.5px solid var(--gold); transition:.25s }
+    .btn.solid { background: var(--gold); color:#0b0b0b }
+    .btn.ghost { color: var(--gold); background: transparent }
+    .btn:hover { transform: translateY(-2px) }
 
-        @keyframes glowPulse {
-            0% {
-                opacity: 0.3;
-                transform: scale(0.8);
-            }
-            100% {
-                opacity: 0.7;
-                transform: scale(1.2);
-            }
-        }
+    /* Sections */
+    section { padding: 80px 5% }
+    .container { max-width: 1200px; margin: 0 auto }
+    .k { background: rgba(30,30,30,.8); border:1px solid var(--gold-ghost); border-radius: var(--radius); box-shadow: var(--shadow) }
 
-        /* Header */
-        .header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 1rem 5%;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--gold-light);
-        }
+    /* Cards & grids */
+    .grid-3 { display:grid; gap:26px; grid-template-columns: repeat(3, 1fr) }
+    @media (max-width: 960px){ .grid-3 { grid-template-columns: 1fr } }
+    .card { padding:32px; background: rgba(18,18,18,.66); border-radius: 14px; border: 1px solid var(--gold-ghost) }
+    .card h3 { color: var(--gold); margin-bottom:8px; display:flex; align-items:center; gap:.5rem }
+    .card p { color: var(--muted); font-size:.98rem }
 
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
+    /* Stats */
+    .stats { margin-top: 24px; display:grid; gap:18px; grid-template-columns: repeat(4, 1fr) }
+    @media (max-width: 960px){ .stats { grid-template-columns: repeat(2, 1fr) } }
+    @media (max-width: 520px){ .stats { grid-template-columns: 1fr } }
+    .stat { text-align:center; padding: 18px; border-radius:12px; background: rgba(255,215,0,.05); border-left: 3px solid var(--gold) }
+    .stat .n { font-weight: 800; font-size: 1.8rem; color: var(--gold) }
+    .stat .d { color: var(--muted); font-size:.92rem }
+    .source { margin-top: 14px; color: var(--muted); font-size:.82rem; text-align:center }
 
-        .logo-img {
-            height: 40px;
-            width: auto;
-        }
+    /* Features */
+    .feature-grid { display:grid; gap:26px; grid-template-columns: repeat(3, 1fr) }
+    @media (max-width: 960px){ .feature-grid { grid-template-columns: 1fr } }
 
-        .company-name {
-            font-weight: 700;
-            font-size: 1.5rem;
-            background: linear-gradient(90deg, var(--gold), #B8860B);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
+    /* Agents */
+    .agents { background: #0a0a0a }
 
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            padding: 0 5%;
-            margin-top: 80px;
-            background: radial-gradient(ellipse at center, var(--dark) 0%, var(--black) 100%);
-        }
+    /* Demo */
+    .demo { padding-top: 40px }
+    .demo .frame { border-radius: 16px; overflow:hidden; aspect-ratio: 16 / 9; border:1px solid var(--gold-ghost); background: #000 }
+    .demo iframe { width:100%; height:100%; border:0 }
 
-        .hero h1 {
-            font-size: clamp(2rem, 5vw, 4rem);
-            margin-bottom: 1rem;
-            color: var(--gold);
-        }
+    /* Waitlist */
+    .wait { max-width: 680px; margin: 0 auto }
+    .wait p { color: var(--muted); margin: 8px 0 22px }
+    .form { display:grid; gap:12px }
+    .input, .select, .textarea { width:100%; padding: 14px 16px; background: rgba(0,0,0,.35); color: var(--text); border:1px solid var(--gold); border-radius:10px }
+    .textarea { min-height: 120px; resize: vertical }
+    .submit { padding: 14px 16px; border-radius: 10px; background: var(--gold); color:#0b0b0b; border:0; font-weight:700; cursor:pointer; transition:.25s }
+    .submit:hover { transform: translateY(-1px) }
+    .hp { position:absolute; left:-9999px }
 
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto 2rem;
-            color: var(--text-secondary);
-        }
+    /* Footer */
+    footer { text-align:center; padding: 40px 5%; border-top:1px solid var(--gold-ghost); margin-top: 40px }
+    footer .brand { justify-content:center; margin-bottom: 6px; display:inline-flex; align-items:center; gap:.6rem }
+    footer p, footer a { color: var(--muted); font-size:.92rem }
+    footer a { color: var(--gold) }
 
-        .cta-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            font-weight: 600;
-            margin: 1rem 0.5rem;
-            transition: all 0.3s;
-        }
+    /* Animations */
+    .reveal { opacity:0; transform: translateY(12px); transition: opacity .6s ease, transform .6s ease }
+    .reveal.on { opacity:1; transform: translateY(0) }
 
-        .primary-cta {
-            background: var(--gold);
-            color: var(--black);
-            border: 2px solid var(--gold);
-        }
+    /* Canvas background element lives behind content */
+    #cyberbg { position: fixed; inset: 0; z-index: -1; width: 100vw; height: 100vh; pointer-events:none }
 
-        .primary-cta:hover {
-            background: #e6c100;
-            transform: translateY(-2px);
-        }
+    @media (prefers-reduced-motion: reduce){
+      * { animation: none !important; transition: none !important }
+    }
+  </style>
 
-        .secondary-cta {
-            border: 2px solid var(--gold);
-            color: var(--gold);
-            background: transparent;
-        }
-
-        .secondary-cta:hover {
-            background: rgba(255, 215, 0, 0.2);
-            transform: translateY(-2px);
-        }
-
-        /* Process Flow */
-        .process-flow {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-            margin: 4rem 0;
-            padding: 0 5%;
-        }
-
-        .process-step {
-            text-align: center;
-            position: relative;
-            padding: 2rem;
-            flex: 1;
-            min-width: 280px;
-        }
-
-        .process-step:not(:last-child)::after {
-            content: '→';
-            position: absolute;
-            right: -1.5rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--gold);
-            font-size: 1.5rem;
-        }
-
-        .step-card {
-            background: rgba(30, 30, 30, 0.8);
-            border-radius: 16px;
-            padding: 2rem;
-            border-left: 4px solid var(--gold);
-            height: 100%;
-        }
-
-        .step-card h3 {
-            color: var(--gold);
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .step-card p {
-            color: var(--text-secondary);
-        }
-
-        /* Value Proposition Section */
-        .value-section {
-            padding: 100px 5%;
-            background: var(--dark);
-        }
-        .value-card {
-            background: rgba(30, 30, 30, 0.8);
-            border-radius: 16px;
-            padding: 40px;
-            border: 1px solid var(--gold-light);
-            max-width: 1200px;
-            margin: 40px auto;
-        }
-        .value-card h2 {
-            color: var(--gold);
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        .value-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-        .value-point h3 {
-            color: var(--gold);
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .value-point p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-        }
-
-        /* Why Now Section */
-        .stats-container {
-            margin-top: 40px;
-            background: rgba(255,215,0,0.05);
-            padding: 30px;
-            border-radius: 12px;
-            border-left: 4px solid var(--gold);
-        }
-        .stats-title {
-            color: var(--gold);
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            text-align: center;
-        }
-        .stat-number {
-            font-size: 2rem;
-            color: var(--gold);
-            font-weight: bold;
-            margin: 10px 0;
-        }
-        .stat-desc {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-        .stat-source {
-            text-align: center;
-            margin-top: 20px;
-            color: var(--text-secondary);
-            font-size: 0.8rem;
-        }
-
-        /* Product Features */
-        .features-detail-section {
-            background: var(--dark);
-            padding: 80px 5%;
-        }
-        .features-detail-card {
-            background: rgba(30, 30, 30, 0.8);
-            border-radius: 16px;
-            padding: 40px;
-            border: 1px solid var(--gold-light);
-            max-width: 1200px;
-            margin: 40px auto;
-        }
-        .features-detail-card h2 {
-            color: var(--gold);
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        .feature-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-        .feature-item h3 {
-            color: var(--gold);
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .feature-item p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-        }
-
-        /* AI Agents Section */
-        .features-section {
-            padding: 80px 5%;
-            background: var(--black);
-            text-align: center;
-        }
-        .features-section h2 {
-            color: var(--gold);
-            font-size: 2rem;
-        }
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-        .feature-card {
-            background: rgba(30, 30, 30, 0.8);
-            border-radius: 12px;
-            padding: 30px;
-            border: 1px solid var(--gold-light);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.7);
-        }
-        .feature-card h3 {
-            margin-bottom: 16px;
-            color: var(--gold);
-            font-size: 1.4rem;
-        }
-        .feature-card p {
-            color: var(--text-secondary);
-            margin-bottom: 12px;
-        }
-
-        /* Demo Container */
-        .demo-container {
-            max-width: 800px;
-            margin: 4rem auto;
-            border-radius: 16px;
-            overflow: hidden;
-            padding: 0 5%;
-        }
-
-        .demo-iframe {
-            width: 100%;
-            height: 450px;
-            border: none;
-            border-radius: 16px;
-        }
-
-        /* Waitlist Section */
-        .waitlist-section {
-            max-width: 600px;
-            margin: 4rem auto;
-            padding: 2rem;
-            background: rgba(30, 30, 30, 0.8);
-            border-radius: 16px;
-            text-align: center;
-        }
-
-        .waitlist-section h2 {
-            color: var(--gold);
-            margin-bottom: 1rem;
-        }
-
-        .waitlist-section p {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 1rem;
-            margin: 1rem 0;
-            background: rgba(0,0,0,0.3);
-            border: 1px solid var(--gold);
-            border-radius: 8px;
-            color: var(--text);
-            font-family: inherit;
-            font-size: inherit;
-        }
-
-        .form-input textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-
-        .waitlist-btn {
-            width: 100%;
-            background: var(--gold);
-            color: var(--black);
-            border: none;
-            padding: 1rem;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.3s, transform 0.3s;
-        }
-
-        .waitlist-btn:hover {
-            background: #e6c100;
-            transform: translateY(-2px);
-        }
-
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 2rem;
-            border-top: 1px solid var(--gold-light);
-            margin-top: 4rem;
-        }
-
-        .footer p {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        .footer a {
-            color: var(--gold);
-            margin: 0 1rem;
-            font-size: 0.9rem;
-            transition: opacity 0.3s;
-        }
-
-        .footer a:hover {
-            opacity: 0.7;
-        }
-
-        @media (max-width: 640px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            .process-step:not(:last-child)::after {
-                display: none;
-            }
-            .process-flow {
-                flex-direction: column;
-                align-items: center;
-            }
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
-    <link rel="stylesheet" 
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "QCipher Technologies",
+    "url": "https://qcipher.xyz/",
+    "logo": "https://qcipher.xyz/qcipher-logo.png",
+    "sameAs": ["https://www.linkedin.com/company/qcipher"],
+    "description": "Agentic AI platform for post‑quantum cryptography migration."
+  }
+  </script>
 </head>
 <body>
-    <div id="particles"></div>
-    <div class="animated-bg"></div>
-    <div class="glow"></div>
-    <div class="glow"></div>
+  <noscript><div style="background:#111;border-bottom:1px solid var(--gold-ghost);color:#ddd;padding:.6rem 5%;text-align:center">This site works best with JavaScript enabled.</div></noscript>
 
-    <!-- Header -->
-    <header class="header">
-        <a href="#" class="logo-container">
-            <img src="qcipher-logo.png" alt="Qcipher Logo" class="logo-img">
-            <span class="company-name">Qcipher</span>
-        </a>
-        <nav>
-            <a href="#demo" class="secondary-cta">View Demo</a>
-        </nav>
-    </header>
+  <canvas id="cyberbg" aria-hidden="true"></canvas>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Revolutionizing Quantum‑Safe Security<br>with Tailored AI Agents</h1>
-            <p>AI-driven solutions that assess, plan, and automate your migration to post-quantum cryptography.</p>
-            <div>
-                <a href="#waitlist" class="cta-button primary-cta">
-                    <i class="fas fa-robot"></i> Join Waitlist
-                </a>
-                <a href="#demo" class="cta-button secondary-cta">
-                    <i class="fas fa-play"></i> Watch Demo
-                </a>
-            </div>
+  <header class="header" aria-label="Primary">
+    <nav class="nav" aria-label="Main navigation">
+      <a href="#top" class="brand">
+        <img src="qcipher-logo.png" alt="QCipher logo" />
+        <span class="name">QCipher</span>
+      </a>
+      <div class="links" role="menubar">
+        <a href="#why" role="menuitem">Why Now</a>
+        <a href="#features" role="menuitem">Features</a>
+        <a href="#agents" role="menuitem">AI Agents</a>
+        <a href="#demo" role="menuitem">Demo</a>
+        <a href="#waitlist" class="btn ghost" role="menuitem"><i class="fa-solid fa-robot"></i> Join Waitlist</a>
+        <button id="watchDemoBtn" class="btn solid" role="button"><i class="fa-solid fa-play"></i> Watch Demo</button>
+      </div>
+      <button class="menu-toggle" aria-controls="mobile" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+    </nav>
+    <div id="mobile" class="mobile-panel" aria-hidden="true">
+      <a href="#why">Why Now</a>
+      <a href="#features">Features</a>
+      <a href="#agents">AI Agents</a>
+      <a href="#demo">Demo</a>
+      <a href="#waitlist">Join Waitlist</a>
+      <button id="watchDemoBtnMobile" class="solid"><i class="fa-solid fa-play"></i> Watch Demo</button>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- Hero -->
+    <section class="hero" aria-label="Hero">
+      <div class="hero-inner reveal on">
+        <span class="eyebrow"><i class="fa-solid fa-shield"></i> Quantum‑Safe Security • AI‑Accelerated</span>
+        <h1>AI‑Enhanced Quantum‑Safe Security</h1>
+        <p class="lead">QCipher discovers your cryptography, generates AI‑assisted migration playbooks, and orchestrates rollout of post‑quantum controls — <strong>without data leaving your environment</strong>.</p>
+        <div class="cta-row">
+          <a href="#waitlist" class="btn solid"><i class="fa-solid fa-robot"></i> Join Waitlist</a>
+          <button id="watchDemoBtnHero" class="btn ghost"><i class="fa-solid fa-play"></i> Watch Demo</button>
         </div>
+      </div>
     </section>
-
 
     <!-- Value Proposition -->
-    <section class="value-section">
-        <div class="value-card">
-            <h2>Why Enterprises Choose Qcipher</h2>
-            <div class="value-grid">
-                <div class="value-point">
-                    <h3><i class="fas fa-shield-alt"></i> Future‑Proof Security</h3>
-                    <p>Stay ahead of quantum threats by migrating to quantum-resistant encryption automatically.</p>
-                </div>
-                <div class="value-point">
-                    <h3><i class="fas fa-clock"></i> Faster Implementation</h3>
-                    <p>Reduce migration timelines from years to months with AI‑powered automation.</p>
-                </div>
-                <div class="value-point">
-                    <h3><i class="fas fa-brain"></i> Tailored AI Agents</h3>
-                    <p>Our AI agents replicate cybersecurity expertise—customized to your environment.</p>
-                </div>
-            </div>
+    <section id="value" class="container" aria-labelledby="value-title">
+      <div class="k" style="padding:34px">
+        <h2 id="value-title" class="reveal" style="text-align:center;color:var(--gold);margin-bottom:16px">Why Enterprises Choose QCipher</h2>
+        <div class="grid-3">
+          <div class="card reveal">
+            <h3><i class="fa-solid fa-shield-halved"></i> Future‑Proof Security</h3>
+            <p>Mitigate the “harvest‑now‑decrypt‑later” risk by moving to quantum‑resistant cryptography, guided by agentic AI.</p>
+          </div>
+          <div class="card reveal">
+            <h3><i class="fa-solid fa-gauge-high"></i> Faster Implementation</h3>
+            <p>Compress multi‑year programs into months via automated inventory, planning, and change execution.</p>
+          </div>
+          <div class="card reveal">
+            <h3><i class="fa-solid fa-brain"></i> Tailored AI Agents</h3>
+            <p>Agents adapt to your stack and policies to mimic seasoned crypto‑security engineers — at scale.</p>
+          </div>
         </div>
+      </div>
     </section>
 
-    <!-- Why Now Section -->
-    <section class="value-section">
-        <div class="value-card">
-            <h2>Why Act Now? The Store Now, Decrypt Later Threat</h2>
-            <div class="value-grid">
-                <div class="value-point">
-                    <h3><i class="fas fa-database"></i> Data Harvesting is Active</h3>
-                    <p>Nation-states are conducting "harvest now, decrypt later" attacks (NSA Cybersecurity Advisory, 2022).</p>
-                </div>
-                <div class="value-point">
-                    <h3><i class="fas fa-clock"></i> Migration Timelines</h3>
-                    <p>NIST estimates 5+ years for full migration (NIST IR 8413, 2023).</p>
-                </div>
-                <div class="value-point">
-                    <h3><i class="fas fa-shield-alt"></i> Compliance Deadlines</h3>
-                    <p>US agencies required to complete migration by 2035 (White House M-23-02).</p>
-                </div>
-            </div>
-            
-            <div class="stats-container">
-                <h3 class="stats-title"><i class="fas fa-chart-bar"></i> Verified Quantum Security Statistics</h3>
-                <div class="stats-grid">
-                    <div>
-                        <div class="stat-number">50%</div>
-                        <div class="stat-desc">Organizations in planning phase (PQC Forum, 2023)</div>
-                    </div>
-                    <div>
-                        <div class="stat-number">$3T+</div>
-                        <div class="stat-desc">At-risk financial value (MITRE, 2023)</div>
-                    </div>
-                    <div>
-                        <div class="stat-number">2030</div>
-                        <div class="stat-desc">RSA-2048 vulnerability estimate (NIST)</div>
-                    </div>
-                    <div>
-                        <div class="stat-number">2-5 years</div>
-                        <div class="stat-desc">Recommended lead time (WEF, 2023)</div>
-                    </div>
-                </div>
-                <p class="stat-source">
-                    Sources: NIST, NSA, MITRE, PQC Forum, World Economic Forum
-                </p>
-            </div>
+    <!-- Why Now -->
+    <section id="why" class="container" aria-labelledby="why-title">
+      <div class="k" style="padding:34px">
+        <h2 id="why-title" class="reveal" style="text-align:center;color:var(--gold);margin-bottom:16px">Why Act Now?</h2>
+        <div class="grid-3">
+          <div class="card reveal">
+            <h3><i class="fa-solid fa-database"></i> Active Data Harvesting</h3>
+            <p>Nation‑states collect encrypted data today to decrypt later when quantum capabilities arrive.</p>
+          </div>
+          <div class="card reveal">
+            <h3><i class="fa-solid fa-clock"></i> Long Migration Timelines</h3>
+            <p>Enterprise‑wide crypto upgrades touch identities, apps, endpoints, and vendors — starting early is essential.</p>
+          </div>
+          <div class="card reveal">
+            <h3><i class="fa-solid fa-list-check"></i> Compliance Pressure</h3>
+            <p>Emerging policies require crypto inventories, risk reduction plans, and PQC transitions across sectors.</p>
+          </div>
         </div>
-    </section>
-
-    <!-- Product Features -->
-    <section class="features-detail-section">
-        <div class="features-detail-card">
-            <h2>Key Platform Features</h2>
-            <div class="feature-list">
-                <div class="feature-item">
-                    <h3><i class="fas fa-search"></i> Inventory Discovery</h3>
-                    <p>Scans and catalogs cryptographic assets across your systems.</p>
-                </div>
-                <div class="feature-item">
-                    <h3><i class="fas fa-file-alt"></i> AI‑Generated Playbooks</h3>
-                    <p>Creates step‑by‑step migration instructions tailored to your needs.</p>
-                </div>
-                <div class="feature-item">
-                    <h3><i class="fas fa-robot"></i> Automated Deployment</h3>
-                    <p>Deploys quantum‑safe encryption with minimal manual effort.</p>
-                </div>
-            </div>
+        <div class="stats">
+          <div class="stat reveal"><div class="n">50%</div><div class="d">Organizations in PQC planning phases</div></div>
+          <div class="stat reveal"><div class="n">$3T+</div><div class="d">Global value at risk from quantum‑enabled decryption</div></div>
+          <div class="stat reveal"><div class="n">2030–2035</div><div class="d">Window targeted by several roadmaps for PQC readiness</div></div>
+          <div class="stat reveal"><div class="n">2–5 yrs</div><div class="d">Typical lead time for complex migrations</div></div>
         </div>
+        <p class="source">* Replace with your preferred citations on the production site.</p>
+      </div>
     </section>
 
-    <!-- AI Agents Section -->
-    <section class="features-section">
-        <h2>Our Tailored AI Agents</h2>
-        <div class="features-grid">
-            <div class="feature-card">
-                <h3><i class="fas fa-cogs"></i> Migration Architect</h3>
-                <p>Generates a clear, customized roadmap for your post‑quantum migration.</p>
-            </div>
-            <div class="feature-card">
-                <h3><i class="fas fa-robot"></i> Automation Orchestrator</h3>
-                <p>Executes and monitors your migration seamlessly.</p>
-            </div>
-            <div class="feature-card">
-                <h3><i class="fas fa-sync-alt"></i> Continuous Learning</h3>
-                <p>Keeps your defenses up to date as quantum threats evolve.</p>
-            </div>
+    <!-- Features -->
+    <section id="features" class="container" aria-labelledby="features-title">
+      <div class="k" style="padding:34px">
+        <h2 id="features-title" class="reveal" style="text-align:center;color:var(--gold);margin-bottom:16px">Key Platform Features</h2>
+        <div class="feature-grid">
+          <div class="card reveal">
+            <h3><i class="fa-solid fa-search"></i> Crypto Inventory & CBOM</h3>
+            <p>Discover and catalog cryptographic assets across code, services, networks, and third‑party dependencies.</p>
+          </div>
+          <div class="card reveal">
+            <h3><i class="fa-solid fa-file-lines"></i> AI‑Generated Playbooks</h3>
+            <p>Produce step‑by‑step migration instructions tailored to your environment, constraints, and SLAs.</p>
+          </div>
+          <div class="card reveal">
+            <h3><i class="fa-solid fa-robot"></i> Automated Rollout</h3>
+            <p>Orchestrate PQC upgrades with guardrails, canaries, rollback, and continuous verification.</p>
+          </div>
         </div>
+      </div>
     </section>
 
-    <!-- Demo Section -->
-    <section class="demo-container" id="demo">
-        <iframe 
-            class="demo-iframe"
-            src="https://www.youtube.com/embed/Y0VI_iyR6yY" 
-            title="Qcipher Demo" 
-            frameborder="0" 
-            allowfullscreen>
-        </iframe>
+    <!-- Agents -->
+    <section id="agents" class="agents" aria-labelledby="agents-title">
+      <div class="container">
+        <div class="k" style="padding:34px">
+          <h2 id="agents-title" class="reveal" style="text-align:center;color:var(--gold);margin-bottom:16px">Our Tailored AI Agents</h2>
+          <div class="feature-grid">
+            <div class="card reveal">
+              <h3><i class="fa-solid fa-diagram-project"></i> Migration Architect</h3>
+              <p>Builds a risk‑prioritized roadmap, maps interfaces, and selects NIST‑recommended PQC algorithms for each use case.</p>
+            </div>
+            <div class="card reveal">
+              <h3><i class="fa-solid fa-gears"></i> Automation Orchestrator</h3>
+              <p>Executes changes across CI/CD, configs, certs, and key management with audit trails.</p>
+            </div>
+            <div class="card reveal">
+              <h3><i class="fa-solid fa-arrows-rotate"></i> Continuous Assurance</h3>
+              <p>Monitors for drift, deprecated algorithms, and vendor gaps; keeps you compliant over time.</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- Waitlist Section -->
-    <section class="waitlist-section" id="waitlist">
-        <h2>Join Quantum Security Waitlist</h2>
-        <p>Be among the first to experience automated quantum-safe migration.</p>
-        <form action="https://formsubmit.co/ferjanimedyassine@gmail.com" method="POST">
-            <input type="hidden" name="_subject" value="New Waitlist Submission from Qcipher Website">
-            <input type="hidden" name="_next" value="https://yourdomain.com/thank-you.html"> <!-- Replace with your thank you page URL -->
-            <input type="hidden" name="_captcha" value="false">
-            
-            <input type="text" class="form-input" name="name" placeholder="Your Name" required>
-            <input type="email" class="form-input" name="email" placeholder="Email Address" required>
-            <input type="text" class="form-input" name="company" placeholder="Organization (Optional)">
-            
-            <select class="form-input" name="interest">
-                <option value="Security Professional">Security Professional</option>
-                <option value="Technical Leader">Technical Leader</option>
-                <option value="Enterprise Buyer">Enterprise Buyer</option>
-                <option value="Other">Other</option>
-            </select>
-            
-            <textarea class="form-input" name="message" placeholder="Your message or questions..." rows="4"></textarea>
-            
-            <button type="submit" class="waitlist-btn">Join Waitlist Now</button>
+    <!-- Demo -->
+    <section id="demo" class="container demo" aria-labelledby="demo-title">
+      <h2 id="demo-title" class="reveal" style="text-align:center;color:var(--gold);margin-bottom:16px">Product Demo</h2>
+      <div class="k frame reveal">
+        <iframe id="demoFrame" title="QCipher Demo" src="" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+    </section>
+
+    <!-- Waitlist -->
+    <section id="waitlist" class="container" aria-labelledby="waitlist-title">
+      <div class="k wait" style="padding:28px">
+        <h2 id="waitlist-title" class="reveal" style="text-align:center;color:var(--gold);margin-bottom:6px">Join the Quantum‑Security Waitlist</h2>
+        <p class="reveal">Be among the first to experience automated PQC migration. We’ll contact you for a brief discovery call.</p>
+        <form class="form" action="https://formsubmit.co/ferjanimedyassine@gmail.com" method="POST">
+          <input type="hidden" name="_subject" value="New Waitlist Submission — QCipher" />
+          <input type="hidden" name="_next" value="https://yourdomain.com/thank-you.html" />
+          <input type="hidden" name="_captcha" value="false" />
+          <label class="hp">Do not fill this: <input name="_honey" type="text" tabindex="-1" autocomplete="off" /></label>
+
+          <input class="input" type="text" name="name" placeholder="Your Name" required />
+          <input class="input" type="email" name="email" placeholder="Work Email" required />
+          <input class="input" type="text" name="company" placeholder="Organization (Optional)" />
+          <select class="select" name="interest" aria-label="Interest">
+            <option value="Security Professional">Security Professional</option>
+            <option value="Technical Leader">Technical Leader</option>
+            <option value="Enterprise Buyer">Enterprise Buyer</option>
+            <option value="Other">Other</option>
+          </select>
+          <textarea class="textarea" name="message" placeholder="Your message or questions…" rows="4"></textarea>
+          <button class="submit" type="submit"><i class="fa-solid fa-robot"></i> Join Waitlist</button>
         </form>
+      </div>
     </section>
+  </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="logo-container" style="justify-content: center; margin-bottom: 1rem;">
-            <img src="qcipher-logo.png" alt="Qcipher Logo" class="logo-img" style="height: 30px;">
-            <span class="company-name" style="font-size: 1.2rem;">Qcipher</span>
-        </div>
-        <p>© 2025 Qcipher Technologies. All rights reserved.</p>
-        <div>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
-        </div>
-    </footer>
+  <footer role="contentinfo">
+    <div class="brand">
+      <img src="qcipher-logo.png" alt="QCipher logo small" />
+      <span class="name">QCipher</span>
+    </div>
+    <p>© <span id="year"></span> QCipher Technologies. All rights reserved.</p>
+    <p style="margin-top:8px">
+      <a href="/privacy.html">Privacy Policy</a>
+      &nbsp;•&nbsp;
+      <a href="/terms.html">Terms of Service</a>
+    </p>
+  </footer>
 
-    <script>
-        // Enhanced Particles animation
-        function createParticles() {
-            const container = document.getElementById('particles');
-            for (let i = 0; i < 75; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                const size = Math.random() * 4 + 1;
-                particle.style.width = `${size}px`;
-                particle.style.height = particle.style.width;
-                particle.style.left = `${Math.random() * 100}%`;
-                particle.style.top = `${Math.random() * 100}%`;
-                particle.style.opacity = Math.random() * 0.5 + 0.1;
-                particle.style.animation = `float ${Math.random() * 15 + 8}s infinite`;
-                particle.style.animationDelay = `${Math.random() * 5}s`;
-                particle.style.background = `rgba(218, 165, 32, ${Math.random() * 0.3 + 0.1})`;
-                particle.style.borderRadius = '50%';
-                particle.style.filter = 'blur(1px)';
-                container.appendChild(particle);
-            }
-        }
-        window.addEventListener('load', createParticles);
-    </script>
+  <script>
+    // Current year
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-    <style>
-        @keyframes float {
-            0% { 
-                transform: translateY(0) translateX(0) rotate(0deg); 
-                opacity: 0.2;
+    // Smooth scroll
+    document.documentElement.style.scrollBehavior = 'smooth';
+
+    // Mobile menu toggle
+    const toggle = document.querySelector('.menu-toggle');
+    const panel = document.getElementById('mobile');
+    toggle?.addEventListener('click', () => {
+      const open = panel.classList.toggle('open');
+      panel.setAttribute('aria-hidden', String(!open));
+      toggle.setAttribute('aria-expanded', String(open));
+    });
+
+    // Intersection reveal
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('on'); })
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
+
+    // Demo autoplay + scroll
+    const demoURL = "https://www.youtube.com/embed/Y0VI_iyR6yY?autoplay=1";
+    function playDemo(){
+      const frame = document.getElementById('demoFrame');
+      if(frame && !frame.src) frame.src = demoURL; else frame.src = demoURL; // ensure autoplay refresh
+      document.getElementById('demo').scrollIntoView({behavior:'smooth'});
+    }
+    document.getElementById('watchDemoBtn')?.addEventListener('click', playDemo);
+    document.getElementById('watchDemoBtnHero')?.addEventListener('click', playDemo);
+    document.getElementById('watchDemoBtnMobile')?.addEventListener('click', playDemo);
+
+    // Deep‑cybersec background (constellation network)
+    (function(){
+      const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const c = document.getElementById('cyberbg');
+      if(!c || reduce) return; // Respect reduced motion
+      const ctx = c.getContext('2d');
+      let w, h, dpr, nodes, rafId, lastT = 0;
+
+      function resize(){
+        dpr = Math.min(2, window.devicePixelRatio || 1);
+        w = c.width = Math.floor(window.innerWidth * dpr);
+        h = c.height = Math.floor(window.innerHeight * dpr);
+        c.style.width = '100vw'; c.style.height = '100vh';
+        initNodes();
+      }
+
+      function initNodes(){
+        const count = Math.floor((window.innerWidth * window.innerHeight) / 12000); // density
+        nodes = Array.from({length: Math.max(40, count)}, ()=>({
+          x: Math.random()*w,
+          y: Math.random()*h,
+          vx: (Math.random()-0.5)*0.15*dpr,
+          vy: (Math.random()-0.5)*0.15*dpr,
+          r: (Math.random()*1.8+0.8)*dpr
+        }));
+      }
+
+      function step(t){
+        if(t - lastT < 16) { rafId = requestAnimationFrame(step); return; } // ~60fps cap
+        lastT = t;
+        ctx.clearRect(0,0,w,h);
+        // subtle vignette glow
+        const grad = ctx.createRadialGradient(w*0.7, h*0.1, 0, w*0.7, h*0.1, Math.max(w,h)*0.6);
+        grad.addColorStop(0, 'rgba(218,165,32,0.06)');
+        grad.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = grad; ctx.fillRect(0,0,w,h);
+
+        // draw connections
+        for(let i=0;i<nodes.length;i++){
+          const a = nodes[i];
+          a.x += a.vx; a.y += a.vy;
+          if(a.x<0||a.x>w) a.vx*=-1; if(a.y<0||a.y>h) a.vy*=-1;
+          // node
+          ctx.beginPath();
+          ctx.arc(a.x, a.y, a.r, 0, Math.PI*2);
+          ctx.fillStyle = 'rgba(218,165,32,0.55)';
+          ctx.shadowColor = 'rgba(218,165,32,0.35)';
+          ctx.shadowBlur = 6*dpr;
+          ctx.fill();
+          ctx.shadowBlur = 0;
+          // links
+          for(let j=i+1;j<nodes.length;j++){
+            const b = nodes[j];
+            const dx = a.x-b.x, dy=a.y-b.y; const dist = Math.hypot(dx,dy);
+            if(dist < 120*dpr){
+              const alpha = 1 - dist/(120*dpr);
+              ctx.beginPath();
+              ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
+              ctx.strokeStyle = `rgba(218,165,32,${0.15*alpha})`;
+              ctx.lineWidth = 0.8*dpr*alpha;
+              ctx.stroke();
             }
-            25% {
-                transform: translateY(-50px) translateX(25px) rotate(90deg);
-                opacity: 0.5;
-            }
-            50% { 
-                transform: translateY(-100px) translateX(-25px) rotate(180deg);
-                opacity: 0.3;
-            }
-            75% {
-                transform: translateY(-150px) translateX(25px) rotate(270deg);
-                opacity: 0.4;
-            }
-            100% { 
-                transform: translateY(-200px) translateX(0) rotate(360deg); 
-                opacity: 0;
-            }
+          }
         }
-        .particle {
-            position: absolute;
-            pointer-events: none;
-            transform-origin: center center;
-            will-change: transform, opacity;
-        }
-    </style>
+        rafId = requestAnimationFrame(step);
+      }
+
+      window.addEventListener('resize', resize);
+      resize();
+      rafId = requestAnimationFrame(step);
+      document.addEventListener('visibilitychange', ()=>{
+        if(document.hidden) cancelAnimationFrame(rafId); else rafId = requestAnimationFrame(step);
+      });
+    })();
+  </script>
 </body>
 </html>
