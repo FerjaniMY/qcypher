@@ -54,7 +54,113 @@
     footer a { color: var(--accent1) }
 
     #cyberbg { position: fixed; inset: 0; z-index: -1; width: 100vw; height: 100vh; pointer-events:none; background: var(--bg1) }
-  </style>
+    /* Global links */
+    a { text-decoration: none; }
+
+    /* Improved nav items */
+    .links a {
+      text-decoration: none;
+      padding: .5rem .8rem;
+      border-radius: 10px;
+      line-height: 1;
+      border: 1px solid transparent;
+    }
+    .links a:hover {
+      color: var(--text);
+      background: rgba(218,165,32,.12);
+      border-color: rgba(218,165,32,.28);
+    }
+
+    /* Better buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      padding: .8rem 1.1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(218,165,32,.55);
+      background: linear-gradient(180deg, rgba(218,165,32,.12), rgba(218,165,32,.06));
+      color: var(--accent1);
+      font-weight: 700;
+      letter-spacing: .2px;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
+      box-shadow: 0 1px 0 rgba(255,255,255,.04) inset, 0 10px 20px rgba(0,0,0,.25);
+      backdrop-filter: saturate(120%);
+    }
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 22px rgba(218,165,32,.28);
+      background: linear-gradient(180deg, rgba(218,165,32,.16), rgba(218,165,32,.08));
+    }
+    .btn:active { transform: translateY(0); filter: brightness(.98); }
+    .btn:focus-visible { outline: 2px solid rgba(218,165,32,.6); outline-offset: 2px; }
+
+    .btn.solid {
+      color: #0b0b0b;
+      border-color: #e0b640;
+      background:
+        linear-gradient(180deg, #ffe08a, #ffd25a 30%, var(--accent1) 100%);
+      box-shadow: 0 2px 0 rgba(255,255,255,.18) inset, 0 12px 26px rgba(218,165,32,.35);
+    }
+    .btn.solid:hover {
+      box-shadow: 0 2px 0 rgba(255,255,255,.22) inset, 0 16px 32px rgba(218,165,32,.42);
+      filter: saturate(110%);
+    }
+
+    /* CTA row layout */
+    .cta-row { display:flex; gap:.8rem; justify-content:center; flex-wrap:wrap; margin-top: 1rem; }
+
+    /* Footer links (no underline) */
+    footer a { text-decoration: none; opacity:.9; }
+    footer a:hover { opacity:1; }
+
+  html { scroll-behavior: smooth; }
+
+    /* Upgrade: section titles with gold accent underline */
+    .section-title {
+      text-align:center;
+      color: var(--text);
+      margin-bottom: 20px;
+      font-weight: 700;
+      letter-spacing: .2px;
+      position: relative;
+      display: inline-block;
+      left: 50%; transform: translateX(-50%);
+      background: linear-gradient(90deg, var(--text), var(--text));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .section-title:after {
+      content: "";
+      display:block;
+      height: 3px; width: 72px; margin:10px auto 0;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #6b5c1e, var(--accent1), #7a5e16);
+      box-shadow: 0 0 18px rgba(218,165,32,.45);
+    }
+
+    /* Upgrade: cards hover */
+    .k { transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+    .k:hover { transform: translateY(-4px); box-shadow: 0 14px 40px rgba(0,0,0,.45); border-color: rgba(218,165,32,.28); }
+
+    /* Upgrade: nav active state */
+    .links a.active { color: var(--text); background: rgba(218,165,32,.14); border-color: rgba(218,165,32,.34); }
+
+    /* Floating back-to-top */
+    .fab-top {
+      position: fixed; right: 20px; bottom: 20px; z-index: 60;
+      display: none; align-items:center; gap:.5rem;
+      padding:.7rem .95rem; border-radius:999px;
+      border:1px solid rgba(218,165,32,.55);
+      background: linear-gradient(180deg, rgba(218,165,32,.18), rgba(218,165,32,.08));
+      color: var(--accent1); font-weight:700;
+      box-shadow: 0 10px 24px rgba(0,0,0,.35);
+    }
+    .fab-top.show { display:inline-flex; }
+
+    /* Background: Quantum Aurora (replaces hex grid) */
+    #cyberbg { position: fixed; inset: 0; z-index: -1; width: 100vw; height: 100vh; pointer-events:none; background: radial-gradient(120vw 80vh at 60% -10%, rgba(218,165,32,.06), transparent 60%), radial-gradient(120vw 80vh at 10% 120%, rgba(218,165,32,.05), transparent 60%), var(--bg1); }
+
+</style>
 </head>
 <body>
   <canvas id="cyberbg"></canvas>
@@ -93,7 +199,7 @@
     <!-- Value Proposition -->
     <section id="value" class="container">
       <div class="k" style="padding:34px">
-        <h2 style="text-align:center;color:var(--accent1);margin-bottom:16px">Why Enterprises Choose QCipher</h2>
+        <h2 class="section-title">Why Enterprises Choose QCipher</h2>
         <div style="display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
           <div class="k" style="padding:20px">
             <h3 style="color:var(--accent1);margin-bottom:6px"><i class="fa-solid fa-shield-halved"></i> Future‑Proof Security</h3>
@@ -114,7 +220,7 @@
     <!-- Why Now Section -->
     <section id="why" class="container">
       <div class="k" style="padding:34px">
-        <h2 style="text-align:center;color:var(--accent1);margin-bottom:16px">Why Act Now?</h2>
+        <h2 class="section-title">Why Act Now?</h2>
         <div style="display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
           <div class="k" style="padding:20px">
             <h3 style="color:var(--accent1);margin-bottom:6px"><i class="fa-solid fa-database"></i> Active Data Harvesting</h3>
@@ -135,7 +241,7 @@
     <!-- Features -->
     <section id="features" class="container">
       <div class="k" style="padding:34px">
-        <h2 style="text-align:center;color:var(--accent1);margin-bottom:16px">Key Platform Features</h2>
+        <h2 class="section-title">Key Platform Features</h2>
         <div style="display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
           <div class="k" style="padding:20px">
             <h3 style="color:var(--accent1);margin-bottom:6px"><i class="fa-solid fa-search"></i> Crypto Inventory & CBOM</h3>
@@ -156,7 +262,7 @@
     <!-- AI Agents -->
     <section id="agents" class="container">
       <div class="k" style="padding:34px">
-        <h2 style="text-align:center;color:var(--accent1);margin-bottom:16px">Our Tailored AI Agents</h2>
+        <h2 class="section-title">Our Tailored AI Agents</h2>
         <div style="display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
           <div class="k" style="padding:20px">
             <h3 style="color:var(--accent1);margin-bottom:6px"><i class="fa-solid fa-diagram-project"></i> Migration Architect</h3>
@@ -177,7 +283,7 @@
     <!-- Demo -->
     <section id="demo" class="container">
       <div class="k" style="padding:34px">
-        <h2 style="text-align:center;color:var(--accent1);margin-bottom:16px">Product Demo</h2>
+        <h2 class="section-title">Product Demo</h2>
         <div style="border-radius:16px; overflow:hidden; border:1px solid rgba(218,165,32,.15); background:#000; aspect-ratio:16/9">
           <iframe id="demoFrame" title="QCipher Demo" src="" allowfullscreen loading="lazy" style="width:100%;height:100%;border:0"></iframe>
         </div>
@@ -187,7 +293,7 @@
     <!-- Waitlist -->
     <section id="waitlist" class="container">
       <div class="k" style="padding:28px;max-width:760px;margin:0 auto">
-        <h2 style="text-align:center;color:var(--accent1);margin-bottom:10px">Join the Quantum‑Security Waitlist</h2>
+        <h2 class="section-title">Join the Quantum‑Security Waitlist</h2>
         <p style="color:var(--muted);text-align:center;margin-bottom:16px">Be among the first to experience automated PQC migration. We’ll contact you for a brief discovery call.</p>
         <form action="https://formsubmit.co/ferjanimedyassine@gmail.com" method="POST" style="display:grid;gap:12px">
           <input type="hidden" name="_subject" value="New Waitlist Submission — QCipher" />
@@ -213,7 +319,7 @@
     <!-- Contact -->
     <section id="contact" class="container">
       <div class="k" style="padding:28px;max-width:760px;margin:0 auto">
-        <h2 style="text-align:center;color:var(--accent1);margin-bottom:10px">Contact Us</h2>
+        <h2 class="section-title">Contact Us</h2>
         <p style="color:var(--muted);text-align:center;margin-bottom:16px">For partnerships, media, or enterprise inquiries, reach us directly.</p>
         <form action="https://formsubmit.co/ferjanimedyassine@gmail.com" method="POST" style="display:grid;gap:12px">
           <input type="hidden" name="_subject" value="New Contact Message — QCipher" />
@@ -226,6 +332,9 @@
       </div>
     </section>
   </main>
+
+  <!-- Back to top button -->
+  <button id="toTop" class="fab-top"><i class="fa-solid fa-arrow-up"></i> Top</button>
 
   <footer>
     <div class="brand">
@@ -248,12 +357,65 @@
     document.getElementById('watchDemoBtnHero')?.addEventListener('click', playDemo);
 
     (function(){
-      const canvas=document.getElementById('cyberbg');
-      const ctx=canvas.getContext('2d');
-      let w,h,t=0;
-      function resize(){ w=canvas.width=window.innerWidth; h=canvas.height=window.innerHeight; }
-      function hexPath(x,y,r){ ctx.beginPath(); for(let i=0;i<6;i++){ const a=Math.PI/3*i; const px=x+r*Math.cos(a); const py=y+r*Math.sin(a); i?ctx.lineTo(px,py):ctx.moveTo(px,py);} ctx.closePath(); }
-      function draw(){ t+=0.008; ctx.clearRect(0,0,w,h); const g=ctx.createLinearGradient(0,0,w,h); g.addColorStop(0,'#050505'); g.addColorStop(1,'#0f0f0f'); ctx.fillStyle=g; ctx.fillRect(0,0,w,h); const r=16, dx=r*Math.sqrt(3), dy=r*1.5, cols=Math.ceil(w/dx)+2, rows=Math.ceil(h/dy)+2; const waveY=(Math.sin(t)*0.5+0.5)*h; ctx.lineWidth=1; for(let row=0;row<rows;row++){ for(let col=0;col<cols;col++){ const x=col*dx+((row%2)?dx/2:0), y=row*dy; const d=Math.abs(y-waveY); const alpha=Math.max(0,0.22-d/600); ctx.strokeStyle=`rgba(218,165,32,${alpha})`; hexPath(x,y,r); ctx.stroke(); if(((row*13+col*7)%64)===0){ const pulse=(Math.sin(t*6+(row+col))*0.5+0.5); ctx.fillStyle=`rgba(218,165,32,${0.3+0.4*pulse})`; ctx.beginPath(); ctx.arc(x,y,1.8+1.5*pulse,0,Math.PI*2); ctx.fill(); } } } requestAnimationFrame(draw);} resize(); draw(); window.addEventListener('resize',resize); })();
+      const canvas = document.getElementById('cyberbg');
+      const ctx = canvas.getContext('2d');
+      const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let w,h,t=0; let particles=[];
+      function resize(){ w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; initParticles(); }
+      function initParticles(){ particles = Array.from({length: 60}, () => ({ x: Math.random()*w, y: Math.random()*h, vx:(Math.random()-.5)*0.2, vy:(Math.random()-.5)*0.2, r: Math.random()*1.5+0.5 })); }
+      function drawAurora(){
+        const layers = 3;
+        for(let i=0;i<layers;i++){
+          const amp = 40 + i*18; const freq = 0.0012 + i*0.0004; const speed = 0.0008 + i*0.0003;
+          const grad = ctx.createLinearGradient(0,0,w,0);
+          grad.addColorStop(0, `rgba(218,165,32,${0.04 + i*0.02})`);
+          grad.addColorStop(0.5, `rgba(255,215,100,${0.06 + i*0.03})`);
+          grad.addColorStop(1, `rgba(184,134,11,${0.04 + i*0.02})`);
+          ctx.strokeStyle = grad; ctx.lineWidth = 1.5 + i*0.7;
+          ctx.beginPath();
+          for(let x=0;x<=w;x+=6){
+            const y = h*0.35 + Math.sin(x*freq + t*speed + i)*amp + Math.cos((x+t*40)*0.0009+i)*10;
+            x===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+          }
+          ctx.stroke();
+        }
+      }
+      function drawParticles(){
+        for(const p of particles){
+          p.x += p.vx; p.y += p.vy; if(p.x<0||p.x>w) p.vx*=-1; if(p.y<0||p.y>h) p.vy*=-1;
+          ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle='rgba(218,165,32,0.6)'; ctx.fill();
+        }
+      }
+      function frame(){
+        t+=1; ctx.clearRect(0,0,w,h);
+        const g = ctx.createRadialGradient(w*0.6,h*-0.1,0,w*0.6,h*0.2,Math.max(w,h));
+        g.addColorStop(0, 'rgba(218,165,32,0.06)'); g.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = g; ctx.fillRect(0,0,w,h);
+        drawAurora(); drawParticles();
+        if(!reduce) requestAnimationFrame(frame);
+      }
+      resize(); frame(); window.addEventListener('resize', resize);
+    })();
+  // Nav active link highlight + back-to-top
+    (function(){
+      const anchors = Array.from(document.querySelectorAll('.links a[href^="#"]'));
+      const map = new Map(anchors.map(a=>[a.getAttribute('href'), a]));
+      const opts = { rootMargin: '-40% 0px -55% 0px', threshold: 0 };
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{
+          if(e.isIntersecting){
+            anchors.forEach(a=>a.classList.remove('active'));
+            const id = '#'+e.target.id; const link = map.get(id); link && link.classList.add('active');
+          }
+        })
+      }, opts);
+      document.querySelectorAll('main section[id]').forEach(sec=>io.observe(sec));
+
+      const fab = document.getElementById('toTop');
+      const toggleFab = () => { if(window.scrollY>400) fab.classList.add('show'); else fab.classList.remove('show'); };
+      window.addEventListener('scroll', toggleFab); toggleFab();
+      fab.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
+    })();
   </script>
 </body>
 </html>
