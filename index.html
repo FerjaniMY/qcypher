@@ -3,9 +3,78 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>QCipher — AI‑Enhanced Quantum‑Safe Security</title>
-  <meta name="description" content="QCipher discovers your cryptography, generates AI‑assisted migration playbooks, and orchestrates post‑quantum rollout — without data leaving your environment." />
+  <title>QCipher — AI-Enhanced Quantum-Safe Security</title>
+  <meta name="description" content="QCipher discovers your cryptography, generates AI-assisted migration playbooks, and orchestrates post-quantum rollout — without data leaving your environment." />
   <meta name="theme-color" content="#0f0f0f" />
+
+  <!-- LLM/SEO additions -->
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <link rel="canonical" href="https://qcipher.xyz/" />
+  <link rel="alternate" hreflang="en" href="https://qcipher.xyz/" />
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="https://qcipher.xyz/sitemap.xml" />
+  <link rel="alternate" type="application/rss+xml" title="QCipher RSS" href="https://qcipher.xyz/feed.xml" />
+  <link rel="me" href="https://www.linkedin.com/company/qcipher" />
+  <link rel="me" href="https://github.com/FerjaniMY" />
+
+  <!-- Social cards -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="QCipher — AI-Enhanced Quantum-Safe Security" />
+  <meta property="og:description" content="AI agents for PQC migration: CBOM discovery, AI-generated playbooks, and automated rollout." />
+  <meta property="og:url" content="https://qcipher.xyz/" />
+  <meta property="og:image" content="https://qcipher.xyz/og-image.png" />
+  <meta property="og:site_name" content="QCipher" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="QCipher — AI-Enhanced Quantum-Safe Security" />
+  <meta name="twitter:description" content="Automate PQC migration with AI: inventory, playbooks, rollout — data stays in your environment." />
+  <meta name="twitter:image" content="https://qcipher.xyz/og-image.png" />
+
+  <!-- Structured data for LLMs -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "name": "QCipher",
+        "url": "https://qcipher.xyz",
+        "logo": "https://qcipher.xyz/qcipher-logo.png",
+        "sameAs": [
+          "https://www.linkedin.com/company/qcipher",
+          "https://github.com/FerjaniMY"
+        ],
+        "description": "AI-driven platform for quantum-safe security: discovers cryptography, generates migration playbooks, and orchestrates post-quantum rollout without data leaving your environment.",
+        "industry": "Quantum-safe Security",
+        "keywords": [
+          "Quantum-safe security",
+          "Post-Quantum Cryptography",
+          "PQC migration",
+          "CBOM",
+          "AI cybersecurity",
+          "NIST SP 800-208",
+          "ETSI TR 103 617",
+          "NIS2"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "url": "https://qcipher.xyz",
+        "name": "QCipher",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://qcipher.xyz/search?q={query}",
+          "query-input": "required name=query"
+        }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "QCipher PQC Migration Platform",
+        "applicationCategory": "SecurityApplication",
+        "operatingSystem": "Linux, macOS, Windows",
+        "description": "Automates PQC migration with AI agents for cryptographic inventory (CBOM), AI-generated playbooks, and orchestrated rollout."
+      }
+    ]
+  }
+  </script>
 
   <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -166,30 +235,30 @@
   <canvas id="cyberbg"></canvas>
 
   <header class="header">
-    <nav class="nav">
-      <a href="#top" class="brand">
+    <nav class="nav" aria-label="Primary">
+      <a href="#top" class="brand" aria-label="QCipher Home">
         <img src="qcipher-logo.png" alt="QCipher logo" />
         <span class="name">QCipher</span>
       </a>
-      <div class="links">
+      <div class="links" role="navigation">
         <a href="#why">Why Now</a>
         <a href="#features">Features</a>
         <a href="#agents">AI Agents</a>
         <a href="#demo">Demo</a>
         <a href="#waitlist">Join Waitlist</a>
         <a href="#contact">Contact</a>
-        <button id="watchDemoBtn" class="btn solid"><i class="fa-solid fa-play"></i> Watch Demo</button>
+        <button id="watchDemoBtn" class="btn solid" aria-label="Watch Demo"><i class="fa-solid fa-play"></i> Watch Demo</button>
       </div>
     </nav>
   </header>
 
-  <main id="top">
+  <main id="top" role="main">
     <section class="hero">
       <div class="hero-inner">
-        <span class="eyebrow"><i class="fa-solid fa-shield"></i> Quantum‑Safe Security • AI‑Accelerated</span>
-        <h1>AI‑Enhanced Quantum‑Safe Security</h1>
-        <p class="lead">QCipher discovers your cryptography, generates AI‑assisted migration playbooks, and orchestrates rollout of post‑quantum controls — <strong>without data leaving your environment</strong>.</p>
-        <div class="cta-row">
+        <span class="eyebrow"><i class="fa-solid fa-shield"></i> Quantum-Safe Security • AI-Accelerated</span>
+        <h1>AI-Enhanced Quantum-Safe Security</h1>
+        <p class="lead">QCipher discovers your cryptography, generates AI-assisted migration playbooks, and orchestrates rollout of post-quantum controls — <strong>without data leaving your environment</strong>.</p>
+        <div class="cta-row" role="group" aria-label="Primary actions">
           <a href="#waitlist" class="btn solid"><i class="fa-solid fa-robot"></i> Join Waitlist</a>
           <button id="watchDemoBtnHero" class="btn"><i class="fa-solid fa-play"></i> Watch Demo</button>
         </div>
@@ -197,30 +266,30 @@
     </section>
 
     <!-- Value Proposition -->
-    <section id="value" class="container">
+    <section id="value" class="container" aria-labelledby="value-title">
       <div class="k" style="padding:34px">
-        <h2 class="section-title">Why Enterprises Choose QCipher</h2>
+        <h2 id="value-title" class="section-title">Why Enterprises Choose QCipher</h2>
         <div style="display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
           <div class="k" style="padding:20px">
-            <h3 style="color:var(--accent1);margin-bottom:6px"><i class="fa-solid fa-shield-halved"></i> Future‑Proof Security</h3>
-            <p style="color:var(--muted)">Mitigate harvest‑now‑decrypt‑later risk by moving to quantum‑resistant cryptography.</p>
+            <h3 style="color:var(--accent1);margin-bottom:6px"><i class="fa-solid fa-shield-halved"></i> Future-Proof Security</h3>
+            <p style="color:var(--muted)">Mitigate harvest-now-decrypt-later risk by moving to quantum-resistant cryptography.</p>
           </div>
           <div class="k" style="padding:20px">
             <h3 style="color:var(--accent1);margin-bottom:6px"><i class="fa-solid fa-gauge-high"></i> Faster Implementation</h3>
-            <p style="color:var(--muted)">Compress multi‑year programs into months with automated inventory, planning, and rollout.</p>
+            <p style="color:var(--muted)">Compress multi-year programs into months with automated inventory, planning, and rollout.</p>
           </div>
           <div class="k" style="padding:20px">
             <h3 style="color:var(--accent1);margin-bottom:6px"><i class="fa-solid fa-brain"></i> Tailored AI Agents</h3>
-            <p style="color:var(--muted)">Agents adapt to your stack and policies to mimic seasoned crypto‑security engineers — at scale.</p>
+            <p style="color:var(--muted)">Agents adapt to your stack and policies to mimic seasoned crypto-security engineers — at scale.</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Why Now Section -->
-    <section id="why" class="container">
+    <section id="why" class="container" aria-labelledby="why-title">
       <div class="k" style="padding:34px">
-        <h2 class="section-title">Why Act Now?</h2>
+        <h2 id="why-title" class="section-title">Why Act Now?</h2>
         <div style="display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
           <div class="k" style="padding:20px">
             <h3 style="color:var(--accent1);margin-bottom:6px"><i class="fa-solid fa-database"></i> Active Data Harvesting</h3>
@@ -239,17 +308,17 @@
     </section>
 
     <!-- Features -->
-    <section id="features" class="container">
+    <section id="features" class="container" aria-labelledby="features-title">
       <div class="k" style="padding:34px">
-        <h2 class="section-title">Key Platform Features</h2>
+        <h2 id="features-title" class="section-title">Key Platform Features</h2>
         <div style="display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
           <div class="k" style="padding:20px">
             <h3 style="color:var(--accent1);margin-bottom:6px"><i class="fa-solid fa-search"></i> Crypto Inventory & CBOM</h3>
             <p style="color:var(--muted)">Discover and catalog cryptographic assets across code, services, networks, and dependencies.</p>
           </div>
           <div class="k" style="padding:20px">
-            <h3 style="color:var(--accent1);margin-bottom:6px"><i class="fa-solid fa-file-lines"></i> AI‑Generated Playbooks</h3>
-            <p style="color:var(--muted)">Produce step‑by‑step migration instructions tailored to your environment and SLAs.</p>
+            <h3 style="color:var(--accent1);margin-bottom:6px"><i class="fa-solid fa-file-lines"></i> AI-Generated Playbooks</h3>
+            <p style="color:var(--muted)">Produce step-by-step migration instructions tailored to your environment and SLAs.</p>
           </div>
           <div class="k" style="padding:20px">
             <h3 style="color:var(--accent1);margin-bottom:6px"><i class="fa-solid fa-robot"></i> Automated Rollout</h3>
@@ -260,13 +329,13 @@
     </section>
 
     <!-- AI Agents -->
-    <section id="agents" class="container">
+    <section id="agents" class="container" aria-labelledby="agents-title">
       <div class="k" style="padding:34px">
-        <h2 class="section-title">Our Tailored AI Agents</h2>
+        <h2 id="agents-title" class="section-title">Our Tailored AI Agents</h2>
         <div style="display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
           <div class="k" style="padding:20px">
             <h3 style="color:var(--accent1);margin-bottom:6px"><i class="fa-solid fa-diagram-project"></i> Migration Architect</h3>
-            <p style="color:var(--muted)">Builds a risk‑prioritized roadmap, maps interfaces, and selects NIST‑recommended PQC schemes.</p>
+            <p style="color:var(--muted)">Builds a risk-prioritized roadmap, maps interfaces, and selects NIST-recommended PQC schemes.</p>
           </div>
           <div class="k" style="padding:20px">
             <h3 style="color:var(--accent1);margin-bottom:6px"><i class="fa-solid fa-gears"></i> Automation Orchestrator</h3>
@@ -281,9 +350,9 @@
     </section>
 
     <!-- Demo -->
-    <section id="demo" class="container">
+    <section id="demo" class="container" aria-labelledby="demo-title">
       <div class="k" style="padding:34px">
-        <h2 class="section-title">Product Demo</h2>
+        <h2 id="demo-title" class="section-title">Product Demo</h2>
         <div style="border-radius:16px; overflow:hidden; border:1px solid rgba(218,165,32,.15); background:#000; aspect-ratio:16/9">
           <iframe id="demoFrame" title="QCipher Demo" src="" allowfullscreen loading="lazy" style="width:100%;height:100%;border:0"></iframe>
         </div>
@@ -291,13 +360,13 @@
     </section>
 
     <!-- Waitlist -->
-    <section id="waitlist" class="container">
+    <section id="waitlist" class="container" aria-labelledby="waitlist-title">
       <div class="k" style="padding:28px;max-width:760px;margin:0 auto">
-        <h2 class="section-title">Join the Quantum‑Security Waitlist</h2>
+        <h2 id="waitlist-title" class="section-title">Join the Quantum-Security Waitlist</h2>
         <p style="color:var(--muted);text-align:center;margin-bottom:16px">Be among the first to experience automated PQC migration. We’ll contact you for a brief discovery call.</p>
-        <form action="https://formsubmit.co/ferjanimedyassine@gmail.com" method="POST" style="display:grid;gap:12px">
+        <form action="https://formsubmit.co/ferjanimedyassine@gmail.com" method="POST" style="display:grid;gap:12px" aria-label="Waitlist form">
           <input type="hidden" name="_subject" value="New Waitlist Submission — QCipher" />
-          <input type="hidden" name="_next" value="https://yourdomain.com/thank-you.html" />
+          <input type="hidden" name="_next" value="https://qcipher.xyz/thank-you.html" />
           <input type="hidden" name="_captcha" value="false" />
           <label style="position:absolute;left:-9999px">Do not fill this: <input name="_honey" type="text" tabindex="-1" autocomplete="off" /></label>
 
@@ -317,11 +386,11 @@
     </section>
 
     <!-- Contact -->
-    <section id="contact" class="container">
+    <section id="contact" class="container" aria-labelledby="contact-title">
       <div class="k" style="padding:28px;max-width:760px;margin:0 auto">
-        <h2 class="section-title">Contact Us</h2>
+        <h2 id="contact-title" class="section-title">Contact Us</h2>
         <p style="color:var(--muted);text-align:center;margin-bottom:16px">For partnerships, media, or enterprise inquiries, reach us directly.</p>
-        <form action="https://formsubmit.co/ferjanimedyassine@gmail.com" method="POST" style="display:grid;gap:12px">
+        <form action="https://formsubmit.co/ferjanimedyassine@gmail.com" method="POST" style="display:grid;gap:12px" aria-label="Contact form">
           <input type="hidden" name="_subject" value="New Contact Message — QCipher" />
           <input type="hidden" name="_captcha" value="false" />
           <input type="text" name="name" placeholder="Your Name" required style="padding:14px 16px;background:rgba(0,0,0,.35);border:1px solid var(--accent1);border-radius:10px;color:var(--text)" />
@@ -334,7 +403,7 @@
   </main>
 
   <!-- Back to top button -->
-  <button id="toTop" class="fab-top"><i class="fa-solid fa-arrow-up"></i> Top</button>
+  <button id="toTop" class="fab-top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i> Top</button>
 
   <footer>
     <div class="brand">
@@ -343,11 +412,12 @@
     </div>
     <p>© <span id="year"></span> QCipher Technologies. All rights reserved.</p>
     <p><a href="/privacy.html">Privacy Policy</a> • <a href="/terms.html">Terms of Service</a></p>
+    <noscript><p style="color:#b0b0b0">QCipher automates Post-Quantum Cryptography (PQC) migration with AI agents for CBOM discovery, AI-generated playbooks, and orchestrated rollout aligned with NIST SP 800-208 and ETSI TR 103 617. Keywords: quantum-safe security, PQC migration, CBOM, NIS2.</p></noscript>
   </footer>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-    const DEMO_URL = "https://www.youtube.com/embed/Y0VI_iyR6yY?autoplay=1";
+    const DEMO_URL = "https://www.youtube.com/embed/Y0VI_iyR6yY?autoplay=1&rel=0";
     function playDemo(){
       const frame = document.getElementById('demoFrame');
       if(frame) frame.src = DEMO_URL;
@@ -419,4 +489,5 @@
   </script>
 </body>
 </html>
+
 
