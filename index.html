@@ -7,75 +7,6 @@
   <meta name="description" content="QCipher discovers your cryptography, generates AI-assisted migration playbooks, and orchestrates post-quantum rollout — without data leaving your environment." />
   <meta name="theme-color" content="#0f0f0f" />
 
-  <!-- LLM/SEO additions -->
-  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
-  <link rel="canonical" href="https://qcipher.xyz/" />
-  <link rel="alternate" hreflang="en" href="https://qcipher.xyz/" />
-  <link rel="sitemap" type="application/xml" title="Sitemap" href="https://qcipher.xyz/sitemap.xml" />
-  <link rel="alternate" type="application/rss+xml" title="QCipher RSS" href="https://qcipher.xyz/feed.xml" />
-  <link rel="me" href="https://www.linkedin.com/company/qcipher" />
-  <link rel="me" href="https://github.com/FerjaniMY" />
-
-  <!-- Social cards -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="QCipher — AI-Enhanced Quantum-Safe Security" />
-  <meta property="og:description" content="AI agents for PQC migration: CBOM discovery, AI-generated playbooks, and automated rollout." />
-  <meta property="og:url" content="https://qcipher.xyz/" />
-  <meta property="og:image" content="https://qcipher.xyz/og-image.png" />
-  <meta property="og:site_name" content="QCipher" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="QCipher — AI-Enhanced Quantum-Safe Security" />
-  <meta name="twitter:description" content="Automate PQC migration with AI: inventory, playbooks, rollout — data stays in your environment." />
-  <meta name="twitter:image" content="https://qcipher.xyz/og-image.png" />
-
-  <!-- Structured data for LLMs -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Organization",
-        "name": "QCipher",
-        "url": "https://qcipher.xyz",
-        "logo": "https://qcipher.xyz/qcipher-logo.png",
-        "sameAs": [
-          "https://www.linkedin.com/company/qcipher",
-          "https://github.com/FerjaniMY"
-        ],
-        "description": "AI-driven platform for quantum-safe security: discovers cryptography, generates migration playbooks, and orchestrates post-quantum rollout without data leaving your environment.",
-        "industry": "Quantum-safe Security",
-        "keywords": [
-          "Quantum-safe security",
-          "Post-Quantum Cryptography",
-          "PQC migration",
-          "CBOM",
-          "AI cybersecurity",
-          "NIST SP 800-208",
-          "ETSI TR 103 617",
-          "NIS2"
-        ]
-      },
-      {
-        "@type": "WebSite",
-        "url": "https://qcipher.xyz",
-        "name": "QCipher",
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": "https://qcipher.xyz/search?q={query}",
-          "query-input": "required name=query"
-        }
-      },
-      {
-        "@type": "SoftwareApplication",
-        "name": "QCipher PQC Migration Platform",
-        "applicationCategory": "SecurityApplication",
-        "operatingSystem": "Linux, macOS, Windows",
-        "description": "Automates PQC migration with AI agents for cryptographic inventory (CBOM), AI-generated playbooks, and orchestrated rollout."
-      }
-    ]
-  }
-  </script>
-
   <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -91,38 +22,208 @@
       --muted: #b0b0b0;
       --radius: 16px;
       --shadow: 0 10px 40px rgba(0,0,0,.35);
+      --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
-    body { font-family: Inter, sans-serif; background: var(--bg1); color: var(--text); line-height:1.6; overflow-x:hidden; }
+    body { 
+      font-family: Inter, sans-serif; 
+      background: var(--bg1); 
+      color: var(--text); 
+      line-height:1.6; 
+      overflow-x:hidden; 
+      margin:0; 
+      padding:0; 
+    }
 
-    .header { position: sticky; top:0; z-index:50; background: rgba(15,15,15,.9); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(218,165,32,.2) }
-    .nav { max-width:1200px; margin:0 auto; padding: 14px 5%; display:flex; align-items:center; justify-content:space-between }
-    .brand { display:flex; align-items:center; gap:.75rem }
-    .brand img { height:34px }
-    .brand .name { font-weight:700; background: linear-gradient(90deg, var(--accent1), var(--accent2)); -webkit-background-clip:text; background-clip:text; color:transparent }
-    .links { display:flex; gap:1rem }
-    .links a { color: var(--text); font-weight:500; transition:.25s }
-    .links a:hover { color: var(--accent1) }
-    .btn { padding:.65rem 1rem; border-radius:999px; border:1.5px solid var(--accent1); transition:.25s; cursor:pointer; background: transparent; color: var(--accent1); font-weight:600 }
-    .btn.solid { background: var(--accent1); color:#0b0b0b }
-    .btn:hover { transform: translateY(-1px); box-shadow:0 4px 12px rgba(218,165,32,.28) }
+    .header { 
+      position: sticky; 
+      top:0; 
+      z-index:50; 
+      background: rgba(15,15,15,.95); 
+      backdrop-filter: blur(12px); 
+      border-bottom: 1px solid rgba(218,165,32,.2);
+      transition: var(--transition);
+    }
+    
+    .nav { 
+      max-width:1200px; 
+      margin:0 auto; 
+      padding: 14px 5%; 
+      display:flex; 
+      align-items:center; 
+      justify-content:space-between; 
+    }
+    
+    .brand { 
+      display:flex; 
+      align-items:center; 
+      gap:.75rem; 
+    }
+    
+    .brand-logo {
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      background: linear-gradient(135deg, rgba(218,165,32,.22), rgba(218,165,32,.08));
+      border: 1px solid rgba(218,165,32,.45);
+      box-shadow: 0 6px 18px rgba(218,165,32,.18) inset, 0 6px 18px rgba(0,0,0,.35);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .brand-logo img {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+    }
+    
+    .brand .name { 
+      font-weight:700; 
+      background: linear-gradient(90deg, var(--accent1), var(--accent2)); 
+      -webkit-background-clip:text; 
+      background-clip:text; 
+      color:transparent;
+      font-size: 1.4rem;
+      letter-spacing: -0.5px;
+    }
+    
+    .links { 
+      display:flex; 
+      gap:1rem; 
+    }
+    
+    .links a { 
+      color: var(--text); 
+      font-weight:500; 
+      transition:var(--transition); 
+    }
+    
+    .links a:hover { 
+      color: var(--accent1); 
+    }
+    
+    .btn { 
+      padding:.65rem 1rem; 
+      border-radius:999px; 
+      border:1.5px solid var(--accent1); 
+      transition:var(--transition); 
+      cursor:pointer; 
+      background: transparent; 
+      color: var(--accent1); 
+      font-weight:600; 
+    }
+    
+    .btn.solid { 
+      background: var(--accent1); 
+      color:#0b0b0b; 
+    }
+    
+    .btn:hover { 
+      transform: translateY(-2px); 
+      box-shadow:0 6px 20px rgba(218,165,32,.35); 
+    }
 
-    .hero { min-height:84vh; display:grid; place-items:center; padding:120px 5% 60px; position:relative }
-    .hero-inner { max-width:1100px; text-align:center }
-    .eyebrow { display:inline-flex; gap:.5rem; align-items:center; padding:.3rem .6rem; border:1px solid rgba(218,165,32,.25); border-radius:999px; background: rgba(218,165,32,.06); color: var(--accent1); font-weight:600; font-size:.9rem }
-    .hero h1 { font-size:clamp(2rem,6vw,4rem); margin:.9rem 0; color:var(--text); font-weight:700; letter-spacing:-0.5px; text-shadow:0 2px 12px rgba(0,0,0,.6) }
-    .hero p.lead { color: var(--muted); max-width:900px; margin:0 auto 1.2rem; font-size:clamp(1rem,2.2vw,1.25rem) }
+    .hero { 
+      min-height:84vh; 
+      display:grid; 
+      place-items:center; 
+      padding:120px 5% 60px; 
+      position:relative; 
+    }
+    
+    .hero-inner { 
+      max-width:1100px; 
+      text-align:center; 
+    }
+    
+    .eyebrow { 
+      display:inline-flex; 
+      gap:.5rem; 
+      align-items:center; 
+      padding:.5rem 1rem; 
+      border:1px solid rgba(218,165,32,.25); 
+      border-radius:999px; 
+      background: rgba(218,165,32,.08); 
+      color: var(--accent1); 
+      font-weight:600; 
+      font-size:.9rem;
+      margin-bottom: 1.5rem;
+      backdrop-filter: blur(10px);
+    }
+    
+    .hero h1 { 
+      font-size:clamp(2.2rem,6vw,4.2rem); 
+      margin:.9rem 0; 
+      color:var(--text); 
+      font-weight:800; 
+      letter-spacing:-0.5px; 
+      text-shadow:0 2px 12px rgba(0,0,0,.6);
+      line-height: 1.1;
+    }
+    
+    .hero p.lead { 
+      color: var(--muted); 
+      max-width:900px; 
+      margin:0 auto 1.8rem; 
+      font-size:clamp(1.1rem,2.2vw,1.35rem);
+      line-height: 1.5;
+    }
 
-    section { padding:80px 5% }
-    .container { max-width:1200px; margin:0 auto }
-    .k { background: rgba(30,30,30,.85); border:1px solid rgba(218,165,32,.15); border-radius:var(--radius); box-shadow:var(--shadow) }
+    section { 
+      padding:100px 5%; 
+    }
+    
+    .container { 
+      max-width:1200px; 
+      margin:0 auto; 
+    }
+    
+    .k { 
+      background: rgba(30,30,30,.85); 
+      border:1px solid rgba(218,165,32,.15); 
+      border-radius:var(--radius); 
+      box-shadow:var(--shadow);
+      backdrop-filter: blur(10px);
+    }
 
-    footer { text-align:center; padding:40px 5%; border-top:1px solid rgba(218,165,32,.2); margin-top:40px }
-    footer .brand { justify-content:center; margin-bottom:6px; display:inline-flex; align-items:center; gap:.6rem }
-    footer p, footer a { color: var(--muted); font-size:.92rem }
-    footer a { color: var(--accent1) }
+    footer { 
+      text-align:center; 
+      padding:60px 5%; 
+      border-top:1px solid rgba(218,165,32,.2); 
+      margin-top:40px; 
+      background: rgba(10,10,10,.8);
+    }
+    
+    footer .brand { 
+      justify-content:center; 
+      margin-bottom:16px; 
+      display:inline-flex; 
+      align-items:center; 
+      gap:.6rem; 
+    }
+    
+    footer p, footer a { 
+      color: var(--muted); 
+      font-size:.92rem; 
+    }
+    
+    footer a { 
+      color: var(--accent1); 
+    }
 
-    #cyberbg { position: fixed; inset: 0; z-index: -1; width: 100vw; height: 100vh; pointer-events:none; background: var(--bg1) }
+    /* Quantum background canvas */
+    #quantum-bg { 
+      position: fixed; 
+      inset: 0; 
+      z-index: -1; 
+      width: 100vw; 
+      height: 100vh; 
+      pointer-events:none; 
+    }
+
     /* Global links */
     a { text-decoration: none; }
 
@@ -134,6 +235,7 @@
       line-height: 1;
       border: 1px solid transparent;
     }
+    
     .links a:hover {
       color: var(--text);
       background: rgba(218,165,32,.12);
@@ -145,45 +247,68 @@
       display: inline-flex;
       align-items: center;
       gap: .55rem;
-      padding: .8rem 1.1rem;
+      padding: .9rem 1.4rem;
       border-radius: 999px;
       border: 1px solid rgba(218,165,32,.55);
       background: linear-gradient(180deg, rgba(218,165,32,.12), rgba(218,165,32,.06));
       color: var(--accent1);
       font-weight: 700;
       letter-spacing: .2px;
-      transition: transform .2s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
+      transition: var(--transition);
       box-shadow: 0 1px 0 rgba(255,255,255,.04) inset, 0 10px 20px rgba(0,0,0,.25);
       backdrop-filter: saturate(120%);
     }
+    
     .btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 8px 22px rgba(218,165,32,.28);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px rgba(218,165,32,.3);
       background: linear-gradient(180deg, rgba(218,165,32,.16), rgba(218,165,32,.08));
     }
-    .btn:active { transform: translateY(0); filter: brightness(.98); }
-    .btn:focus-visible { outline: 2px solid rgba(218,165,32,.6); outline-offset: 2px; }
+    
+    .btn:active { 
+      transform: translateY(0); 
+      filter: brightness(.98); 
+    }
+    
+    .btn:focus-visible { 
+      outline: 2px solid rgba(218,165,32,.6); 
+      outline-offset: 2px; 
+    }
 
     .btn.solid {
       color: #0b0b0b;
       border-color: #e0b640;
-      background:
-        linear-gradient(180deg, #ffe08a, #ffd25a 30%, var(--accent1) 100%);
+      background: linear-gradient(180deg, #ffe08a, #ffd25a 30%, var(--accent1) 100%);
       box-shadow: 0 2px 0 rgba(255,255,255,.18) inset, 0 12px 26px rgba(218,165,32,.35);
     }
+    
     .btn.solid:hover {
       box-shadow: 0 2px 0 rgba(255,255,255,.22) inset, 0 16px 32px rgba(218,165,32,.42);
       filter: saturate(110%);
     }
 
     /* CTA row layout */
-    .cta-row { display:flex; gap:.8rem; justify-content:center; flex-wrap:wrap; margin-top: 1rem; }
+    .cta-row { 
+      display:flex; 
+      gap:.8rem; 
+      justify-content:center; 
+      flex-wrap:wrap; 
+      margin-top: 2rem; 
+    }
 
     /* Footer links (no underline) */
-    footer a { text-decoration: none; opacity:.9; }
-    footer a:hover { opacity:1; }
+    footer a { 
+      text-decoration: none; 
+      opacity:.9; 
+    }
+    
+    footer a:hover { 
+      opacity:1; 
+    }
 
-  html { scroll-behavior: smooth; }
+    html { 
+      scroll-behavior: smooth; 
+    }
 
     /* Upgrade: section titles with gold accent underline */
     .section-title {
@@ -194,60 +319,334 @@
       letter-spacing: .2px;
       position: relative;
       display: inline-block;
-      left: 50%; transform: translateX(-50%);
+      left: 50%; 
+      transform: translateX(-50%);
       background: linear-gradient(90deg, var(--text), var(--text));
-      -webkit-background-clip: text; background-clip: text; color: transparent;
+      -webkit-background-clip: text; 
+      background-clip: text; 
+      color: transparent;
+      font-size: 2.2rem;
     }
+    
     .section-title:after {
       content: "";
       display:block;
-      height: 3px; width: 72px; margin:10px auto 0;
+      height: 4px; 
+      width: 80px; 
+      margin:12px auto 0;
       border-radius: 999px;
       background: linear-gradient(90deg, #6b5c1e, var(--accent1), #7a5e16);
       box-shadow: 0 0 18px rgba(218,165,32,.45);
     }
 
     /* Upgrade: cards hover */
-    .k { transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
-    .k:hover { transform: translateY(-4px); box-shadow: 0 14px 40px rgba(0,0,0,.45); border-color: rgba(218,165,32,.28); }
+    .k { 
+      transition: var(--transition); 
+    }
+    
+    .k:hover { 
+      transform: translateY(-5px); 
+      box-shadow: 0 20px 40px rgba(0,0,0,.45); 
+      border-color: rgba(218,165,32,.28); 
+    }
 
     /* Upgrade: nav active state */
-    .links a.active { color: var(--text); background: rgba(218,165,32,.14); border-color: rgba(218,165,32,.34); }
+    .links a.active { 
+      color: var(--text); 
+      background: rgba(218,165,32,.14); 
+      border-color: rgba(218,165,32,.34); 
+    }
 
     /* Floating back-to-top */
     .fab-top {
-      position: fixed; right: 20px; bottom: 20px; z-index: 60;
-      display: none; align-items:center; gap:.5rem;
-      padding:.7rem .95rem; border-radius:999px;
+      position: fixed; 
+      right: 20px; 
+      bottom: 20px; 
+      z-index: 60;
+      display: none; 
+      align-items:center; 
+      gap:.5rem;
+      padding:.7rem .95rem; 
+      border-radius:999px;
       border:1px solid rgba(218,165,32,.55);
       background: linear-gradient(180deg, rgba(218,165,32,.18), rgba(218,165,32,.08));
-      color: var(--accent1); font-weight:700;
+      color: var(--accent1); 
+      font-weight:700;
       box-shadow: 0 10px 24px rgba(0,0,0,.35);
+      transition: var(--transition);
     }
-    .fab-top.show { display:inline-flex; }
+    
+    .fab-top.show { 
+      display:inline-flex; 
+    }
 
-    /* Background: Quantum Aurora (replaces hex grid) */
-    #cyberbg { position: fixed; inset: 0; z-index: -1; width: 100vw; height: 100vh; pointer-events:none; background: radial-gradient(120vw 80vh at 60% -10%, rgba(218,165,32,.06), transparent 60%), radial-gradient(120vw 80vh at 10% 120%, rgba(218,165,32,.05), transparent 60%), var(--bg1); }
+    /* Card glow upgrade */
+    .card { 
+      position:relative; 
+      overflow: hidden;
+    }
+    
+    .card:before { 
+      content:""; 
+      position:absolute; 
+      inset:0; 
+      border-radius:var(--radius); 
+      padding:1px; 
+      background:linear-gradient(135deg, rgba(218,165,32,.35), rgba(218,165,32,0)); 
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); 
+      -webkit-mask-composite: xor; 
+      mask-composite: exclude; 
+      pointer-events:none; 
+    }
 
-</style>
+    /* Section spacing tweak */
+    #features .k { 
+      backdrop-filter: blur(2px) saturate(110%); 
+    }
+
+    /* Features grid upgrade */
+    .features-grid {
+      display:grid;
+      gap:22px;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      position:relative;
+    }
+    
+    .feature h3 {
+      color:var(--text);
+      margin:.25rem 0 6px;
+      font-weight:700;
+      letter-spacing:.2px;
+      font-size: 1.3rem;
+    }
+    
+    .feature p {
+      color:var(--muted);
+      line-height: 1.5;
+    }
+    
+    .icon-wrap {
+      width:60px;
+      height:60px;
+      display:grid;
+      place-items:center;
+      border-radius:16px;
+      background:linear-gradient(180deg, rgba(218,165,32,.22), rgba(218,165,32,.08));
+      border:1px solid rgba(218,165,32,.45);
+      box-shadow:0 6px 18px rgba(218,165,32,.18) inset, 0 6px 18px rgba(0,0,0,.35);
+      margin-bottom: 1rem;
+      transition: var(--transition);
+    }
+    
+    .icon-wrap i {
+      font-size: 1.6rem;
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .feature:hover .icon-wrap {
+      transform:translateY(-3px) scale(1.05);
+      box-shadow:0 10px 25px rgba(218,165,32,.25) inset, 0 10px 25px rgba(0,0,0,.4);
+    }
+
+    /* Subtle background pattern inside features panel */
+    #features .k {
+      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0)) , rgba(30,30,30,.85);
+    }
+
+    /* Value section redesign */
+    .value-panel {
+      backdrop-filter:blur(3px) saturate(115%);
+    }
+    
+    .value-lead {
+      text-align:center;
+      color:var(--muted);
+      max-width:780px;
+      margin:0 auto 32px;
+      font-size:1.1rem;
+      line-height: 1.6;
+    }
+    
+    .value-grid {
+      display:grid;
+      gap:24px;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    }
+    
+    .value-card {
+      padding:30px;
+      border-radius:var(--radius);
+      text-align:left;
+      position:relative;
+      transition: var(--transition);
+    }
+    
+    .value-card h3 {
+      margin:16px 0 10px;
+      font-weight:700;
+      letter-spacing:.2px;
+      color:var(--text);
+      font-size: 1.3rem;
+    }
+    
+    .value-card p {
+      color:var(--muted);
+      line-height: 1.5;
+    }
+    
+    .value-icon {
+      width:70px;
+      height:70px;
+      border-radius:18px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(180deg, rgba(218,165,32,.26), rgba(218,165,32,.09));
+      border:1px solid rgba(218,165,32,.55);
+      box-shadow:0 6px 20px rgba(0,0,0,.35), inset 0 0 12px rgba(218,165,32,.22);
+      transition: var(--transition);
+    }
+    
+    .value-icon i {
+      font-size: 1.8rem;
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .value-card:hover .value-icon {
+      transform:translateY(-3px) scale(1.05);
+      box-shadow:0 10px 25px rgba(218,165,32,.3), inset 0 0 15px rgba(218,165,32,.25);
+    }
+
+    /* Why Now Section */
+    .why-panel {
+      backdrop-filter: blur(3px) saturate(115%);
+    }
+    
+    .why-lead {
+      text-align:center;
+      color:var(--muted);
+      max-width:780px;
+      margin:0 auto 32px;
+      font-size:1.1rem;
+      line-height: 1.6;
+    }
+    
+    .why-grid {
+      display:grid;
+      gap:24px;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    }
+    
+    .why-card {
+      padding:30px;
+      border-radius:var(--radius);
+      text-align:left;
+      position:relative;
+      transition: var(--transition);
+    }
+    
+    .why-card h3 {
+      margin:16px 0 10px;
+      font-weight:700;
+      letter-spacing:.2px;
+      color:var(--text);
+      font-size: 1.3rem;
+    }
+    
+    .why-card p {
+      color:var(--muted);
+      line-height: 1.5;
+    }
+    
+    .why-icon {
+      width:70px;
+      height:70px;
+      border-radius:18px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(180deg, rgba(218,165,32,.26), rgba(218,165,32,.09));
+      border:1px solid rgba(218,165,32,.55);
+      box-shadow:0 6px 20px rgba(0,0,0,.35), inset 0 0 12px rgba(218,165,32,.22);
+      transition: var(--transition);
+    }
+    
+    .why-icon i {
+      font-size: 1.8rem;
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .why-card:hover .why-icon {
+      transform:translateY(-3px) scale(1.05);
+      box-shadow:0 10px 25px rgba(218,165,32,.3), inset 0 0 15px rgba(218,165,32,.25);
+    }
+
+    /* Form styling */
+    form input, form select, form textarea {
+      padding:14px 16px;
+      background:rgba(0,0,0,.35);
+      border:1px solid rgba(218,165,32,.4);
+      border-radius:10px;
+      color:var(--text);
+      transition: var(--transition);
+      font-family: Inter, sans-serif;
+    }
+    
+    form input:focus, form select:focus, form textarea:focus {
+      outline: none;
+      border-color: var(--accent1);
+      box-shadow: 0 0 0 2px rgba(218,165,32,.2);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .section-title {
+        font-size: 1.8rem;
+      }
+      
+      .hero {
+        padding: 100px 5% 40px;
+        min-height: 70vh;
+      }
+      
+      section {
+        padding: 60px 5%;
+      }
+      
+      .value-icon, .why-icon, .icon-wrap {
+        width: 55px;
+        height: 55px;
+      }
+      
+      .value-icon i, .why-icon i, .icon-wrap i {
+        font-size: 1.4rem;
+      }
+    }
+  </style>
 </head>
 <body>
-  <canvas id="cyberbg"></canvas>
+  <canvas id="quantum-bg"></canvas>
 
   <header class="header">
     <nav class="nav" aria-label="Primary">
       <a href="#top" class="brand" aria-label="QCipher Home">
-        <img src="qcipher-logo.png" alt="QCipher logo" />
+        <div class="brand-logo">
+          <img src="qcipher-logo.png" alt="QCipher Logo">
+        </div>
         <span class="name">QCipher</span>
       </a>
       <div class="links" role="navigation">
         <a href="#why">Why Now</a>
         <a href="#features">Features</a>
-        <a href="#agents">AI Agents</a>
-        <a href="#demo">Demo</a>
         <a href="#waitlist">Join Waitlist</a>
         <a href="#contact">Contact</a>
-        <button id="watchDemoBtn" class="btn solid" aria-label="Watch Demo"><i class="fa-solid fa-play"></i> Watch Demo</button>
       </div>
     </nav>
   </header>
@@ -257,30 +656,39 @@
       <div class="hero-inner">
         <span class="eyebrow"><i class="fa-solid fa-shield"></i> Quantum-Safe Security • AI-Accelerated</span>
         <h1>AI-Enhanced Quantum-Safe Security</h1>
-        <p class="lead">QCipher discovers your cryptography, generates AI-assisted migration playbooks, and orchestrates rollout of post-quantum controls — <strong>without data leaving your environment</strong>.</p>
+        <p class="lead">We make the transition to <strong>post‑quantum cryptography</strong> faster, easier, and more cost‑efficient.</p>
         <div class="cta-row" role="group" aria-label="Primary actions">
           <a href="#waitlist" class="btn solid"><i class="fa-solid fa-robot"></i> Join Waitlist</a>
-          <button id="watchDemoBtnHero" class="btn"><i class="fa-solid fa-play"></i> Watch Demo</button>
+          <a href="#features" class="btn"><i class="fa-solid fa-chart-line"></i> Learn More</a>
         </div>
       </div>
     </section>
 
     <!-- Value Proposition -->
     <section id="value" class="container" aria-labelledby="value-title">
-      <div class="k" style="padding:34px">
+      <div class="k value-panel" style="padding:60px 40px">
         <h2 id="value-title" class="section-title">Why Enterprises Choose QCipher</h2>
-        <div style="display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
-          <div class="k" style="padding:20px">
-            <h3 style="color:var(--accent1);margin-bottom:6px"><i class="fa-solid fa-shield-halved"></i> Future-Proof Security</h3>
-            <p style="color:var(--muted)">Mitigate harvest-now-decrypt-later risk by moving to quantum-resistant cryptography.</p>
+        <p class="value-lead">Accelerate PQC adoption with a platform built for real security teams — not endless consulting cycles.</p>
+        <div class="value-grid">
+          <div class="k value-card">
+            <div class="value-icon"><i class="fa-solid fa-shield-check"></i></div>
+            <h3>Compliance Ready</h3>
+            <p>Meet NIS2, ETSI, and NIST PQC migration guidelines with structured crypto inventory and migration evidence.</p>
           </div>
-          <div class="k" style="padding:20px">
-            <h3 style="color:var(--accent1);margin-bottom:6px"><i class="fa-solid fa-gauge-high"></i> Faster Implementation</h3>
-            <p style="color:var(--muted)">Compress multi-year programs into months with automated inventory, planning, and rollout.</p>
+          <div class="k value-card">
+            <div class="value-icon"><i class="fa-solid fa-rocket"></i></div>
+            <h3>Faster PQC Migration</h3>
+            <p>Automate discovery, planning, simulation, and rollout — compress project timelines from years to months.</p>
           </div>
-          <div class="k" style="padding:20px">
-            <h3 style="color:var(--accent1);margin-bottom:6px"><i class="fa-solid fa-brain"></i> Tailored AI Agents</h3>
-            <p style="color:var(--muted)">Agents adapt to your stack and policies to mimic seasoned crypto-security engineers — at scale.</p>
+          <div class="k value-card">
+            <div class="value-icon"><i class="fa-solid fa-users-gear"></i></div>
+            <h3>Empower Security Teams</h3>
+            <p>Give engineers purpose‑built PQC migration workflows — no more manual audits, guesswork, or scattered tools.</p>
+          </div>
+          <div class="k value-card">
+            <div class="value-icon"><i class="fa-solid fa-brain-circuit"></i></div>
+            <h3>AI‑Powered PQC Strategy</h3>
+            <p>Context‑aware optimization selects algorithms, key sizes, and rollout paths matched to your environment.</p>
           </div>
         </div>
       </div>
@@ -288,20 +696,29 @@
 
     <!-- Why Now Section -->
     <section id="why" class="container" aria-labelledby="why-title">
-      <div class="k" style="padding:34px">
+      <div class="k why-panel" style="padding:60px 40px">
         <h2 id="why-title" class="section-title">Why Act Now?</h2>
-        <div style="display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
-          <div class="k" style="padding:20px">
-            <h3 style="color:var(--accent1);margin-bottom:6px"><i class="fa-solid fa-database"></i> Active Data Harvesting</h3>
-            <p style="color:var(--muted)">Adversaries collect encrypted data today to decrypt later when quantum capabilities arrive.</p>
+        <p class="why-lead">Quantum threat timelines are no longer theoretical. Organizations that delay PQC readiness risk silent compromise, supply‑chain exposure, and regulatory penalties.</p>
+        <div class="why-grid">
+          <div class="k why-card">
+            <div class="why-icon"><i class="fa-solid fa-database"></i></div>
+            <h3>Data Being Collected Today</h3>
+            <p>Adversaries are already harvesting encrypted data for future decryption once quantum computers mature — this is "harvest now, decrypt later."</p>
           </div>
-          <div class="k" style="padding:20px">
-            <h3 style="color:var(--accent1);margin-bottom:6px"><i class="fa-solid fa-clock"></i> Long Migration Timelines</h3>
-            <p style="color:var(--muted)">Crypto upgrades touch identities, apps, endpoints, and vendors — starting early is essential.</p>
+          <div class="k why-card">
+            <div class="why-icon"><i class="fa-solid fa-hourglass-half"></i></div>
+            <h3>Migration Takes Years</h3>
+            <p>Keys, certificates, identity systems, applications, endpoints, and vendors must all be upgraded—this is not a simple patch but a fundamental infrastructure overhaul.</p>
           </div>
-          <div class="k" style="padding:20px">
-            <h3 style="color:var(--accent1);margin-bottom:6px"><i class="fa-solid fa-list-check"></i> Compliance Pressure</h3>
-            <p style="color:var(--muted)">Policies increasingly require crypto inventories, risk reduction plans, and PQC transitions.</p>
+          <div class="k why-card">
+            <div class="why-icon"><i class="fa-solid fa-link"></i></div>
+            <h3>Interconnected Risk</h3>
+            <p>Your security depends on every vendor and subsystem. One weak link exposes entire environments to quantum attacks.</p>
+          </div>
+          <div class="k why-card">
+            <div class="why-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+            <h3>Regulations Are Shifting</h3>
+            <p>NIS2, CISA, NIST, and ETSI increasingly mandate crypto inventory and quantum‑safe transition strategies with specific deadlines.</p>
           </div>
         </div>
       </div>
@@ -309,77 +726,59 @@
 
     <!-- Features -->
     <section id="features" class="container" aria-labelledby="features-title">
-      <div class="k" style="padding:34px">
+      <div class="k" style="padding:60px 40px">
         <h2 id="features-title" class="section-title">Key Platform Features</h2>
-        <div style="display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
-          <div class="k" style="padding:20px">
-            <h3 style="color:var(--accent1);margin-bottom:6px"><i class="fa-solid fa-search"></i> Crypto Inventory & CBOM</h3>
-            <p style="color:var(--muted)">Discover and catalog cryptographic assets across code, services, networks, and dependencies.</p>
+        <div class="features-grid">
+          <div class="k card feature" style="padding:30px">
+            <div class="icon-wrap"><i class="fa-solid fa-search"></i></div>
+            <h3>Crypto Inventory &amp; CBOM</h3>
+            <p>Discover and catalog cryptographic assets across code, services, networks, and dependencies with our AI multi‑scanner.</p>
           </div>
-          <div class="k" style="padding:20px">
-            <h3 style="color:var(--accent1);margin-bottom:6px"><i class="fa-solid fa-file-lines"></i> AI-Generated Playbooks</h3>
-            <p style="color:var(--muted)">Produce step-by-step migration instructions tailored to your environment and SLAs.</p>
+          <div class="k card feature" style="padding:30px">
+            <div class="icon-wrap"><i class="fa-solid fa-map"></i></div>
+            <h3>AI‑Generated Migration Plans</h3>
+            <p>Produce step‑by‑step plans tailored to your environment. Prioritize high‑risk assets. Algorithms minimize quantum risk and improve performance and adaptability.</p>
           </div>
-          <div class="k" style="padding:20px">
-            <h3 style="color:var(--accent1);margin-bottom:6px"><i class="fa-solid fa-robot"></i> Automated Rollout</h3>
-            <p style="color:var(--muted)">Orchestrate PQC upgrades with guardrails, canaries, rollback, and continuous verification.</p>
+          <div class="k card feature" style="padding:30px">
+            <div class="icon-wrap"><i class="fa-solid fa-flask-vial"></i></div>
+            <h3>Simulate Before Execution</h3>
+            <p>Dry‑run changes on a digital twin: validate protocols, keys, certificates, and traffic impact before touching production.</p>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- AI Agents -->
-    <section id="agents" class="container" aria-labelledby="agents-title">
-      <div class="k" style="padding:34px">
-        <h2 id="agents-title" class="section-title">Our Tailored AI Agents</h2>
-        <div style="display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
-          <div class="k" style="padding:20px">
-            <h3 style="color:var(--accent1);margin-bottom:6px"><i class="fa-solid fa-diagram-project"></i> Migration Architect</h3>
-            <p style="color:var(--muted)">Builds a risk-prioritized roadmap, maps interfaces, and selects NIST-recommended PQC schemes.</p>
+          <div class="k card feature" style="padding:30px">
+            <div class="icon-wrap"><i class="fa-solid fa-chart-line"></i></div>
+            <h3>Continuous Monitoring &amp; Tuning</h3>
+            <p>Continuously monitor and adjust crypto parameters for optimal security, compliance, and performance across environments.</p>
           </div>
-          <div class="k" style="padding:20px">
-            <h3 style="color:var(--accent1);margin-bottom:6px"><i class="fa-solid fa-gears"></i> Automation Orchestrator</h3>
-            <p style="color:var(--muted)">Executes changes across CI/CD, configs, certs, and key management with audit trails.</p>
-          </div>
-          <div class="k" style="padding:20px">
-            <h3 style="color:var(--accent1);margin-bottom:6px"><i class="fa-solid fa-arrows-rotate"></i> Continuous Assurance</h3>
-            <p style="color:var(--muted)">Monitors for drift, deprecated algorithms, and vendor gaps; keeps you compliant over time.</p>
+          <div class="k card feature" style="padding:30px">
+            <div class="icon-wrap"><i class="fa-solid fa-robot"></i></div>
+            <h3>Automated Rollout</h3>
+            <p>Orchestrate PQC upgrades with guardrails, canaries, staged rollouts, automatic rollback, and continuous verification.</p>
           </div>
         </div>
       </div>
     </section>
-
-    <!-- Demo -->
-    <section id="demo" class="container" aria-labelledby="demo-title">
-      <div class="k" style="padding:34px">
-        <h2 id="demo-title" class="section-title">Product Demo</h2>
-        <div style="border-radius:16px; overflow:hidden; border:1px solid rgba(218,165,32,.15); background:#000; aspect-ratio:16/9">
-          <iframe id="demoFrame" title="QCipher Demo" src="" allowfullscreen loading="lazy" style="width:100%;height:100%;border:0"></iframe>
-        </div>
-      </div>
-    </section>
-
+    
     <!-- Waitlist -->
     <section id="waitlist" class="container" aria-labelledby="waitlist-title">
-      <div class="k" style="padding:28px;max-width:760px;margin:0 auto">
+      <div class="k" style="padding:50px 40px;max-width:760px;margin:0 auto">
         <h2 id="waitlist-title" class="section-title">Join the Quantum-Security Waitlist</h2>
-        <p style="color:var(--muted);text-align:center;margin-bottom:16px">Be among the first to experience automated PQC migration. We’ll contact you for a brief discovery call.</p>
-        <form action="https://formsubmit.co/ferjanimedyassine@gmail.com" method="POST" style="display:grid;gap:12px" aria-label="Waitlist form">
+        <p style="color:var(--muted);text-align:center;margin-bottom:24px">Be among the first to experience automated PQC migration. We'll contact you for a brief discovery call.</p>
+        <form action="https://formsubmit.co/ferjanimedyassine@gmail.com" method="POST" style="display:grid;gap:16px" aria-label="Waitlist form">
           <input type="hidden" name="_subject" value="New Waitlist Submission — QCipher" />
           <input type="hidden" name="_next" value="https://qcipher.xyz/thank-you.html" />
           <input type="hidden" name="_captcha" value="false" />
           <label style="position:absolute;left:-9999px">Do not fill this: <input name="_honey" type="text" tabindex="-1" autocomplete="off" /></label>
 
-          <input type="text" name="name" placeholder="Your Name" required style="padding:14px 16px;background:rgba(0,0,0,.35);border:1px solid var(--accent1);border-radius:10px;color:var(--text)" />
-          <input type="email" name="email" placeholder="Work Email" required style="padding:14px 16px;background:rgba(0,0,0,.35);border:1px solid var(--accent1);border-radius:10px;color:var(--text)" />
-          <input type="text" name="company" placeholder="Organization (Optional)" style="padding:14px 16px;background:rgba(0,0,0,.35);border:1px solid var(--accent1);border-radius:10px;color:var(--text)" />
-          <select name="interest" aria-label="Interest" style="padding:14px 16px;background:rgba(0,0,0,.35);border:1px solid var(--accent1);border-radius:10px;color:var(--text)">
+          <input type="text" name="name" placeholder="Your Name" required />
+          <input type="email" name="email" placeholder="Work Email" required />
+          <input type="text" name="company" placeholder="Organization (Optional)" />
+          <select name="interest" aria-label="Interest">
             <option value="Security Professional">Security Professional</option>
             <option value="Technical Leader">Technical Leader</option>
             <option value="Enterprise Buyer">Enterprise Buyer</option>
             <option value="Other">Other</option>
           </select>
-          <textarea name="message" placeholder="Your message or questions…" rows="4" style="padding:14px 16px;background:rgba(0,0,0,.35);border:1px solid var(--accent1);border-radius:10px;color:var(--text)"></textarea>
+          <textarea name="message" placeholder="Your message or questions…" rows="4"></textarea>
           <button type="submit" class="btn solid" style="justify-self:center;width:100%"><i class="fa-solid fa-robot"></i> Join Waitlist</button>
         </form>
       </div>
@@ -387,15 +786,15 @@
 
     <!-- Contact -->
     <section id="contact" class="container" aria-labelledby="contact-title">
-      <div class="k" style="padding:28px;max-width:760px;margin:0 auto">
+      <div class="k" style="padding:50px 40px;max-width:760px;margin:0 auto">
         <h2 id="contact-title" class="section-title">Contact Us</h2>
-        <p style="color:var(--muted);text-align:center;margin-bottom:16px">For partnerships, media, or enterprise inquiries, reach us directly.</p>
-        <form action="https://formsubmit.co/ferjanimedyassine@gmail.com" method="POST" style="display:grid;gap:12px" aria-label="Contact form">
+        <p style="color:var(--muted);text-align:center;margin-bottom:24px">For partnerships, media, or enterprise inquiries, reach us directly.</p>
+        <form action="https://formsubmit.co/ferjanimedyassine@gmail.com" method="POST" style="display:grid;gap:16px" aria-label="Contact form">
           <input type="hidden" name="_subject" value="New Contact Message — QCipher" />
           <input type="hidden" name="_captcha" value="false" />
-          <input type="text" name="name" placeholder="Your Name" required style="padding:14px 16px;background:rgba(0,0,0,.35);border:1px solid var(--accent1);border-radius:10px;color:var(--text)" />
-          <input type="email" name="email" placeholder="Email" required style="padding:14px 16px;background:rgba(0,0,0,.35);border:1px solid var(--accent1);border-radius:10px;color:var(--text)" />
-          <textarea name="message" placeholder="Your message…" rows="4" style="padding:14px 16px;background:rgba(0,0,0,.35);border:1px solid var(--accent1);border-radius:10px;color:var(--text)"></textarea>
+          <input type="text" name="name" placeholder="Your Name" required />
+          <input type="email" name="email" placeholder="Email" required />
+          <textarea name="message" placeholder="Your message…" rows="4"></textarea>
           <button type="submit" class="btn solid" style="justify-self:center;width:100%">Send Message</button>
         </form>
       </div>
@@ -407,66 +806,370 @@
 
   <footer>
     <div class="brand">
-      <img src="qcipher-logo.png" alt="QCipher logo small" />
+      <div class="brand-logo">
+        <img src="qcipher-logo.png" alt="QCipher Logo">
+      </div>
       <span class="name">QCipher</span>
     </div>
     <p>© <span id="year"></span> QCipher Technologies. All rights reserved.</p>
     <p><a href="/privacy.html">Privacy Policy</a> • <a href="/terms.html">Terms of Service</a></p>
-    <noscript><p style="color:#b0b0b0">QCipher automates Post-Quantum Cryptography (PQC) migration with AI agents for CBOM discovery, AI-generated playbooks, and orchestrated rollout aligned with NIST SP 800-208 and ETSI TR 103 617. Keywords: quantum-safe security, PQC migration, CBOM, NIS2.</p></noscript>
+    <noscript><p style="color:#b0b0b0">QCipher automates Post-Quantum Cryptography (PQC) migration with AI solutions for CBOM discovery, AI-generated playbooks, and orchestrated rollout aligned with NIST SP 800-208 and ETSI TR 103 617. Keywords: quantum-safe security, PQC migration, CBOM, NIS2.</p></noscript>
   </footer>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-    const DEMO_URL = "https://www.youtube.com/embed/Y0VI_iyR6yY?autoplay=1&rel=0";
-    function playDemo(){
-      const frame = document.getElementById('demoFrame');
-      if(frame) frame.src = DEMO_URL;
-      document.getElementById('demo')?.scrollIntoView({behavior:'smooth'});
-    }
-    document.getElementById('watchDemoBtn')?.addEventListener('click', playDemo);
-    document.getElementById('watchDemoBtnHero')?.addEventListener('click', playDemo);
 
+    // Enhanced Quantum Background Animation with Reduced Brightness
     (function(){
-      const canvas = document.getElementById('cyberbg');
+      const canvas = document.getElementById('quantum-bg');
       const ctx = canvas.getContext('2d');
       const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      let w,h,t=0; let particles=[];
-      function resize(){ w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; initParticles(); }
-      function initParticles(){ particles = Array.from({length: 60}, () => ({ x: Math.random()*w, y: Math.random()*h, vx:(Math.random()-.5)*0.2, vy:(Math.random()-.5)*0.2, r: Math.random()*1.5+0.5 })); }
-      function drawAurora(){
-        const layers = 3;
-        for(let i=0;i<layers;i++){
-          const amp = 40 + i*18; const freq = 0.0012 + i*0.0004; const speed = 0.0008 + i*0.0003;
-          const grad = ctx.createLinearGradient(0,0,w,0);
-          grad.addColorStop(0, `rgba(218,165,32,${0.04 + i*0.02})`);
-          grad.addColorStop(0.5, `rgba(255,215,100,${0.06 + i*0.03})`);
-          grad.addColorStop(1, `rgba(184,134,11,${0.04 + i*0.02})`);
-          ctx.strokeStyle = grad; ctx.lineWidth = 1.5 + i*0.7;
-          ctx.beginPath();
-          for(let x=0;x<=w;x+=6){
-            const y = h*0.35 + Math.sin(x*freq + t*speed + i)*amp + Math.cos((x+t*40)*0.0009+i)*10;
-            x===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+      let w, h, t = 0;
+      
+      // Multiple particle systems for different visual layers
+      const particles = {
+        quantumBits: [],
+        energyFields: [],
+        dataStreams: []
+      };
+      
+      const particleCounts = {
+        quantumBits: 60, // Reduced count for less brightness
+        energyFields: 25,
+        dataStreams: 15
+      };
+      
+      // Quantum Bit particles
+      class QuantumBit {
+        constructor() {
+          this.reset();
+          this.x = Math.random() * w;
+          this.y = Math.random() * h;
+        }
+        
+        reset() {
+          this.x = Math.random() * w;
+          this.y = Math.random() * h;
+          this.vx = (Math.random() - 0.5) * 0.6; // Slower movement
+          this.vy = (Math.random() - 0.5) * 0.6;
+          this.size = Math.random() * 1.5 + 0.8; // Smaller particles
+          this.color = `rgba(218, 165, 32, ${Math.random() * 0.3 + 0.1})`; // Lower opacity
+          this.phase = Math.random() * Math.PI * 2;
+          this.quantumState = Math.random();
+        }
+        
+        update() {
+          // Quantum behavior - particles move in wave-like patterns
+          this.phase += 0.02; // Slower phase change
+          this.vx += Math.sin(this.phase) * 0.015;
+          this.vy += Math.cos(this.phase) * 0.015;
+          
+          this.x += this.vx;
+          this.y += this.vy;
+          
+          // Boundary behavior - quantum tunneling effect
+          if (this.x < 0 || this.x > w || this.y < 0 || this.y > h) {
+            if (Math.random() > 0.8) { // Lower quantum tunneling probability
+              this.x = Math.random() * w;
+              this.y = Math.random() * h;
+            } else {
+              if (this.x < 0) this.vx = Math.abs(this.vx);
+              if (this.x > w) this.vx = -Math.abs(this.vx);
+              if (this.y < 0) this.vy = Math.abs(this.vy);
+              if (this.y > h) this.vy = -Math.abs(this.vy);
+            }
           }
+          
+          // Speed limits
+          const speed = Math.sqrt(this.vx*this.vx + this.vy*this.vy);
+          const maxSpeed = 1.2; // Lower max speed
+          if (speed > maxSpeed) {
+            this.vx = (this.vx / speed) * maxSpeed;
+            this.vy = (this.vy / speed) * maxSpeed;
+          }
+        }
+        
+        draw() {
+          // Draw quantum bit with subtle glow effect
+          const gradient = ctx.createRadialGradient(
+            this.x, this.y, 0,
+            this.x, this.y, this.size * 2.5
+          );
+          gradient.addColorStop(0, this.color);
+          gradient.addColorStop(1, 'rgba(218, 165, 32, 0)');
+          
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size * 2.5, 0, Math.PI * 2);
+          ctx.fillStyle = gradient;
+          ctx.fill();
+          
+          // Core particle
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(255, 215, 145, 0.7)'; // Lower opacity
+          ctx.fill();
+        }
+      }
+      
+      // Energy Field particles (larger, slower moving)
+      class EnergyField {
+        constructor() {
+          this.reset();
+        }
+        
+        reset() {
+          this.x = Math.random() * w;
+          this.y = Math.random() * h;
+          this.size = Math.random() * 80 + 40; // Smaller fields
+          this.opacity = Math.random() * 0.06 + 0.03; // Lower opacity
+          this.pulseSpeed = Math.random() * 0.015 + 0.008; // Slower pulsing
+          this.pulsePhase = Math.random() * Math.PI * 2;
+        }
+        
+        update() {
+          this.pulsePhase += this.pulseSpeed;
+          this.currentOpacity = this.opacity + Math.sin(this.pulsePhase) * 0.02; // Lower pulse amplitude
+        }
+        
+        draw() {
+          const gradient = ctx.createRadialGradient(
+            this.x, this.y, 0,
+            this.x, this.y, this.size
+          );
+          gradient.addColorStop(0, `rgba(218, 165, 32, ${this.currentOpacity})`);
+          gradient.addColorStop(1, 'rgba(218, 165, 32, 0)');
+          
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fillStyle = gradient;
+          ctx.fill();
+        }
+      }
+      
+      // Data Stream particles (moving in streams)
+      class DataStream {
+        constructor() {
+          this.reset();
+        }
+        
+        reset() {
+          this.side = Math.floor(Math.random() * 4); // 0: top, 1: right, 2: bottom, 3: left
+          this.progress = Math.random();
+          this.speed = Math.random() * 0.004 + 0.0015; // Slower speed
+          this.size = Math.random() * 2 + 0.8; // Smaller particles
+          this.color = `rgba(218, 165, 32, ${Math.random() * 0.25 + 0.2})`; // Lower opacity
+          
+          // Set initial position based on side
+          switch(this.side) {
+            case 0: // top
+              this.x = Math.random() * w;
+              this.y = 0;
+              this.targetX = Math.random() * w;
+              this.targetY = h;
+              break;
+            case 1: // right
+              this.x = w;
+              this.y = Math.random() * h;
+              this.targetX = 0;
+              this.targetY = Math.random() * h;
+              break;
+            case 2: // bottom
+              this.x = Math.random() * w;
+              this.y = h;
+              this.targetX = Math.random() * w;
+              this.targetY = 0;
+              break;
+            case 3: // left
+              this.x = 0;
+              this.y = Math.random() * h;
+              this.targetX = w;
+              this.targetY = Math.random() * h;
+              break;
+          }
+        }
+        
+        update() {
+          this.progress += this.speed;
+          if (this.progress >= 1) {
+            this.reset();
+            this.progress = 0;
+          }
+          
+          // Calculate current position
+          this.x = this.x + (this.targetX - this.x) * this.progress;
+          this.y = this.y + (this.targetY - this.y) * this.progress;
+        }
+        
+        draw() {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fillStyle = this.color;
+          ctx.fill();
+          
+          // Draw trail (shorter and more subtle)
+          const trailLength = 3;
+          for (let i = 1; i <= trailLength; i++) {
+            const trailProgress = this.progress - (i * 0.015);
+            if (trailProgress < 0) continue;
+            
+            const trailX = this.x + (this.targetX - this.x) * trailProgress;
+            const trailY = this.y + (this.targetY - this.y) * trailProgress;
+            
+            ctx.beginPath();
+            ctx.arc(trailX, trailY, this.size * (1 - i/trailLength), 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(218, 165, 32, ${0.2 * (1 - i/trailLength)})`;
+            ctx.fill();
+          }
+        }
+      }
+      
+      function resize(){
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+        
+        // Reset particles on resize
+        initParticles();
+      }
+      
+      function initParticles() {
+        // Initialize quantum bits
+        particles.quantumBits = [];
+        for(let i = 0; i < particleCounts.quantumBits; i++) {
+          particles.quantumBits.push(new QuantumBit());
+        }
+        
+        // Initialize energy fields
+        particles.energyFields = [];
+        for(let i = 0; i < particleCounts.energyFields; i++) {
+          particles.energyFields.push(new EnergyField());
+        }
+        
+        // Initialize data streams
+        particles.dataStreams = [];
+        for(let i = 0; i < particleCounts.dataStreams; i++) {
+          particles.dataStreams.push(new DataStream());
+        }
+      }
+      
+      function drawConnections() {
+        // Draw subtle connections between quantum bits
+        for(let i = 0; i < particles.quantumBits.length; i++) {
+          for(let j = i + 1; j < particles.quantumBits.length; j++) {
+            const p1 = particles.quantumBits[i];
+            const p2 = particles.quantumBits[j];
+            const dx = p1.x - p2.x;
+            const dy = p1.y - p2.y;
+            const distance = Math.sqrt(dx*dx + dy*dy);
+            
+            if (distance < 120) { // Shorter connection distance
+              const opacity = 1 - (distance / 120);
+              ctx.beginPath();
+              ctx.moveTo(p1.x, p1.y);
+              ctx.lineTo(p2.x, p2.y);
+              ctx.strokeStyle = `rgba(218, 165, 32, ${opacity * 0.08})`; // Lower opacity
+              ctx.lineWidth = 0.6;
+              ctx.stroke();
+            }
+          }
+        }
+      }
+      
+      function drawQuantumWaves() {
+        // Large quantum wave interference patterns (more subtle)
+        for(let i = 0; i < 3; i++) { // Fewer waves
+          const radius = 80 + i * 130 + Math.sin(t * 0.0008 + i) * 30; // Slower movement
+          const opacity = 0.015 + i * 0.008; // Lower opacity
+          
+          ctx.beginPath();
+          ctx.arc(w/2, h/2, radius, 0, Math.PI * 2);
+          ctx.strokeStyle = `rgba(218, 165, 32, ${opacity})`;
+          ctx.lineWidth = 0.8;
           ctx.stroke();
         }
-      }
-      function drawParticles(){
-        for(const p of particles){
-          p.x += p.vx; p.y += p.vy; if(p.x<0||p.x>w) p.vx*=-1; if(p.y<0||p.y>h) p.vy*=-1;
-          ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle='rgba(218,165,32,0.6)'; ctx.fill();
+        
+        // Orbital quantum nodes (more subtle)
+        const orbitalCount = 5; // Fewer orbitals
+        for(let i = 0; i < orbitalCount; i++) {
+          const angle = t * 0.0006 + i * (Math.PI * 2 / orbitalCount); // Slower rotation
+          const radius = Math.min(w, h) * 0.25;
+          const x = w/2 + Math.cos(angle) * radius;
+          const y = h/2 + Math.sin(angle) * radius;
+          
+          // Draw subtle orbital path
+          ctx.beginPath();
+          ctx.arc(w/2, h/2, radius, 0, Math.PI * 2);
+          ctx.strokeStyle = 'rgba(218, 165, 32, 0.03)'; // Lower opacity
+          ctx.lineWidth = 0.8;
+          ctx.stroke();
+          
+          // Draw orbital node with subtle glow
+          const nodeGradient = ctx.createRadialGradient(x, y, 0, x, y, 12);
+          nodeGradient.addColorStop(0, 'rgba(255, 215, 145, 0.6)'); // Lower opacity
+          nodeGradient.addColorStop(1, 'rgba(218, 165, 32, 0)');
+          
+          ctx.beginPath();
+          ctx.arc(x, y, 12, 0, Math.PI * 2);
+          ctx.fillStyle = nodeGradient;
+          ctx.fill();
+          
+          ctx.beginPath();
+          ctx.arc(x, y, 3, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(255, 215, 145, 0.8)'; // Lower opacity
+          ctx.fill();
         }
       }
+      
+      function drawBackground() {
+        // Base gradient background (darker)
+        const gradient = ctx.createRadialGradient(
+          w/2, h/2, 0,
+          w/2, h/2, Math.max(w, h) * 0.8
+        );
+        gradient.addColorStop(0, 'rgba(3, 3, 3, 1)'); // Darker
+        gradient.addColorStop(0.7, 'rgba(8, 8, 8, 1)'); // Darker
+        gradient.addColorStop(1, 'rgba(12, 12, 12, 1)'); // Darker
+        
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, w, h);
+      }
+      
       function frame(){
-        t+=1; ctx.clearRect(0,0,w,h);
-        const g = ctx.createRadialGradient(w*0.6,h*-0.1,0,w*0.6,h*0.2,Math.max(w,h));
-        g.addColorStop(0, 'rgba(218,165,32,0.06)'); g.addColorStop(1, 'rgba(0,0,0,0)');
-        ctx.fillStyle = g; ctx.fillRect(0,0,w,h);
-        drawAurora(); drawParticles();
+        t += 1;
+        
+        drawBackground();
+        drawQuantumWaves();
+        
+        // Update and draw energy fields
+        particles.energyFields.forEach(field => {
+          field.update();
+          field.draw();
+        });
+        
+        // Update and draw data streams
+        particles.dataStreams.forEach(stream => {
+          stream.update();
+          stream.draw();
+        });
+        
+        // Update and draw quantum bits
+        particles.quantumBits.forEach(bit => {
+          bit.update();
+          bit.draw();
+        });
+        
+        drawConnections();
+        
         if(!reduce) requestAnimationFrame(frame);
       }
-      resize(); frame(); window.addEventListener('resize', resize);
+      
+      // Initialize
+      resize();
+      initParticles();
+      frame();
+      window.addEventListener('resize', resize);
     })();
-  // Nav active link highlight + back-to-top
+
+    // Nav active link highlight + back-to-top
     (function(){
       const anchors = Array.from(document.querySelectorAll('.links a[href^="#"]'));
       const map = new Map(anchors.map(a=>[a.getAttribute('href'), a]));
