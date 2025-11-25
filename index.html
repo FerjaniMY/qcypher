@@ -1,1197 +1,1031 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>QCipher — AI-Enhanced Quantum-Safe Security</title>
-  <meta name="description" content="QCipher discovers your cryptography, generates AI-assisted migration playbooks, and orchestrates post-quantum rollout — without data leaving your environment." />
-  <meta name="theme-color" content="#0f0f0f" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QCipher | Automated Post-Quantum Cryptography Migration</title>
+    <meta name="description" content="Enterprise-grade Post-Quantum Cryptography (PQC) migration platform. Secure your infrastructure against Harvest Now, Decrypt Later attacks." />
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
-  <!-- Fonts & Icons -->
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
-  <style>
-    :root {
-      --bg1: #050505;
-      --bg2: #0f0f0f;
-      --accent1: #daa520;
-      --accent2: #b8860b;
-      --text: #f5f5f5;
-      --muted: #b0b0b0;
-      --radius: 16px;
-      --shadow: 0 10px 40px rgba(0,0,0,.35);
-      --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        deep: '#000000', // Pure Void Black
+                        panel: '#020617', // Slate 950
+                        accent: '#3b82f6', // Electric Blue
+                        accent_glow: '#60a5fa', // Lighter Blue for glows
+                        secondary: '#06b6d4', // Cyan for gradients
+                        white: '#f8fafc',
+                        danger: {
+                            500: '#f43f5e', // Rose 500
+                            900: '#881337'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    backgroundImage: {
+                        // Updated SVG fill to Blue (#3b82f6)
+                        'hex-grid': "url(\"data:image/svg+xml,%3Csvg width='24' height='40' viewBox='0 0 24 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 40c5.523 0 10-4.477 10-10V10c0-5.523 4.477-10 10-10s10 4.477 10 10v20c0 5.523-4.477 10-10 10S0 35.523 0 30V40z' fill='%233b82f6' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E\")",
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'marquee': 'marquee 40s linear infinite',
+                        'scan': 'scan 3s linear infinite',
+                        'scan-horizontal': 'scan-horizontal 4s linear infinite',
+                        'grid-flow': 'gridMove 30s linear infinite',
+                        'slide-in': 'slideIn 0.3s ease-out forwards',
+                        'fade-out': 'fadeOut 0.3s ease-in forwards',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        marquee: {
+                            '0%': { transform: 'translateX(0)' },
+                            '100%': { transform: 'translateX(-100%)' },
+                        },
+                        scan: {
+                            '0%': { transform: 'translateY(-100%)' },
+                            '100%': { transform: 'translateY(100%)' }
+                        },
+                         'scan-horizontal': {
+                            '0%': { transform: 'translateX(-100%)' },
+                            '100%': { transform: 'translateX(200%)' }
+                        },
+                        gridMove: {
+                            '0%': { backgroundPosition: '0 0' },
+                            '100%': { backgroundPosition: '0 40px' }
+                        },
+                        slideIn: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        },
+                        fadeOut: {
+                            '0%': { transform: 'translateY(0)', opacity: '1' },
+                            '100%': { transform: 'translateY(20px)', opacity: '0' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 
-    body { 
-      font-family: Inter, sans-serif; 
-      background: var(--bg1); 
-      color: var(--text); 
-      line-height:1.6; 
-      overflow-x:hidden; 
-      margin:0; 
-      padding:0; 
-    }
+    <style>
+        /* --- CORE VISUALS --- */
+        body {
+            background-color: #000000;
+            color: #e2e8f0;
+            overflow-x: hidden;
+            font-feature-settings: "ss01", "ss02", "cv01";
+        }
 
-    .header { 
-      position: sticky; 
-      top:0; 
-      z-index:50; 
-      background: rgba(15,15,15,.95); 
-      backdrop-filter: blur(12px); 
-      border-bottom: 1px solid rgba(218,165,32,.2);
-      transition: var(--transition);
-    }
-    
-    .nav { 
-      max-width:1200px; 
-      margin:0 auto; 
-      padding: 14px 5%; 
-      display:flex; 
-      align-items:center; 
-      justify-content:space-between; 
-    }
-    
-    .brand { 
-      display:flex; 
-      align-items:center; 
-      gap:.75rem; 
-    }
-    
-    .brand-logo {
-      width: 42px;
-      height: 42px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 10px;
-      background: linear-gradient(135deg, rgba(218,165,32,.22), rgba(218,165,32,.08));
-      border: 1px solid rgba(218,165,32,.45);
-      box-shadow: 0 6px 18px rgba(218,165,32,.18) inset, 0 6px 18px rgba(0,0,0,.35);
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .brand-logo img {
-      width: 28px;
-      height: 28px;
-      object-fit: contain;
-    }
-    
-    .brand .name { 
-      font-weight:700; 
-      background: linear-gradient(90deg, var(--accent1), var(--accent2)); 
-      -webkit-background-clip:text; 
-      background-clip:text; 
-      color:transparent;
-      font-size: 1.4rem;
-      letter-spacing: -0.5px;
-    }
-    
-    .links { 
-      display:flex; 
-      gap:1rem; 
-    }
-    
-    .links a { 
-      color: var(--text); 
-      font-weight:500; 
-      transition:var(--transition); 
-    }
-    
-    .links a:hover { 
-      color: var(--accent1); 
-    }
-    
-    .btn { 
-      padding:.65rem 1rem; 
-      border-radius:999px; 
-      border:1.5px solid var(--accent1); 
-      transition:var(--transition); 
-      cursor:pointer; 
-      background: transparent; 
-      color: var(--accent1); 
-      font-weight:600; 
-    }
-    
-    .btn.solid { 
-      background: var(--accent1); 
-      color:#0b0b0b; 
-    }
-    
-    .btn:hover { 
-      transform: translateY(-2px); 
-      box-shadow:0 6px 20px rgba(218,165,32,.35); 
-    }
+        /* Ambient Fog - Blue/Cyan Tint */
+        .ambient-glow {
+            position: fixed;
+            width: 100vw; height: 100vh;
+            background: 
+                radial-gradient(circle at 15% 25%, rgba(59, 130, 246, 0.08), transparent 40%),
+                radial-gradient(circle at 85% 75%, rgba(6, 182, 212, 0.05), transparent 40%);
+            pointer-events: none;
+            z-index: 0;
+        }
 
-    .hero { 
-      min-height:84vh; 
-      display:grid; 
-      place-items:center; 
-      padding:120px 5% 60px; 
-      position:relative; 
-    }
-    
-    .hero-inner { 
-      max-width:1100px; 
-      text-align:center; 
-    }
-    
-    .eyebrow { 
-      display:inline-flex; 
-      gap:.5rem; 
-      align-items:center; 
-      padding:.5rem 1rem; 
-      border:1px solid rgba(218,165,32,.25); 
-      border-radius:999px; 
-      background: rgba(218,165,32,.08); 
-      color: var(--accent1); 
-      font-weight:600; 
-      font-size:.9rem;
-      margin-bottom: 1.5rem;
-      backdrop-filter: blur(10px);
-    }
-    
-    .hero h1 { 
-      font-size:clamp(2.2rem,6vw,4.2rem); 
-      margin:.9rem 0; 
-      color:var(--text); 
-      font-weight:800; 
-      letter-spacing:-0.5px; 
-      text-shadow:0 2px 12px rgba(0,0,0,.6);
-      line-height: 1.1;
-    }
-    
-    .hero p.lead { 
-      color: var(--muted); 
-      max-width:900px; 
-      margin:0 auto 1.8rem; 
-      font-size:clamp(1.1rem,2.2vw,1.35rem);
-      line-height: 1.5;
-    }
+        /* --- UI COMPONENTS --- */
+        
+        /* Glass Panel - Cleaner, Darker tint */
+        .glass-panel {
+            background: rgba(2, 6, 23, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(59, 130, 246, 0.15);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+        }
 
-    section { 
-      padding:100px 5%; 
-    }
-    
-    .container { 
-      max-width:1200px; 
-      margin:0 auto; 
-    }
-    
-    .k { 
-      background: rgba(30,30,30,.85); 
-      border:1px solid rgba(218,165,32,.15); 
-      border-radius:var(--radius); 
-      box-shadow:var(--shadow);
-      backdrop-filter: blur(10px);
-    }
+        /* Holographic Card - Blue Theme */
+        .holo-card {
+            background: linear-gradient(180deg, rgba(2, 6, 23, 0.8) 0%, rgba(0, 0, 0, 0.9) 100%);
+            border: 1px solid rgba(59, 130, 246, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
 
-    footer { 
-      text-align:center; 
-      padding:60px 5%; 
-      border-top:1px solid rgba(218,165,32,.2); 
-      margin-top:40px; 
-      background: rgba(10,10,10,.8);
-    }
-    
-    footer .brand { 
-      justify-content:center; 
-      margin-bottom:16px; 
-      display:inline-flex; 
-      align-items:center; 
-      gap:.6rem; 
-    }
-    
-    footer p, footer a { 
-      color: var(--muted); 
-      font-size:.92rem; 
-    }
-    
-    footer a { 
-      color: var(--accent1); 
-    }
+        .holo-card:hover {
+            border-color: #3b82f6;
+            transform: translateY(-5px);
+            box-shadow: 0 0 40px -10px rgba(59, 130, 246, 0.2);
+        }
 
-    /* Quantum background canvas */
-    #quantum-bg { 
-      position: fixed; 
-      inset: 0; 
-      z-index: -1; 
-      width: 100vw; 
-      height: 100vh; 
-      pointer-events:none; 
-    }
+        /* Scanning effect - Blue */
+        .holo-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(180deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+            transform: translateY(-100%);
+            transition: transform 0.5s;
+        }
+        .holo-card:hover::before {
+            animation: scan 1.5s linear infinite;
+        }
 
-    /* Global links */
-    a { text-decoration: none; }
+        /* Text Highlighting */
+        .text-white-stark {
+            color: #f1f5f9;
+            text-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+        }
 
-    /* Improved nav items */
-    .links a {
-      text-decoration: none;
-      padding: .5rem .8rem;
-      border-radius: 10px;
-      line-height: 1;
-      border: 1px solid transparent;
-    }
-    
-    .links a:hover {
-      color: var(--text);
-      background: rgba(218,165,32,.12);
-      border-color: rgba(218,165,32,.28);
-    }
+        .text-accent-glow {
+            color: #3b82f6;
+            text-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+        }
 
-    /* Better buttons */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: .55rem;
-      padding: .9rem 1.4rem;
-      border-radius: 999px;
-      border: 1px solid rgba(218,165,32,.55);
-      background: linear-gradient(180deg, rgba(218,165,32,.12), rgba(218,165,32,.06));
-      color: var(--accent1);
-      font-weight: 700;
-      letter-spacing: .2px;
-      transition: var(--transition);
-      box-shadow: 0 1px 0 rgba(255,255,255,.04) inset, 0 10px 20px rgba(0,0,0,.25);
-      backdrop-filter: saturate(120%);
-    }
-    
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 25px rgba(218,165,32,.3);
-      background: linear-gradient(180deg, rgba(218,165,32,.16), rgba(218,165,32,.08));
-    }
-    
-    .btn:active { 
-      transform: translateY(0); 
-      filter: brightness(.98); 
-    }
-    
-    .btn:focus-visible { 
-      outline: 2px solid rgba(218,165,32,.6); 
-      outline-offset: 2px; 
-    }
+        /* --- CANVAS --- */
+        #canvas-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            opacity: 0.6;
+            mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+        }
 
-    .btn.solid {
-      color: #0b0b0b;
-      border-color: #e0b640;
-      background: linear-gradient(180deg, #ffe08a, #ffd25a 30%, var(--accent1) 100%);
-      box-shadow: 0 2px 0 rgba(255,255,255,.18) inset, 0 12px 26px rgba(218,165,32,.35);
-    }
-    
-    .btn.solid:hover {
-      box-shadow: 0 2px 0 rgba(255,255,255,.22) inset, 0 16px 32px rgba(218,165,32,.42);
-      filter: saturate(110%);
-    }
+        /* --- DECORATION --- */
+        .tech-corner {
+            position: absolute;
+            width: 8px; height: 8px;
+            border-color: rgba(59, 130, 246, 0.3);
+            transition: 0.3s;
+        }
+        .holo-card:hover .tech-corner { border-color: #60a5fa; }
+        
+        .tl { top: 0; left: 0; border-top: 2px solid; border-left: 2px solid; }
+        .tr { top: 0; right: 0; border-top: 2px solid; border-right: 2px solid; }
+        .bl { bottom: 0; left: 0; border-bottom: 2px solid; border-left: 2px solid; }
+        .br { bottom: 0; right: 0; border-bottom: 2px solid; border-right: 2px solid; }
 
-    /* CTA row layout */
-    .cta-row { 
-      display:flex; 
-      gap:.8rem; 
-      justify-content:center; 
-      flex-wrap:wrap; 
-      margin-top: 2rem; 
-    }
+        /* Blue Block Cursor */
+        .blue-block-cursor::after { 
+            content: '';
+            display: inline-block;
+            width: 0.6em;
+            height: 0.9em;
+            background-color: #3b82f6;
+            margin-left: 0.1em;
+            vertical-align: middle;
+            animation: blink 1s step-end infinite;
+            box-shadow: 0 0 10px #3b82f6;
+        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-    /* Footer links (no underline) */
-    footer a { 
-      text-decoration: none; 
-      opacity:.9; 
-    }
-    
-    footer a:hover { 
-      opacity:1; 
-    }
+        /* Button Clip */
+        .clip-button {
+            clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+        }
 
-    html { 
-      scroll-behavior: smooth; 
-    }
-
-    /* Upgrade: section titles with gold accent underline */
-    .section-title {
-      text-align:center;
-      color: var(--text);
-      margin-bottom: 20px;
-      font-weight: 700;
-      letter-spacing: .2px;
-      position: relative;
-      display: inline-block;
-      left: 50%; 
-      transform: translateX(-50%);
-      background: linear-gradient(90deg, var(--text), var(--text));
-      -webkit-background-clip: text; 
-      background-clip: text; 
-      color: transparent;
-      font-size: 2.2rem;
-    }
-    
-    .section-title:after {
-      content: "";
-      display:block;
-      height: 4px; 
-      width: 80px; 
-      margin:12px auto 0;
-      border-radius: 999px;
-      background: linear-gradient(90deg, #6b5c1e, var(--accent1), #7a5e16);
-      box-shadow: 0 0 18px rgba(218,165,32,.45);
-    }
-
-    /* Upgrade: cards hover */
-    .k { 
-      transition: var(--transition); 
-    }
-    
-    .k:hover { 
-      transform: translateY(-5px); 
-      box-shadow: 0 20px 40px rgba(0,0,0,.45); 
-      border-color: rgba(218,165,32,.28); 
-    }
-
-    /* Upgrade: nav active state */
-    .links a.active { 
-      color: var(--text); 
-      background: rgba(218,165,32,.14); 
-      border-color: rgba(218,165,32,.34); 
-    }
-
-    /* Floating back-to-top */
-    .fab-top {
-      position: fixed; 
-      right: 20px; 
-      bottom: 20px; 
-      z-index: 60;
-      display: none; 
-      align-items:center; 
-      gap:.5rem;
-      padding:.7rem .95rem; 
-      border-radius:999px;
-      border:1px solid rgba(218,165,32,.55);
-      background: linear-gradient(180deg, rgba(218,165,32,.18), rgba(218,165,32,.08));
-      color: var(--accent1); 
-      font-weight:700;
-      box-shadow: 0 10px 24px rgba(0,0,0,.35);
-      transition: var(--transition);
-    }
-    
-    .fab-top.show { 
-      display:inline-flex; 
-    }
-
-    /* Card glow upgrade */
-    .card { 
-      position:relative; 
-      overflow: hidden;
-    }
-    
-    .card:before { 
-      content:""; 
-      position:absolute; 
-      inset:0; 
-      border-radius:var(--radius); 
-      padding:1px; 
-      background:linear-gradient(135deg, rgba(218,165,32,.35), rgba(218,165,32,0)); 
-      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); 
-      -webkit-mask-composite: xor; 
-      mask-composite: exclude; 
-      pointer-events:none; 
-    }
-
-    /* Section spacing tweak */
-    #features .k { 
-      backdrop-filter: blur(2px) saturate(110%); 
-    }
-
-    /* Features grid upgrade */
-    .features-grid {
-      display:grid;
-      gap:22px;
-      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-      position:relative;
-    }
-    
-    .feature h3 {
-      color:var(--text);
-      margin:.25rem 0 6px;
-      font-weight:700;
-      letter-spacing:.2px;
-      font-size: 1.3rem;
-    }
-    
-    .feature p {
-      color:var(--muted);
-      line-height: 1.5;
-    }
-    
-    .icon-wrap {
-      width:60px;
-      height:60px;
-      display:grid;
-      place-items:center;
-      border-radius:16px;
-      background:linear-gradient(180deg, rgba(218,165,32,.22), rgba(218,165,32,.08));
-      border:1px solid rgba(218,165,32,.45);
-      box-shadow:0 6px 18px rgba(218,165,32,.18) inset, 0 6px 18px rgba(0,0,0,.35);
-      margin-bottom: 1rem;
-      transition: var(--transition);
-    }
-    
-    .icon-wrap i {
-      font-size: 1.6rem;
-      background: linear-gradient(135deg, var(--accent1), var(--accent2));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    
-    .feature:hover .icon-wrap {
-      transform:translateY(-3px) scale(1.05);
-      box-shadow:0 10px 25px rgba(218,165,32,.25) inset, 0 10px 25px rgba(0,0,0,.4);
-    }
-
-    /* Subtle background pattern inside features panel */
-    #features .k {
-      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0)) , rgba(30,30,30,.85);
-    }
-
-    /* Value section redesign */
-    .value-panel {
-      backdrop-filter:blur(3px) saturate(115%);
-    }
-    
-    .value-lead {
-      text-align:center;
-      color:var(--muted);
-      max-width:780px;
-      margin:0 auto 32px;
-      font-size:1.1rem;
-      line-height: 1.6;
-    }
-    
-    .value-grid {
-      display:grid;
-      gap:24px;
-      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    }
-    
-    .value-card {
-      padding:30px;
-      border-radius:var(--radius);
-      text-align:left;
-      position:relative;
-      transition: var(--transition);
-    }
-    
-    .value-card h3 {
-      margin:16px 0 10px;
-      font-weight:700;
-      letter-spacing:.2px;
-      color:var(--text);
-      font-size: 1.3rem;
-    }
-    
-    .value-card p {
-      color:var(--muted);
-      line-height: 1.5;
-    }
-    
-    .value-icon {
-      width:70px;
-      height:70px;
-      border-radius:18px;
-      display:grid;
-      place-items:center;
-      background:linear-gradient(180deg, rgba(218,165,32,.26), rgba(218,165,32,.09));
-      border:1px solid rgba(218,165,32,.55);
-      box-shadow:0 6px 20px rgba(0,0,0,.35), inset 0 0 12px rgba(218,165,32,.22);
-      transition: var(--transition);
-    }
-    
-    .value-icon i {
-      font-size: 1.8rem;
-      background: linear-gradient(135deg, var(--accent1), var(--accent2));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    
-    .value-card:hover .value-icon {
-      transform:translateY(-3px) scale(1.05);
-      box-shadow:0 10px 25px rgba(218,165,32,.3), inset 0 0 15px rgba(218,165,32,.25);
-    }
-
-    /* Why Now Section */
-    .why-panel {
-      backdrop-filter: blur(3px) saturate(115%);
-    }
-    
-    .why-lead {
-      text-align:center;
-      color:var(--muted);
-      max-width:780px;
-      margin:0 auto 32px;
-      font-size:1.1rem;
-      line-height: 1.6;
-    }
-    
-    .why-grid {
-      display:grid;
-      gap:24px;
-      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    }
-    
-    .why-card {
-      padding:30px;
-      border-radius:var(--radius);
-      text-align:left;
-      position:relative;
-      transition: var(--transition);
-    }
-    
-    .why-card h3 {
-      margin:16px 0 10px;
-      font-weight:700;
-      letter-spacing:.2px;
-      color:var(--text);
-      font-size: 1.3rem;
-    }
-    
-    .why-card p {
-      color:var(--muted);
-      line-height: 1.5;
-    }
-    
-    .why-icon {
-      width:70px;
-      height:70px;
-      border-radius:18px;
-      display:grid;
-      place-items:center;
-      background:linear-gradient(180deg, rgba(218,165,32,.26), rgba(218,165,32,.09));
-      border:1px solid rgba(218,165,32,.55);
-      box-shadow:0 6px 20px rgba(0,0,0,.35), inset 0 0 12px rgba(218,165,32,.22);
-      transition: var(--transition);
-    }
-    
-    .why-icon i {
-      font-size: 1.8rem;
-      background: linear-gradient(135deg, var(--accent1), var(--accent2));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    
-    .why-card:hover .why-icon {
-      transform:translateY(-3px) scale(1.05);
-      box-shadow:0 10px 25px rgba(218,165,32,.3), inset 0 0 15px rgba(218,165,32,.25);
-    }
-
-    /* Form styling */
-    form input, form select, form textarea {
-      padding:14px 16px;
-      background:rgba(0,0,0,.35);
-      border:1px solid rgba(218,165,32,.4);
-      border-radius:10px;
-      color:var(--text);
-      transition: var(--transition);
-      font-family: Inter, sans-serif;
-    }
-    
-    form input:focus, form select:focus, form textarea:focus {
-      outline: none;
-      border-color: var(--accent1);
-      box-shadow: 0 0 0 2px rgba(218,165,32,.2);
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-      .section-title {
-        font-size: 1.8rem;
-      }
-      
-      .hero {
-        padding: 100px 5% 40px;
-        min-height: 70vh;
-      }
-      
-      section {
-        padding: 60px 5%;
-      }
-      
-      .value-icon, .why-icon, .icon-wrap {
-        width: 55px;
-        height: 55px;
-      }
-      
-      .value-icon i, .why-icon i, .icon-wrap i {
-        font-size: 1.4rem;
-      }
-    }
-  </style>
+        /* Toast Notifications */
+        #toast-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+    </style>
 </head>
 <body>
-  <canvas id="quantum-bg"></canvas>
 
-  <header class="header">
-    <nav class="nav" aria-label="Primary">
-      <a href="#top" class="brand" aria-label="QCipher Home">
-        <div class="brand-logo">
-          <img src="qcipher-logo.png" alt="QCipher Logo">
+    <!-- Backgrounds -->
+    <div class="ambient-glow"></div>
+    <div id="canvas-container"></div>
+    <!-- Hex Grid Pattern -->
+    <div class="fixed inset-0 z-0 bg-hex-grid bg-[length:24px_40px] opacity-10 pointer-events-none animate-grid-flow"></div>
+
+    <!-- Notification Toast Container -->
+    <div id="toast-container"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 top-0 left-0 px-4 py-6 pointer-events-none">
+        <div class="max-w-7xl mx-auto pointer-events-auto relative">
+            
+            <!-- Main Navbar Container -->
+            <div class="glass-panel rounded-full p-2 flex items-center justify-between transition-all duration-500 hover:border-accent/40 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] bg-[#020617]/80 backdrop-blur-xl border border-white/10">
+                
+                <!-- 1. Logo Section -->
+                <a href="#" class="flex items-center gap-3 pl-4 pr-6 group">
+                    <!-- Custom QCipher Logo SVG (Globe + Shield) -->
+                    <div class="relative w-10 h-10 flex-shrink-0 text-accent group-hover:text-accent_glow transition-colors duration-300">
+                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+                            <!-- Outer Ring -->
+                            <circle cx="32" cy="32" r="28" stroke="currentColor" stroke-width="4" />
+                            <!-- Horizontal Line -->
+                            <path d="M4 32H60" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+                            <!-- Vertical Curves (Globe Effect) -->
+                            <path d="M32 4C38 4 44 14 44 32C44 50 38 60 32 60" stroke="currentColor" stroke-width="4"/>
+                            <path d="M32 4C26 4 20 14 20 32C20 50 26 60 32 60" stroke="currentColor" stroke-width="4"/>
+                            <!-- Center Shield with Masking Background -->
+                            <path d="M32 12L46 16V34C46 44 32 54 32 54C32 54 18 44 18 34V16L32 12Z" fill="#020617" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/>
+                            <!-- Inner Shield Detail -->
+                            <path d="M32 18L40 20.5V33C40 39 32 46 32 46C32 46 24 39 24 33V20.5L32 18Z" fill="currentColor" fill-opacity="0.2"/>
+                        </svg>
+                    </div>
+                    
+                    <div class="flex flex-col">
+                        <span class="text-xl font-bold font-display tracking-wide text-white leading-none group-hover:text-accent transition-colors">QCIPHER</span>
+                    </div>
+                </a>
+
+                <!-- 2. Desktop Menu (Center Pill) -->
+                <div class="hidden md:flex items-center bg-[#000000]/50 rounded-full px-1 py-1 border border-white/5 backdrop-blur-sm">
+                    <ul class="flex items-center text-[11px] font-mono font-bold text-slate-400 gap-1 tracking-wider">
+                        <li>
+                            <a href="#platform" class="relative group px-5 py-2 rounded-full hover:bg-white/5 hover:text-white transition-all block overflow-hidden">
+                                <span class="relative z-10 group-hover:text-accent transition-colors">PLATFORM</span>
+                                <div class="absolute bottom-0 left-0 w-full h-0.5 bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#industries" class="relative group px-5 py-2 rounded-full hover:bg-white/5 hover:text-white transition-all block overflow-hidden">
+                                <span class="relative z-10 group-hover:text-accent transition-colors">INDUSTRIES</span>
+                                <div class="absolute bottom-0 left-0 w-full h-0.5 bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#threats" class="relative group px-5 py-2 rounded-full hover:bg-white/5 hover:text-white transition-all block overflow-hidden">
+                                <span class="relative z-10 group-hover:text-accent transition-colors">THREAT_INTEL</span>
+                                <div class="absolute bottom-0 left-0 w-full h-0.5 bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#solutions" class="relative group px-5 py-2 rounded-full hover:bg-white/5 hover:text-white transition-all block overflow-hidden">
+                                <span class="relative z-10 group-hover:text-accent transition-colors">SOLUTIONS</span>
+                                <div class="absolute bottom-0 left-0 w-full h-0.5 bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 3. Actions & Mobile Toggle -->
+                <div class="flex items-center gap-2 pl-6 pr-2">
+                    <!-- Mobile Toggle Button -->
+                    <button id="mobile-menu-btn" class="md:hidden p-3 text-slate-300 hover:text-accent bg-white/5 hover:bg-white/10 rounded-full transition-all border border-transparent hover:border-accent/20">
+                        <i class="ph-bold ph-list text-xl"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu Dropdown -->
+            <div id="mobile-menu" class="hidden absolute top-full left-0 right-0 mt-4 glass-panel rounded-2xl p-2 flex flex-col gap-1 z-50 animate-slide-in origin-top">
+                <a href="#platform" class="text-xs font-mono font-bold text-slate-300 hover:text-accent hover:bg-white/5 p-4 rounded-xl transition-all">PLATFORM</a>
+                <a href="#industries" class="text-xs font-mono font-bold text-slate-300 hover:text-accent hover:bg-white/5 p-4 rounded-xl transition-all">INDUSTRIES</a>
+                <a href="#threats" class="text-xs font-mono font-bold text-slate-300 hover:text-accent hover:bg-white/5 p-4 rounded-xl transition-all">THREAT_INTEL</a>
+                <a href="#solutions" class="text-xs font-mono font-bold text-slate-300 hover:text-accent hover:bg-white/5 p-4 rounded-xl transition-all">SOLUTIONS</a>
+                <div class="h-px bg-white/5 my-1 mx-2"></div>
+                <a href="#contact" class="text-center bg-accent text-deep py-3 rounded-xl font-bold font-mono text-xs hover:bg-accent_glow transition-colors mx-2 mb-2">
+                    INITIATE AUDIT
+                </a>
+            </div>
         </div>
-        <span class="name">QCipher</span>
-      </a>
-      <div class="links" role="navigation">
-        <a href="#why">Why Now</a>
-        <a href="#features">Features</a>
-        <a href="#waitlist">Join Waitlist</a>
-        <a href="#contact">Contact</a>
-      </div>
     </nav>
-  </header>
 
-  <main id="top" role="main">
-    <section class="hero">
-      <div class="hero-inner">
-        <span class="eyebrow"><i class="fa-solid fa-shield"></i> Quantum-Safe Security • AI-Accelerated</span>
-        <h1>AI-Enhanced Quantum-Safe Security</h1>
-        <p class="lead">We make the transition to <strong>post‑quantum cryptography</strong> faster, easier, and more cost‑efficient.</p>
-        <div class="cta-row" role="group" aria-label="Primary actions">
-          <a href="#waitlist" class="btn solid"><i class="fa-solid fa-robot"></i> Join Waitlist</a>
-          <a href="#features" class="btn"><i class="fa-solid fa-chart-line"></i> Learn More</a>
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden" id="platform">
+        <div class="max-w-7xl mx-auto px-6 w-full relative z-10">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                
+                <!-- Left: Content -->
+                <div class="lg:w-1/2 space-y-8">
+                    <!-- Status Indicator -->
+                    <div class="inline-flex items-center gap-3 px-4 py-2 rounded-sm border border-accent/20 bg-accent/5 backdrop-blur-sm">
+                        <span class="relative flex h-2 w-2">
+                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+                          <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
+                        </span>
+                        <span class="text-[10px] font-mono text-accent tracking-widest uppercase">System: Active Protection</span>
+                    </div>
+
+                    <!-- Main Headline -->
+                    <h1 class="text-6xl lg:text-8xl font-bold font-display leading-[0.9] text-white tracking-tighter text-white-stark">
+                        ZERO TO<br>
+                        QUANTUM<br>
+                        <span class="blue-block-cursor text-white">SAFE</span>
+                    </h1>
+                    
+                    <div class="pl-6 border-l-2 border-accent space-y-6">
+                        <p class="text-xl text-slate-300 font-light leading-relaxed">
+                            The quantum era is arriving. <span class="text-accent-glow font-medium">Is your data ready?</span>
+                        </p>
+                        <p class="text-slate-400 leading-relaxed max-w-lg">
+                            We streamline the transition to post-quantum cryptography, making it <span class="text-white font-medium">seamless, automated, and secure</span>. Eliminate the complexity of migration and protect your infrastructure for the quantum era—let our platform handle the heavy lifting.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row items-center gap-5 pt-4">
+                        <a href="#contact" class="w-full sm:w-auto px-8 py-4 bg-accent text-white font-bold font-mono text-sm uppercase hover:bg-accent_glow hover:shadow-[0_0_30px_rgba(59,130,246,0.3)] transition-all duration-300 flex items-center justify-center gap-2 clip-button">
+                            <i class="ph-bold ph-rocket-launch"></i>
+                            Request Early Access
+                        </a>
+                        <button onclick="showToast('Demo environment initialization started...')" class="w-full sm:w-auto px-8 py-4 border border-white/10 text-white font-mono text-sm uppercase hover:border-accent hover:text-accent hover:bg-accent/5 transition-all duration-300 flex items-center justify-center gap-2 clip-button backdrop-blur-sm">
+                            <i class="ph-fill ph-play-circle"></i>
+                            View Demo
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right: Visual Anchor (Floating over canvas) -->
+                <div class="lg:w-1/2 h-[500px] flex items-center justify-end relative pointer-events-none">
+                    <!-- Glass Data Card -->
+                    <div class="absolute top-1/3 right-0 md:right-10 p-6 glass-panel w-80 rounded-lg animate-float z-20 border-l-4 border-accent shadow-lg shadow-accent/10">
+                        <div class="flex justify-between items-center mb-6 pb-4 border-b border-white/10">
+                            <span class="text-[10px] font-mono text-accent tracking-wider">/// NETWORK_ANALYSIS</span>
+                            <div class="flex gap-1.5">
+                                <div class="w-1.5 h-1.5 bg-slate-600 rounded-full"></div>
+                                <div class="w-1.5 h-1.5 bg-slate-600 rounded-full"></div>
+                                <div class="w-1.5 h-1.5 bg-accent rounded-full animate-pulse"></div>
+                            </div>
+                        </div>
+                        <div class="space-y-6">
+                            <!-- Graph Item 1 -->
+                            <div>
+                                <div class="flex justify-between text-[10px] font-mono text-slate-400 mb-2">
+                                    <span>RSA-2048 (LEGACY)</span>
+                                    <span class="text-danger-500 font-bold animate-pulse">VULNERABLE</span>
+                                </div>
+                                <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+                                    <div class="bg-danger-500 h-full w-[15%]"></div>
+                                </div>
+                            </div>
+                            <!-- Graph Item 2 -->
+                            <div>
+                                <div class="flex justify-between text-[10px] font-mono text-slate-400 mb-2">
+                                    <span>ML-KEM (NIST LEVEL 3)</span>
+                                    <span class="text-accent font-bold">SECURE</span>
+                                </div>
+                                <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+                                    <div class="bg-accent h-full w-[98%] shadow-[0_0_15px_rgba(59,130,246,0.6)]"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </section>
 
-    <!-- Value Proposition -->
-    <section id="value" class="container" aria-labelledby="value-title">
-      <div class="k value-panel" style="padding:60px 40px">
-        <h2 id="value-title" class="section-title">Why Enterprises Choose QCipher</h2>
-        <p class="value-lead">Accelerate PQC adoption with a platform built for real security teams — not endless consulting cycles.</p>
-        <div class="value-grid">
-          <div class="k value-card">
-            <div class="value-icon"><i class="fa-solid fa-shield-check"></i></div>
-            <h3>Compliance Ready</h3>
-            <p>Meet NIS2, ETSI, and NIST PQC migration guidelines with structured crypto inventory and migration evidence.</p>
-          </div>
-          <div class="k value-card">
-            <div class="value-icon"><i class="fa-solid fa-rocket"></i></div>
-            <h3>Faster PQC Migration</h3>
-            <p>Faster migration plans with our AI driven crypto discovery and migration planning tools.</p>
-          </div>
-          <div class="k value-card">
-            <div class="value-icon"><i class="fa-solid fa-users-gear"></i></div>
-            <h3>Empower Security Teams</h3>
-            <p>Give your security engineers the tools needed for PQC migration.</p>
-          </div>
-          <div class="k value-card">
-            <div class="value-icon"><i class="fa-solid fa-brain-circuit"></i></div>
-            <h3>AI‑Powered PQC Strategy</h3>
-            <p>Context‑aware optimization selects algorithms, key sizes, and rollout paths matched to your environment.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Why Now Section -->
-    <section id="why" class="container" aria-labelledby="why-title">
-      <div class="k why-panel" style="padding:60px 40px">
-        <h2 id="why-title" class="section-title">Why Act Now?</h2>
-        <p class="why-lead">Quantum threat timelines are no longer theoretical. Organizations that delay PQC readiness risk silent compromise, supply‑chain exposure, and regulatory penalties.</p>
-        <div class="why-grid">
-          <div class="k why-card">
-            <div class="why-icon"><i class="fa-solid fa-database"></i></div>
-            <h3>Data Being Collected Today</h3>
-            <p>Adversaries are already harvesting encrypted data for future decryption once quantum computers mature — this is "harvest now, decrypt later."</p>
-          </div>
-          <div class="k why-card">
-            <div class="why-icon"><i class="fa-solid fa-hourglass-half"></i></div>
-            <h3>Migration Takes Years</h3>
-            <p>Keys, certificates, identity systems, applications, endpoints, and vendors must all be upgraded—this is not a simple patch but a fundamental infrastructure overhaul.</p>
-          </div>
-          <div class="k why-card">
-            <div class="why-icon"><i class="fa-solid fa-link"></i></div>
-            <h3>Interconnected Risk</h3>
-            <p>Your security depends on every vendor and subsystem. One weak link exposes entire environments to quantum attacks.</p>
-          </div>
-          <div class="k why-card">
-            <div class="why-icon"><i class="fa-solid fa-scale-balanced"></i></div>
-            <h3>Regulations Are Shifting</h3>
-            <p>NIS2, CISA, NIST, and ETSI increasingly mandate crypto inventory and quantum‑safe transition strategies with specific deadlines.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Features -->
-    <section id="features" class="container" aria-labelledby="features-title">
-      <div class="k" style="padding:60px 40px">
-        <h2 id="features-title" class="section-title">Key Platform Features</h2>
-        <div class="features-grid">
-          <div class="k card feature" style="padding:30px">
-            <div class="icon-wrap"><i class="fa-solid fa-search"></i></div>
-            <h3>Crypto Inventory &amp; CBOM</h3>
-            <p>Discover and catalog cryptographic assets across code, services, networks, and dependencies with our AI multi‑scanner.</p>
-          </div>
-          <div class="k card feature" style="padding:30px">
-            <div class="icon-wrap"><i class="fa-solid fa-map"></i></div>
-            <h3>AI‑Generated Migration Plans</h3>
-            <p>Produce step‑by‑step plans tailored to your environment. Choose the right post-quantum algorithms for your application, Prioritize high‑risk assets. Our platform minimize quantum risk and improve performance and adaptability.</p>
-          </div>
-          <div class="k card feature" style="padding:30px">
-            <div class="icon-wrap"><i class="fa-solid fa-flask-vial"></i></div>
-            <h3>Simulate Before Execution</h3>
-            <p>Simulate on a digital twin: validate protocols, keys, certificates, and traffic impact before touching production.</p>
-          </div>
-          <div class="k card feature" style="padding:30px">
-            <div class="icon-wrap"><i class="fa-solid fa-chart-line"></i></div>
-            <h3>Continuous Monitoring &amp; Tuning</h3>
-            <p>Continuously monitor and adjust crypto parameters for optimal security, compliance, and performance across environments.</p>
-          </div>
-          <div class="k card feature" style="padding:30px">
-            <div class="icon-wrap"><i class="fa-solid fa-robot"></i></div>
-            <h3>Automated Rollout</h3>
-            <p>Orchestrate PQC upgrades with guardrails, canaries, staged rollouts, automatic rollback, and continuous verification.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-    
-    <!-- Waitlist -->
-    <section id="waitlist" class="container" aria-labelledby="waitlist-title">
-      <div class="k" style="padding:50px 40px;max-width:760px;margin:0 auto">
-        <h2 id="waitlist-title" class="section-title">Join the Quantum-Security Waitlist</h2>
-        <p style="color:var(--muted);text-align:center;margin-bottom:24px">Be among the first to experience automated PQC migration. We'll contact you for a brief discovery call.</p>
-        <form action="https://formsubmit.co/ferjanimedyassine@gmail.com" method="POST" style="display:grid;gap:16px" aria-label="Waitlist form">
-          <input type="hidden" name="_subject" value="New Waitlist Submission — QCipher" />
-          <input type="hidden" name="_next" value="https://qcipher.xyz/thank-you.html" />
-          <input type="hidden" name="_captcha" value="false" />
-          <label style="position:absolute;left:-9999px">Do not fill this: <input name="_honey" type="text" tabindex="-1" autocomplete="off" /></label>
-
-          <input type="text" name="name" placeholder="Your Name" required />
-          <input type="email" name="email" placeholder="Work Email" required />
-          <input type="text" name="company" placeholder="Organization (Optional)" />
-          <select name="interest" aria-label="Interest">
-            <option value="Security Professional">Security Professional</option>
-            <option value="Technical Leader">Technical Leader</option>
-            <option value="Enterprise Buyer">Enterprise Buyer</option>
-            <option value="Other">Other</option>
-          </select>
-          <textarea name="message" placeholder="Your message or questions…" rows="4"></textarea>
-          <button type="submit" class="btn solid" style="justify-self:center;width:100%"><i class="fa-solid fa-robot"></i> Join Waitlist</button>
-        </form>
-      </div>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact" class="container" aria-labelledby="contact-title">
-      <div class="k" style="padding:50px 40px;max-width:760px;margin:0 auto">
-        <h2 id="contact-title" class="section-title">Contact Us</h2>
-        <p style="color:var(--muted);text-align:center;margin-bottom:24px">For partnerships, media, or enterprise inquiries, reach us directly.</p>
-        <form action="https://formsubmit.co/ferjanimedyassine@gmail.com" method="POST" style="display:grid;gap:16px" aria-label="Contact form">
-          <input type="hidden" name="_subject" value="New Contact Message — QCipher" />
-          <input type="hidden" name="_captcha" value="false" />
-          <input type="text" name="name" placeholder="Your Name" required />
-          <input type="email" name="email" placeholder="Email" required />
-          <textarea name="message" placeholder="Your message…" rows="4"></textarea>
-          <button type="submit" class="btn solid" style="justify-self:center;width:100%">Send Message</button>
-        </form>
-      </div>
-    </section>
-  </main>
-
-  <!-- Back to top button -->
-  <button id="toTop" class="fab-top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i> Top</button>
-
-  <footer>
-    <div class="brand">
-      <div class="brand-logo">
-        <img src="qcipher-logo.png" alt="QCipher Logo">
-      </div>
-      <span class="name">QCipher</span>
-    </div>
-    <p>© <span id="year"></span> QCipher Technologies. All rights reserved.</p>
-    <p>  Bildungscampus 1, 74076 Heilbronn </p>
-    <p><a href="/privacy.html">Privacy Policy</a> • <a href="/terms.html">Terms of Service</a></p>
-    <noscript><p style="color:#b0b0b0">QCipher automates Post-Quantum Cryptography (PQC) migration with AI solutions for CBOM discovery, AI-generated playbooks, and orchestrated rollout aligned with NIST SP 800-208 and ETSI TR 103 617. Keywords: quantum-safe security, PQC migration, CBOM, NIS2.</p></noscript>
-  </footer>
-
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Enhanced Quantum Background Animation with Reduced Brightness
-    (function(){
-      const canvas = document.getElementById('quantum-bg');
-      const ctx = canvas.getContext('2d');
-      const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      let w, h, t = 0;
-      
-      // Multiple particle systems for different visual layers
-      const particles = {
-        quantumBits: [],
-        energyFields: [],
-        dataStreams: []
-      };
-      
-      const particleCounts = {
-        quantumBits: 60, // Reduced count for less brightness
-        energyFields: 25,
-        dataStreams: 15
-      };
-      
-      // Quantum Bit particles
-      class QuantumBit {
-        constructor() {
-          this.reset();
-          this.x = Math.random() * w;
-          this.y = Math.random() * h;
-        }
+    <!-- 1. Threat Intelligence (Moved Up) -->
+    <section class="py-32 bg-panel relative overflow-hidden" id="threats">
+        <!-- Warning Gradient -->
+        <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-danger-900/10 to-transparent pointer-events-none"></div>
         
-        reset() {
-          this.x = Math.random() * w;
-          this.y = Math.random() * h;
-          this.vx = (Math.random() - 0.5) * 0.6; // Slower movement
-          this.vy = (Math.random() - 0.5) * 0.6;
-          this.size = Math.random() * 1.5 + 0.8; // Smaller particles
-          this.color = `rgba(218, 165, 32, ${Math.random() * 0.3 + 0.1})`; // Lower opacity
-          this.phase = Math.random() * Math.PI * 2;
-          this.quantumState = Math.random();
-        }
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="flex flex-col lg:flex-row gap-16">
+                <!-- Text Content -->
+                <div class="lg:w-1/2">
+                    <div class="flex items-center gap-3 mb-6">
+                        <span class="w-12 h-0.5 bg-danger-500"></span>
+                        <span class="text-danger-500 font-mono text-xs tracking-widest uppercase font-bold">Alert: Immediate Action Required</span>
+                    </div>
+                    
+                    <h2 class="text-4xl lg:text-5xl font-display font-bold text-white mb-6 leading-tight">
+                        Harvest Now,<br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-500">Decrypt Later.</span>
+                    </h2>
+                    
+                    <p class="text-slate-400 text-lg leading-relaxed mb-8">
+                        Adversaries are actively intercepting your encrypted traffic today. They are building massive data lakes of "secure" communications, waiting for a fault-tolerant quantum computer (CRQC) to break RSA-2048 and decrypt everything retrospectively.
+                    </p>
+
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-4 p-5 border border-white/5 rounded-lg bg-white/5 hover:border-danger-500/30 hover:bg-danger-900/5 transition-all duration-300">
+                            <i class="ph-fill ph-warning-octagon text-2xl text-danger-500 mt-1"></i>
+                            <div>
+                                <h4 class="text-white font-bold text-sm font-display tracking-wide">Long-Term Secrets at Risk</h4>
+                                <p class="text-xs text-slate-400 mt-2 leading-relaxed">PII, Health Records, and State Secrets with 10+ year shelf lives are already compromised if harvested.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4 p-5 border border-white/5 rounded-lg bg-white/5 hover:border-accent/30 hover:bg-accent/5 transition-all duration-300">
+                            <i class="ph-fill ph-fingerprint text-2xl text-accent mt-1"></i>
+                            <div>
+                                <h4 class="text-white font-bold text-sm font-display tracking-wide">Identity Forgery</h4>
+                                <p class="text-xs text-slate-400 mt-2 leading-relaxed">Quantum computers will allow attackers to forge digital signatures, impersonating trusted entities.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Threat Dashboard -->
+                <div class="lg:w-1/2">
+                    <div class="glass-panel rounded-xl p-1 border border-white/10 shadow-[0_0_60px_-20px_rgba(59,130,246,0.1)]">
+                        <div class="bg-[#020617] rounded-lg p-8 relative overflow-hidden h-full">
+                            <!-- Scan line effect -->
+                            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-accent/5 to-transparent h-full animate-scan pointer-events-none"></div>
+                            
+                            <!-- Dashboard Header -->
+                            <div class="flex justify-between items-center mb-10 border-b border-white/10 pb-4">
+                                <div class="font-mono text-xs text-slate-500">TARGET: GLOBAL_INFRASTRUCTURE</div>
+                                <div class="text-danger-500 font-mono text-xs animate-pulse flex items-center gap-2">
+                                    <span class="w-2 h-2 rounded-full bg-danger-500"></span> RECORDING_TRAFFIC
+                                </div>
+                            </div>
+
+                            <!-- Timeline Visualization -->
+                            <div class="relative pl-8 border-l border-white/10 space-y-16">
+                                <!-- Now -->
+                                <div class="relative group">
+                                    <div class="absolute -left-[37px] top-1 w-4 h-4 rounded-full bg-deep border-2 border-slate-600 group-hover:border-white transition-colors"></div>
+                                    <div class="text-sm font-bold text-white mb-2 font-display">TODAY (2025)</div>
+                                    <div class="bg-white/5 p-4 rounded border border-white/5 text-xs text-slate-300 group-hover:border-white/20 transition-colors">
+                                        Traffic encrypted with RSA-2048 is intercepted and stored in exabyte-scale data centers.
+                                        <div class="mt-3 text-danger-400 font-mono text-[10px] tracking-widest">[ DATA HARVESTED ]</div>
+                                    </div>
+                                </div>
+
+                                <!-- Q-Day -->
+                                <div class="relative group">
+                                    <div class="absolute -left-[37px] top-1 w-4 h-4 rounded-full bg-danger-500 shadow-[0_0_15px_#f43f5e] animate-pulse"></div>
+                                    <div class="text-sm font-bold text-white mb-2 font-display">Q-DAY (~2030)</div>
+                                    <div class="bg-danger-900/10 p-4 rounded border border-danger-500/30 text-xs text-slate-300 group-hover:bg-danger-900/20 transition-colors">
+                                        Cryptographically Relevant Quantum Computer (CRQC) comes online.
+                                        <div class="mt-3">
+                                            <span class="text-white font-bold font-mono text-[10px] bg-danger-500/80 px-2 py-1 rounded">DECRYPTION SUCCESSFUL</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. QCipher Platform (Comprehensive Quantum Security) (Moved Up) -->
+    <section class="py-20 relative z-10" id="solutions">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <span class="text-accent font-mono text-xs tracking-widest uppercase bg-accent/10 px-4 py-1.5 rounded-full border border-accent/20">The QCipher Platform</span>
+                <h2 class="text-3xl md:text-4xl font-display font-bold text-white mt-4">All what you need to be quantum safe</h2>
+                <p class="text-slate-400 mt-3 max-w-2xl mx-auto text-sm">Empower your security team today with automated, enterprise-grade quantum protection.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1: Discovery -->
+                <div class="holo-card rounded-2xl p-8 group">
+                    <div class="tech-corner tl"></div><div class="tech-corner tr"></div><div class="tech-corner bl"></div><div class="tech-corner br"></div>
+                    
+                    <div class="w-14 h-14 bg-accent/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-accent/20 transition-all duration-300 border border-accent/20 group-hover:shadow-[0_0_20px_rgba(59,130,246,0.2)]">
+                        <i class="ph-fill ph-scan text-2xl text-accent"></i>
+                    </div>
+                    <h3 class="text-xl font-display font-bold text-white mb-3 group-hover:text-accent transition-colors">Discovery</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed mb-6 font-light">
+                        Cryptographic inventory engine that discovers all keys, algorithms, and code. Generates a standardized CBOM and quantifies quantum risk.
+                    </p>
+                    <div class="h-px w-full bg-gradient-to-r from-accent/50 to-transparent opacity-30"></div>
+                </div>
+
+                <!-- Card 2: AI Migration Planning -->
+                <div class="holo-card rounded-2xl p-8 group">
+                    <div class="tech-corner tl"></div><div class="tech-corner tr"></div><div class="tech-corner bl"></div><div class="tech-corner br"></div>
+                    
+                    <div class="w-14 h-14 bg-accent/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-accent/20 transition-all duration-300 border border-accent/20 group-hover:shadow-[0_0_20px_rgba(59,130,246,0.2)]">
+                        <i class="ph-fill ph-brain text-2xl text-accent"></i>
+                    </div>
+                    <h3 class="text-xl font-display font-bold text-white mb-3 group-hover:text-accent transition-colors">AI Planning</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed mb-6 font-light">
+                        Our advanced AI engine plans the safest migration path, automatically selecting optimal PQC algorithms based on compliance and system constraints.
+                    </p>
+                    <div class="h-px w-full bg-gradient-to-r from-accent/50 to-transparent opacity-30"></div>
+                </div>
+
+                <!-- Card 3: Simulation -->
+                <div class="holo-card rounded-2xl p-8 group">
+                    <div class="tech-corner tl"></div><div class="tech-corner tr"></div><div class="tech-corner bl"></div><div class="tech-corner br"></div>
+                    
+                    <div class="w-14 h-14 bg-accent/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-accent/20 transition-all duration-300 border border-accent/20 group-hover:shadow-[0_0_20px_rgba(59,130,246,0.2)]">
+                        <i class="ph-fill ph-flask text-2xl text-accent"></i>
+                    </div>
+                    <h3 class="text-xl font-display font-bold text-white mb-3 group-hover:text-accent transition-colors">Simulation</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed mb-6 font-light">
+                        ML surrogate models predict performance (latency, memory, energy). Optimizers select configurations that meet security and resource limits.
+                    </p>
+                    <div class="h-px w-full bg-gradient-to-r from-accent/50 to-transparent opacity-30"></div>
+                </div>
+
+                <!-- Card 4: Orchestration -->
+                <div class="holo-card rounded-2xl p-8 group">
+                    <div class="tech-corner tl"></div><div class="tech-corner tr"></div><div class="tech-corner bl"></div><div class="tech-corner br"></div>
+                    
+                    <div class="w-14 h-14 bg-accent/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-accent/20 transition-all duration-300 border border-accent/20 group-hover:shadow-[0_0_20px_rgba(59,130,246,0.2)]">
+                        <i class="ph-fill ph-share-network text-2xl text-accent"></i>
+                    </div>
+                    <h3 class="text-xl font-display font-bold text-white mb-3 group-hover:text-accent transition-colors">Orchestration</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed mb-6 font-light">
+                        Automates secure rollout via CI/CD pipelines. Enforces policies, monitors deployment health, and feeds continuous improvements via telemetry.
+                    </p>
+                    <div class="h-px w-full bg-gradient-to-r from-accent/50 to-transparent opacity-30"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Automated Migration Process -->
+    <section class="py-32 relative overflow-hidden">
+        <!-- Background Bloom -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[90%] bg-gradient-to-r from-accent/5 via-secondary/5 to-accent/5 blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-20">
+                <span class="text-accent font-mono text-xs tracking-widest uppercase">/// AUTOMATED_LIFECYCLE</span>
+                <h2 class="text-3xl md:text-4xl font-display font-bold text-white mt-4">No PQC Expertise Required</h2>
+                <p class="text-slate-400 mt-4 max-w-2xl mx-auto">From discovery to deployment, our platform automates the complex transition to post-quantum standards in one seamless workflow.</p>
+            </div>
+
+            <!-- PROCESS VISUALIZATION -->
+            <div class="relative w-full max-w-6xl mx-auto">
+                
+                <!-- Main Glass Container -->
+                <div class="bg-[#09090b]/90 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden shadow-2xl relative group">
+                    
+                    <!-- Decorative Top Bar -->
+                    <div class="flex items-center justify-between px-6 py-4 border-b border-white/5 bg-[#000000]/50">
+                        <div class="flex items-center gap-4">
+                            <span class="flex h-2 w-2 relative">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
+                            </span>
+                            <span class="text-xs font-mono text-slate-400 tracking-wider">PIPELINE_STATUS: <span class="text-accent">ACTIVE</span></span>
+                        </div>
+                        <div class="text-[10px] font-mono text-slate-500">
+                            MODE: <span class="text-white">END_TO_END</span>
+                        </div>
+                    </div>
+
+                    <!-- Process Area: Linear Transformation Pipeline -->
+                    <div class="p-8 md:p-20 relative min-h-[400px] flex flex-col md:flex-row items-center justify-between gap-8">
+                        
+                        <!-- Background Grid -->
+                        <div class="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.03)_1px,transparent_1px)] bg-[size:30px_30px]"></div>
+
+                        <!-- Central Connection Track -->
+                        <div class="hidden md:block absolute top-1/2 left-20 right-20 h-px bg-gradient-to-r from-danger-500/20 via-accent to-accent/20"></div>
+                        
+                        <!-- Moving Data Particles along the track -->
+                        <div class="hidden md:block absolute top-1/2 left-20 right-20 h-10 -translate-y-1/2 overflow-hidden pointer-events-none">
+                             <div class="flex justify-between w-full absolute top-1/2 -translate-y-1/2 animate-[scan-horizontal_3s_linear_infinite]">
+                                  <div class="w-2 h-2 bg-white rounded-full blur-[1px]"></div>
+                                  <div class="w-16 h-1 bg-gradient-to-r from-transparent to-white opacity-50"></div>
+                             </div>
+                        </div>
+
+
+                        <!-- START: Legacy Node -->
+                        <div class="relative z-10 w-full md:w-auto flex flex-col items-center text-center gap-4 group">
+                            <div class="relative p-1 rounded-2xl bg-gradient-to-b from-danger-900/50 to-transparent border border-danger-500/30 hover:border-danger-500 transition-colors shadow-[0_0_30px_-10px_rgba(244,63,94,0.2)]">
+                                <div class="bg-[#020617] rounded-xl p-8 w-64 h-48 flex flex-col items-center justify-center gap-4">
+                                    <div class="w-16 h-16 rounded-full bg-danger-500/10 flex items-center justify-center border border-danger-500/20 group-hover:bg-danger-500/20 transition-colors">
+                                        <i class="ph-duotone ph-lock-open text-3xl text-danger-500"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-white font-bold font-display text-lg">Legacy Infra</h3>
+                                        <p class="text-[10px] font-mono text-slate-500 mt-1 uppercase tracking-wider">RSA-2048 / ECC</p>
+                                    </div>
+                                    <div class="px-2 py-1 bg-danger-500/10 border border-danger-500/20 rounded text-[9px] font-mono text-danger-500 animate-pulse">
+                                        VULNERABLE
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- MIDDLE: The QCipher Engine -->
+                        <div class="relative z-20 flex-1 flex flex-col items-center justify-center">
+                            <!-- Animated Container -->
+                            <div class="relative w-24 h-24 flex items-center justify-center">
+                                <!-- Spinning Rings -->
+                                <div class="absolute inset-0 border-2 border-accent/30 rounded-full animate-[spin_4s_linear_infinite] border-t-accent"></div>
+                                <div class="absolute inset-2 border border-dashed border-accent/50 rounded-full animate-[spin_8s_linear_infinite_reverse]"></div>
+                                <!-- Core Icon -->
+                                <div class="bg-black border border-accent w-16 h-16 rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(59,130,246,0.6)] z-10">
+                                    <i class="ph-fill ph-arrows-left-right text-2xl text-accent"></i>
+                                </div>
+                            </div>
+                            <div class="mt-4 text-center">
+                                <h4 class="text-xs font-mono font-bold text-accent tracking-widest uppercase">Auto-Migration</h4>
+                                <p class="text-[10px] text-slate-500 mt-1">Processing...</p>
+                            </div>
+                        </div>
+
+                        <!-- END: Quantum Safe Node -->
+                        <div class="relative z-10 w-full md:w-auto flex flex-col items-center text-center gap-4 group">
+                             <div class="relative p-1 rounded-2xl bg-gradient-to-b from-accent/50 to-transparent border border-accent/30 hover:border-accent transition-colors shadow-[0_0_30px_-10px_rgba(59,130,246,0.3)]">
+                                <div class="bg-[#020617] rounded-xl p-8 w-64 h-48 flex flex-col items-center justify-center gap-4 relative overflow-hidden">
+                                    <!-- Shine Effect -->
+                                    <div class="absolute inset-0 bg-gradient-to-tr from-accent/10 to-transparent opacity-50 group-hover:opacity-100 transition-opacity"></div>
+                                    
+                                    <div class="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center border border-accent/20 group-hover:bg-accent/20 transition-colors relative z-10">
+                                        <i class="ph-fill ph-shield-check text-3xl text-accent"></i>
+                                    </div>
+                                    <div class="relative z-10">
+                                        <h3 class="text-white font-bold font-display text-lg">Quantum Safe</h3>
+                                        <p class="text-[10px] font-mono text-slate-500 mt-1 uppercase tracking-wider">ML-KEM / ML-DSA</p>
+                                    </div>
+                                    <div class="px-2 py-1 bg-accent/10 border border-accent/20 rounded text-[9px] font-mono text-accent relative z-10 flex items-center gap-1">
+                                        <i class="ph-bold ph-check"></i> SECURE
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Automation Footer Stats -->
+                    <div class="grid grid-cols-3 divide-x divide-white/5 bg-[#000000]/80 border-t border-white/5">
+                        <div class="p-4 text-center">
+                            <div class="text-lg font-bold text-white font-display flex items-center justify-center gap-2">
+                                <i class="ph-fill ph-lightning text-accent"></i> Faster
+                            </div>
+                            <div class="text-[9px] font-mono text-slate-500 uppercase tracking-widest mt-1">Migration Speed</div>
+                        </div>
+                        <div class="p-4 text-center">
+                            <div class="text-lg font-bold text-white font-display flex items-center justify-center gap-2">
+                                <i class="ph-fill ph-magic-wand text-accent"></i> Easier
+                            </div>
+                            <div class="text-[9px] font-mono text-slate-500 uppercase tracking-widest mt-1">Automated Workflow</div>
+                        </div>
+                        <div class="p-4 text-center">
+                            <div class="text-lg font-bold text-white font-display flex items-center justify-center gap-2">
+                                <i class="ph-fill ph-certificate text-accent"></i> Compliant
+                            </div>
+                            <div class="text-[9px] font-mono text-slate-500 uppercase tracking-widest mt-1">NIST Standards</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Industries -->
+    <section class="py-24 bg-panel relative z-10" id="industries">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-accent font-mono text-xs tracking-widest uppercase bg-accent/10 px-4 py-1.5 rounded-full border border-accent/20">Sectors</span>
+                <h2 class="text-3xl md:text-4xl font-display font-bold text-white mt-4">Critical Infrastructure Defense</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Finance -->
+                <div class="holo-card rounded-xl p-6 group hover:bg-black transition-colors">
+                    <i class="ph-duotone ph-bank text-4xl text-accent mb-4 group-hover:text-white transition-colors"></i>
+                    <h3 class="text-lg font-bold text-white mb-2">Financial Services</h3>
+                    <p class="text-sm text-slate-400 font-light">Secure high-frequency trading and long-duration ledgers. ISO 20022 compliant.</p>
+                </div>
+
+                <!-- Defense -->
+                <div class="holo-card rounded-xl p-6 group hover:bg-black transition-colors">
+                    <i class="ph-duotone ph-shield-check text-4xl text-accent mb-4 group-hover:text-white transition-colors"></i>
+                    <h3 class="text-lg font-bold text-white mb-2">Defense & Gov</h3>
+                    <p class="text-sm text-slate-400 font-light">Protect classified comms and sensitive data. CNSA 2.0 readiness.</p>
+                </div>
+
+                <!-- Auto -->
+                <div class="holo-card rounded-xl p-6 group hover:bg-black transition-colors">
+                    <i class="ph-duotone ph-car text-4xl text-accent mb-4 group-hover:text-white transition-colors"></i>
+                    <h3 class="text-lg font-bold text-white mb-2">Automotive & IoT</h3>
+                    <p class="text-sm text-slate-400 font-light">Secure V2X channels and long-lifecycle embedded devices against Q-Day.</p>
+                </div>
+
+                <!-- Healthcare -->
+                <div class="holo-card rounded-xl p-6 group hover:bg-black transition-colors">
+                    <i class="ph-duotone ph-heartbeat text-4xl text-accent mb-4 group-hover:text-white transition-colors"></i>
+                    <h3 class="text-lg font-bold text-white mb-2">Healthcare</h3>
+                    <p class="text-sm text-slate-400 font-light">Safeguard sensitive patient data (EHR) with multi-decade retention requirements.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. NIST Standards Strip -->
+    <section class="bg-deep border-y border-white/5 py-16 relative overflow-hidden" id="technology">
+        <div class="absolute inset-0 bg-hex-grid opacity-5"></div>
+        <div class="max-w-7xl mx-auto px-6 relative z-10 flex flex-wrap justify-center gap-6 lg:gap-12">
+            <div class="flex items-center gap-3 px-8 py-4 rounded-lg bg-white/5 border border-white/10 hover:border-accent/50 transition-colors group cursor-default">
+                <div class="w-6 h-6 rounded-full bg-accent/20 flex items-center justify-center border border-accent/50">
+                    <i class="ph-fill ph-check text-accent text-xs"></i>
+                </div>
+                <span class="text-sm font-mono text-slate-300 tracking-wider group-hover:text-white transition-colors">NIST FIPS 203 (ML-KEM)</span>
+            </div>
+            <div class="flex items-center gap-3 px-8 py-4 rounded-lg bg-white/5 border border-white/10 hover:border-accent/50 transition-colors group cursor-default">
+                <div class="w-6 h-6 rounded-full bg-accent/20 flex items-center justify-center border border-accent/50">
+                    <i class="ph-fill ph-check text-accent text-xs"></i>
+                </div>
+                <span class="text-sm font-mono text-slate-300 tracking-wider group-hover:text-white transition-colors">NIST FIPS 204 (ML-DSA)</span>
+            </div>
+            <div class="flex items-center gap-3 px-8 py-4 rounded-lg bg-white/5 border border-white/10 hover:border-accent/50 transition-colors group cursor-default">
+                <div class="w-6 h-6 rounded-full bg-accent/20 flex items-center justify-center border border-accent/50">
+                    <i class="ph-fill ph-check text-accent text-xs"></i>
+                </div>
+                <span class="text-sm font-mono text-slate-300 tracking-wider group-hover:text-white transition-colors">CNSA 2.0 Ready</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Trusted By Section -->
+    <section class="bg-panel border-y border-white/5 py-6 relative overflow-hidden">
+        <!-- Background Texture -->
+        <div class="absolute inset-0 bg-hex-grid opacity-5"></div>
         
-        update() {
-          // Quantum behavior - particles move in wave-like patterns
-          this.phase += 0.02; // Slower phase change
-          this.vx += Math.sin(this.phase) * 0.015;
-          this.vy += Math.cos(this.phase) * 0.015;
-          
-          this.x += this.vx;
-          this.y += this.vy;
-          
-          // Boundary behavior - quantum tunneling effect
-          if (this.x < 0 || this.x > w || this.y < 0 || this.y > h) {
-            if (Math.random() > 0.8) { // Lower quantum tunneling probability
-              this.x = Math.random() * w;
-              this.y = Math.random() * h;
-            } else {
-              if (this.x < 0) this.vx = Math.abs(this.vx);
-              if (this.x > w) this.vx = -Math.abs(this.vx);
-              if (this.y < 0) this.vy = Math.abs(this.vy);
-              if (this.y > h) this.vy = -Math.abs(this.vy);
+        <div class="max-w-7xl mx-auto px-6 relative z-10 flex flex-row items-center justify-center gap-6 opacity-70 hover:opacity-100 transition-opacity duration-500">
+            <p class="text-[9px] font-mono text-slate-600 uppercase tracking-widest whitespace-nowrap">Trusted By</p>
+            
+            <div class="h-4 w-px bg-white/10"></div>
+
+            <!-- Recreated Campus Founders Logo (Compact Version) -->
+            <div class="relative group cursor-default transition-transform duration-500 hover:scale-105">
+                <div class="flex flex-col relative pl-4 pb-1 pr-1 pt-1">
+                    <!-- The Distinctive Green Bracket (Scaled Down) -->
+                    <div class="absolute top-0 left-0 w-6 h-[2px] bg-[#a4c639] shadow-[0_0_10px_rgba(164,198,57,0.4)]"></div>
+                    <div class="absolute top-0 left-0 w-[2px] h-full bg-[#a4c639] shadow-[0_0_10px_rgba(164,198,57,0.4)]"></div>
+                    <div class="absolute bottom-0 left-0 w-full h-[2px] bg-[#a4c639] shadow-[0_0_10px_rgba(164,198,57,0.4)]"></div>
+                    
+                    <!-- The Text (Scaled Down) -->
+                    <div class="flex flex-col leading-[0.85] z-10">
+                         <span class="text-lg font-sans font-light text-white tracking-wide">CAMPUS</span>
+                         <span class="text-lg font-sans font-bold text-white tracking-wide mt-0.5">FOUNDERS</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Pilot Waitlist CTA -->
+    <section class="py-32 relative" id="contact">
+        <div class="max-w-3xl mx-auto px-6 relative z-10">
+            <div class="glass-panel rounded-2xl p-1 bg-gradient-to-b from-white/10 to-transparent">
+                <div class="bg-panel rounded-xl p-8 md:p-12 border border-white/5 relative overflow-hidden">
+                    <!-- Glow behind -->
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-accent/5 blur-3xl pointer-events-none"></div>
+                    
+                    <div class="relative z-10">
+                        <div class="text-center mb-10">
+                            <div class="w-16 h-16 mx-auto bg-accent/10 rounded-full flex items-center justify-center mb-6 border border-accent/20 shadow-[0_0_20px_rgba(59,130,246,0.2)]">
+                                <i class="ph-duotone ph-rocket-launch text-3xl text-accent"></i>
+                            </div>
+                            
+                            <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-4">Join the Pilot Waitlist</h2>
+                            <p class="text-slate-400 max-w-lg mx-auto text-sm leading-relaxed">
+                                Secure early access to the industry's first automated PQC migration platform. 
+                            </p>
+                        </div>
+                        
+                        <!-- Form submits to specific email using FormSubmit AJAX -->
+                        <form class="max-w-lg mx-auto space-y-4" onsubmit="event.preventDefault(); const btn = this.querySelector('button'); const originalText = btn.innerHTML; btn.innerHTML = 'Sending...'; fetch('https://formsubmit.co/ajax/ferjanimedyassine@gmail.com', { method: 'POST', body: new FormData(this) }).then(res => res.json()).then(data => { showToast('Application Encrypted & Sent'); btn.innerHTML = originalText; this.reset(); }).catch(err => { showToast('Error sending application'); btn.innerHTML = originalText; });">
+                            
+                            <!-- Hidden Configuration for FormSubmit -->
+                            <input type="hidden" name="_subject" value="New QCipher Pilot Application">
+                            <input type="hidden" name="_template" value="table">
+                            <input type="hidden" name="_captcha" value="false">
+
+                            <!-- Name & Company Grid -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="space-y-1">
+                                    <label class="text-[10px] font-mono text-slate-500 uppercase tracking-wider ml-1">Full Name</label>
+                                    <div class="relative">
+                                        <i class="ph-bold ph-user absolute left-4 top-1/2 -translate-y-1/2 text-slate-500"></i>
+                                        <input type="text" name="name" required placeholder="Alice Smith" class="w-full bg-panel border border-white/10 pl-10 p-3 rounded text-white font-mono text-sm focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent transition-all placeholder:text-slate-700">
+                                    </div>
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="text-[10px] font-mono text-slate-500 uppercase tracking-wider ml-1">Company</label>
+                                    <div class="relative">
+                                        <i class="ph-bold ph-buildings absolute left-4 top-1/2 -translate-y-1/2 text-slate-500"></i>
+                                        <input type="text" name="company" required placeholder="Acme Corp" class="w-full bg-panel border border-white/10 pl-10 p-3 rounded text-white font-mono text-sm focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent transition-all placeholder:text-slate-700">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Email Field -->
+                            <div class="space-y-1">
+                                <label class="text-[10px] font-mono text-slate-500 uppercase tracking-wider ml-1">Work Email</label>
+                                <div class="relative">
+                                    <i class="ph-bold ph-envelope absolute left-4 top-1/2 -translate-y-1/2 text-slate-500"></i>
+                                    <input type="email" name="email" required placeholder="alice@acmecorp.com" class="w-full bg-panel border border-white/10 pl-10 p-3 rounded text-white font-mono text-sm focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent transition-all placeholder:text-slate-700">
+                                </div>
+                            </div>
+
+                            <!-- Message Field (New) -->
+                            <div class="space-y-1">
+                                <label class="text-[10px] font-mono text-slate-500 uppercase tracking-wider ml-1">Project Context</label>
+                                <div class="relative">
+                                    <i class="ph-bold ph-chat-text absolute left-4 top-4 text-slate-500"></i>
+                                    <textarea name="message" placeholder="Briefly describe your cryptographic infrastructure or specific PQC goals..." rows="3" class="w-full bg-panel border border-white/10 pl-10 p-3 rounded text-white font-mono text-sm focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent transition-all placeholder:text-slate-700 resize-none"></textarea>
+                                </div>
+                            </div>
+
+                            <!-- Submit -->
+                            <button type="submit" class="w-full bg-white text-deep font-bold font-mono uppercase py-4 rounded hover:bg-accent hover:shadow-[0_0_20px_rgba(59,130,246,0.4)] transition-all duration-300 mt-2 flex items-center justify-center gap-2 group">
+                                Apply for Access
+                                <i class="ph-bold ph-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                            </button>
+                        </form>
+                        
+                        <div class="flex items-center justify-center gap-2 mt-8 opacity-60">
+                            <i class="ph-fill ph-lock-key text-accent text-xs"></i>
+                            <p class="text-[10px] text-slate-500 font-mono tracking-widest uppercase">
+                                
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deep Tech Footer -->
+    <footer class="relative bg-black pt-20 pb-10 overflow-hidden border-t border-accent/20">
+        
+        <!-- Animated Quantum Grid Background -->
+        <div class="absolute inset-0 z-0 opacity-20 pointer-events-none">
+            <div class="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] animate-grid-flow"></div>
+        </div>
+        
+        <!-- Scanning Energy Line at Top -->
+        <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent"></div>
+        <div class="absolute top-0 left-0 w-1/3 h-[2px] bg-accent blur-[3px] animate-[scan-horizontal_4s_linear_infinite] shadow-[0_0_15px_rgba(59,130,246,0.8)]"></div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-slate-500 font-mono">
+                
+                <div class="flex items-center gap-2">
+                     <div class="w-2 h-2 bg-accent rounded-full animate-pulse"></div>
+                     <p>&copy; 2025 QCipher - Bildungscampus 11, 74076 Heilbronn.</p>
+                </div>
+
+                <div class="flex items-center gap-8 bg-white/5 px-6 py-2 rounded-full border border-white/5 backdrop-blur-sm hover:border-accent/30 transition-colors">
+                    <a href="#" class="hover:text-accent hover:shadow-[0_0_10px_rgba(59,130,246,0.5)] transition-all">TWITTER</a>
+                    <a href="#" class="hover:text-accent hover:shadow-[0_0_10px_rgba(59,130,246,0.5)] transition-all">LINKEDIN</a>
+                    <a href="#" class="hover:text-accent hover:shadow-[0_0_10px_rgba(59,130,246,0.5)] transition-all">GITHUB</a>
+                </div>
+            </div>
+            
+            <!-- Bottom Ambient Glow -->
+            <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-20 bg-accent/10 blur-[50px] pointer-events-none"></div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // 1. Mobile Menu
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+
+        // 2. Custom Toast Notification (Replaces Alert)
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            
+            // Cyber-themed styling
+            toast.className = 'bg-deep/90 backdrop-blur border border-accent/40 text-accent font-mono text-xs p-4 rounded shadow-lg animate-slide-in flex items-center gap-3 min-w-[300px]';
+            toast.innerHTML = `
+                <i class="ph-bold ph-check-circle text-lg"></i>
+                <span>${message}</span>
+            `;
+
+            container.appendChild(toast);
+
+            // Remove after 3 seconds
+            setTimeout(() => {
+                toast.classList.replace('animate-slide-in', 'animate-fade-out');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // 3. Three.js: Quantum Landscape Background
+        window.onload = () => {
+            const container = document.getElementById('canvas-container');
+            if(!container) return; // Safety check
+
+            const scene = new THREE.Scene();
+            
+            // Camera setup
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 50;
+            camera.position.y = 15;
+            camera.rotation.x = -0.2;
+
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            container.appendChild(renderer.domElement);
+
+            // --- Wireframe Landscape ---
+            const planeGeometry = new THREE.PlaneGeometry(150, 150, 40, 40);
+            // Updated Material Color to Blue
+            const planeMaterial = new THREE.MeshBasicMaterial({ 
+                color: 0x1e3a8a, // Dark Blue
+                wireframe: true,
+                transparent: true,
+                opacity: 0.15
+            });
+
+            const plane = new THREE.Mesh(planeGeometry, planeMaterial);
+            plane.rotation.x = -Math.PI / 2;
+            plane.position.y = -10;
+            scene.add(plane);
+
+            // --- Floating Particles (Data Dust) ---
+            const particlesGeometry = new THREE.BufferGeometry();
+            const particlesCount = 800;
+            const posArray = new Float32Array(particlesCount * 3);
+
+            for(let i = 0; i < particlesCount * 3; i+=3) {
+                posArray[i] = (Math.random() - 0.5) * 150;   // x
+                posArray[i+1] = (Math.random() - 0.5) * 100; // y
+                posArray[i+2] = (Math.random() - 0.5) * 100; // z
             }
-          }
-          
-          // Speed limits
-          const speed = Math.sqrt(this.vx*this.vx + this.vy*this.vy);
-          const maxSpeed = 1.2; // Lower max speed
-          if (speed > maxSpeed) {
-            this.vx = (this.vx / speed) * maxSpeed;
-            this.vy = (this.vy / speed) * maxSpeed;
-          }
-        }
-        
-        draw() {
-          // Draw quantum bit with subtle glow effect
-          const gradient = ctx.createRadialGradient(
-            this.x, this.y, 0,
-            this.x, this.y, this.size * 2.5
-          );
-          gradient.addColorStop(0, this.color);
-          gradient.addColorStop(1, 'rgba(218, 165, 32, 0)');
-          
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, this.size * 2.5, 0, Math.PI * 2);
-          ctx.fillStyle = gradient;
-          ctx.fill();
-          
-          // Core particle
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(255, 215, 145, 0.7)'; // Lower opacity
-          ctx.fill();
-        }
-      }
-      
-      // Energy Field particles (larger, slower moving)
-      class EnergyField {
-        constructor() {
-          this.reset();
-        }
-        
-        reset() {
-          this.x = Math.random() * w;
-          this.y = Math.random() * h;
-          this.size = Math.random() * 80 + 40; // Smaller fields
-          this.opacity = Math.random() * 0.06 + 0.03; // Lower opacity
-          this.pulseSpeed = Math.random() * 0.015 + 0.008; // Slower pulsing
-          this.pulsePhase = Math.random() * Math.PI * 2;
-        }
-        
-        update() {
-          this.pulsePhase += this.pulseSpeed;
-          this.currentOpacity = this.opacity + Math.sin(this.pulsePhase) * 0.02; // Lower pulse amplitude
-        }
-        
-        draw() {
-          const gradient = ctx.createRadialGradient(
-            this.x, this.y, 0,
-            this.x, this.y, this.size
-          );
-          gradient.addColorStop(0, `rgba(218, 165, 32, ${this.currentOpacity})`);
-          gradient.addColorStop(1, 'rgba(218, 165, 32, 0)');
-          
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-          ctx.fillStyle = gradient;
-          ctx.fill();
-        }
-      }
-      
-      // Data Stream particles (moving in streams)
-      class DataStream {
-        constructor() {
-          this.reset();
-        }
-        
-        reset() {
-          this.side = Math.floor(Math.random() * 4); // 0: top, 1: right, 2: bottom, 3: left
-          this.progress = Math.random();
-          this.speed = Math.random() * 0.004 + 0.0015; // Slower speed
-          this.size = Math.random() * 2 + 0.8; // Smaller particles
-          this.color = `rgba(218, 165, 32, ${Math.random() * 0.25 + 0.2})`; // Lower opacity
-          
-          // Set initial position based on side
-          switch(this.side) {
-            case 0: // top
-              this.x = Math.random() * w;
-              this.y = 0;
-              this.targetX = Math.random() * w;
-              this.targetY = h;
-              break;
-            case 1: // right
-              this.x = w;
-              this.y = Math.random() * h;
-              this.targetX = 0;
-              this.targetY = Math.random() * h;
-              break;
-            case 2: // bottom
-              this.x = Math.random() * w;
-              this.y = h;
-              this.targetX = Math.random() * w;
-              this.targetY = 0;
-              break;
-            case 3: // left
-              this.x = 0;
-              this.y = Math.random() * h;
-              this.targetX = w;
-              this.targetY = Math.random() * h;
-              break;
-          }
-        }
-        
-        update() {
-          this.progress += this.speed;
-          if (this.progress >= 1) {
-            this.reset();
-            this.progress = 0;
-          }
-          
-          // Calculate current position
-          this.x = this.x + (this.targetX - this.x) * this.progress;
-          this.y = this.y + (this.targetY - this.y) * this.progress;
-        }
-        
-        draw() {
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-          ctx.fillStyle = this.color;
-          ctx.fill();
-          
-          // Draw trail (shorter and more subtle)
-          const trailLength = 3;
-          for (let i = 1; i <= trailLength; i++) {
-            const trailProgress = this.progress - (i * 0.015);
-            if (trailProgress < 0) continue;
-            
-            const trailX = this.x + (this.targetX - this.x) * trailProgress;
-            const trailY = this.y + (this.targetY - this.y) * trailProgress;
-            
-            ctx.beginPath();
-            ctx.arc(trailX, trailY, this.size * (1 - i/trailLength), 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(218, 165, 32, ${0.2 * (1 - i/trailLength)})`;
-            ctx.fill();
-          }
-        }
-      }
-      
-      function resize(){
-        w = canvas.width = window.innerWidth;
-        h = canvas.height = window.innerHeight;
-        
-        // Reset particles on resize
-        initParticles();
-      }
-      
-      function initParticles() {
-        // Initialize quantum bits
-        particles.quantumBits = [];
-        for(let i = 0; i < particleCounts.quantumBits; i++) {
-          particles.quantumBits.push(new QuantumBit());
-        }
-        
-        // Initialize energy fields
-        particles.energyFields = [];
-        for(let i = 0; i < particleCounts.energyFields; i++) {
-          particles.energyFields.push(new EnergyField());
-        }
-        
-        // Initialize data streams
-        particles.dataStreams = [];
-        for(let i = 0; i < particleCounts.dataStreams; i++) {
-          particles.dataStreams.push(new DataStream());
-        }
-      }
-      
-      function drawConnections() {
-        // Draw subtle connections between quantum bits
-        for(let i = 0; i < particles.quantumBits.length; i++) {
-          for(let j = i + 1; j < particles.quantumBits.length; j++) {
-            const p1 = particles.quantumBits[i];
-            const p2 = particles.quantumBits[j];
-            const dx = p1.x - p2.x;
-            const dy = p1.y - p2.y;
-            const distance = Math.sqrt(dx*dx + dy*dy);
-            
-            if (distance < 120) { // Shorter connection distance
-              const opacity = 1 - (distance / 120);
-              ctx.beginPath();
-              ctx.moveTo(p1.x, p1.y);
-              ctx.lineTo(p2.x, p2.y);
-              ctx.strokeStyle = `rgba(218, 165, 32, ${opacity * 0.08})`; // Lower opacity
-              ctx.lineWidth = 0.6;
-              ctx.stroke();
+
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+            // Updated Particles Color to Bright Blue
+            const particlesMaterial = new THREE.PointsMaterial({
+                size: 0.15,
+                color: 0x3b82f6, // Bright Blue
+                transparent: true,
+                opacity: 0.6
+            });
+            const particleMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+            scene.add(particleMesh);
+
+            // Interaction
+            let mouseX = 0;
+            let mouseY = 0;
+            const windowHalfX = window.innerWidth / 2;
+            const windowHalfY = window.innerHeight / 2;
+
+            document.addEventListener('mousemove', (event) => {
+                mouseX = (event.clientX - windowHalfX);
+                mouseY = (event.clientY - windowHalfY);
+            });
+
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+
+            const clock = new THREE.Clock();
+
+            function animate() {
+                requestAnimationFrame(animate);
+                const elapsedTime = clock.getElapsedTime();
+
+                // Animate Terrain (Wave Effect)
+                const positionAttribute = planeGeometry.attributes.position;
+                for ( let i = 0; i < positionAttribute.count; i ++ ) {
+                    const x = positionAttribute.getX(i);
+                    const y = positionAttribute.getY(i);
+                    
+                    // Wave formula
+                    const z = Math.sin(x / 10 + elapsedTime * 0.5) * 2 + Math.cos(y / 10 + elapsedTime * 0.3) * 2;
+                    positionAttribute.setZ(i, z); 
+                }
+                positionAttribute.needsUpdate = true;
+
+                // Rotate Particles
+                particleMesh.rotation.y += 0.0005;
+                particleMesh.rotation.x -= 0.0002;
+
+                // Mouse Parallax
+                camera.position.x += (mouseX * 0.01 - camera.position.x) * 0.05;
+                camera.position.y += (-mouseY * 0.01 + 15 - camera.position.y) * 0.05;
+                camera.lookAt(scene.position);
+
+                renderer.render(scene, camera);
             }
-          }
-        }
-      }
-      
-      function drawQuantumWaves() {
-        // Large quantum wave interference patterns (more subtle)
-        for(let i = 0; i < 3; i++) { // Fewer waves
-          const radius = 80 + i * 130 + Math.sin(t * 0.0008 + i) * 30; // Slower movement
-          const opacity = 0.015 + i * 0.008; // Lower opacity
-          
-          ctx.beginPath();
-          ctx.arc(w/2, h/2, radius, 0, Math.PI * 2);
-          ctx.strokeStyle = `rgba(218, 165, 32, ${opacity})`;
-          ctx.lineWidth = 0.8;
-          ctx.stroke();
-        }
-        
-        // Orbital quantum nodes (more subtle)
-        const orbitalCount = 5; // Fewer orbitals
-        for(let i = 0; i < orbitalCount; i++) {
-          const angle = t * 0.0006 + i * (Math.PI * 2 / orbitalCount); // Slower rotation
-          const radius = Math.min(w, h) * 0.25;
-          const x = w/2 + Math.cos(angle) * radius;
-          const y = h/2 + Math.sin(angle) * radius;
-          
-          // Draw subtle orbital path
-          ctx.beginPath();
-          ctx.arc(w/2, h/2, radius, 0, Math.PI * 2);
-          ctx.strokeStyle = 'rgba(218, 165, 32, 0.03)'; // Lower opacity
-          ctx.lineWidth = 0.8;
-          ctx.stroke();
-          
-          // Draw orbital node with subtle glow
-          const nodeGradient = ctx.createRadialGradient(x, y, 0, x, y, 12);
-          nodeGradient.addColorStop(0, 'rgba(255, 215, 145, 0.6)'); // Lower opacity
-          nodeGradient.addColorStop(1, 'rgba(218, 165, 32, 0)');
-          
-          ctx.beginPath();
-          ctx.arc(x, y, 12, 0, Math.PI * 2);
-          ctx.fillStyle = nodeGradient;
-          ctx.fill();
-          
-          ctx.beginPath();
-          ctx.arc(x, y, 3, 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(255, 215, 145, 0.8)'; // Lower opacity
-          ctx.fill();
-        }
-      }
-      
-      function drawBackground() {
-        // Base gradient background (darker)
-        const gradient = ctx.createRadialGradient(
-          w/2, h/2, 0,
-          w/2, h/2, Math.max(w, h) * 0.8
-        );
-        gradient.addColorStop(0, 'rgba(3, 3, 3, 1)'); // Darker
-        gradient.addColorStop(0.7, 'rgba(8, 8, 8, 1)'); // Darker
-        gradient.addColorStop(1, 'rgba(12, 12, 12, 1)'); // Darker
-        
-        ctx.fillStyle = gradient;
-        ctx.fillRect(0, 0, w, h);
-      }
-      
-      function frame(){
-        t += 1;
-        
-        drawBackground();
-        drawQuantumWaves();
-        
-        // Update and draw energy fields
-        particles.energyFields.forEach(field => {
-          field.update();
-          field.draw();
-        });
-        
-        // Update and draw data streams
-        particles.dataStreams.forEach(stream => {
-          stream.update();
-          stream.draw();
-        });
-        
-        // Update and draw quantum bits
-        particles.quantumBits.forEach(bit => {
-          bit.update();
-          bit.draw();
-        });
-        
-        drawConnections();
-        
-        if(!reduce) requestAnimationFrame(frame);
-      }
-      
-      // Initialize
-      resize();
-      initParticles();
-      frame();
-      window.addEventListener('resize', resize);
-    })();
-
-    // Nav active link highlight + back-to-top
-    (function(){
-      const anchors = Array.from(document.querySelectorAll('.links a[href^="#"]'));
-      const map = new Map(anchors.map(a=>[a.getAttribute('href'), a]));
-      const opts = { rootMargin: '-40% 0px -55% 0px', threshold: 0 };
-      const io = new IntersectionObserver((entries)=>{
-        entries.forEach(e=>{
-          if(e.isIntersecting){
-            anchors.forEach(a=>a.classList.remove('active'));
-            const id = '#'+e.target.id; const link = map.get(id); link && link.classList.add('active');
-          }
-        })
-      }, opts);
-      document.querySelectorAll('main section[id]').forEach(sec=>io.observe(sec));
-
-      const fab = document.getElementById('toTop');
-      const toggleFab = () => { if(window.scrollY>400) fab.classList.add('show'); else fab.classList.remove('show'); };
-      window.addEventListener('scroll', toggleFab); toggleFab();
-      fab.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
-    })();
-  </script>
+            animate();
+        };
+    </script>
 </body>
 </html>
-
-
