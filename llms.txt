@@ -1,0 +1,35 @@
+# QCipher
+
+> QCipher helps organisations prepare for post-quantum cryptography migration by discovering quantum-vulnerable cryptography, generating CBOMs, prioritizing risk, and supporting crypto-agility.
+
+## Site
+
+- Canonical site: https://qcipher.de/
+- German version: https://qcipher.de/index_de.html
+- Logo: https://qcipher.de/qcipher-logo.png
+- LinkedIn: https://www.linkedin.com/company/qcipher
+- Contact and demo booking: https://outlook.office.com/book/QCipherteammeet@qcipher.de/?ismsaljsauthenabled
+
+## What QCipher does
+
+- Discovers cryptographic assets across code, dependencies, certificates, and infrastructure.
+- Generates and ingests CycloneDX 1.7 CBOM reports.
+- Scores findings by vulnerability, sensitivity, and exposure.
+- Prioritizes post-quantum cryptography migration work.
+- Supports crypto-agility planning so algorithms can be replaced repeatedly as standards and threats change.
+- Keeps customer code and data inside the customer's environment.
+
+## Primary topics
+
+- Post-quantum cryptography
+- PQC migration
+- Crypto-agility
+- Cryptographic asset discovery
+- CBOM
+- Quantum risk assessment
+- HNDL-aware prioritization
+- Local graph intelligence
+
+## Suggested citation
+
+QCipher, post-quantum cryptography migration and crypto-agility platform, https://qcipher.de/
