@@ -135,21 +135,12 @@
     display: flex;
     flex-direction: column;
     gap: 0.35rem;
-    width: 148px;
+    width: 162px;
     padding: 0.8rem;
     background: #0a0a0a;
     color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 18px 45px rgba(10, 10, 10, 0.16);
-  }
-  .section-sidebar-title {
-    font-family: var(--font-mono);
-    font-size: 0.62rem;
-    line-height: 1;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.5);
-    margin-bottom: 0.25rem;
   }
   .section-sidebar a {
     display: flex;
@@ -184,10 +175,6 @@
       border-radius: 0;
       padding: 0.55rem var(--pad);
       box-shadow: none;
-    }
-    .section-sidebar-title {
-      flex: 0 0 auto;
-      margin: 0 0.55rem 0 0;
     }
     .section-sidebar a {
       flex: 0 0 auto;
@@ -231,7 +218,7 @@
 
   /* ─────────── HERO ─────────── */
   .hero {
-    padding: clamp(5.5rem, 14vw, 10rem) 0 clamp(2rem, 6vw, 4rem);
+    padding: clamp(5.5rem, 14vw, 10rem) 0 clamp(1.6rem, 4vw, 2.75rem);
   }
   h1 {
     font-family: var(--font-display);
@@ -247,6 +234,13 @@
     font-style: italic;
     font-weight: 400;
     letter-spacing: -0.02em;
+  }
+  .hero-subtitle {
+    max-width: 34ch;
+    margin-top: 1.35rem;
+    font-size: clamp(1.05rem, 2vw, 1.35rem);
+    line-height: 1.45;
+    color: var(--ink-soft);
   }
 
 
@@ -585,9 +579,12 @@
 
   /* ─────────── SUPPORTED BY ─────────── */
   .supporters {
-    padding: clamp(3rem, 6vw, 4.5rem) 0;
-    border-top: 1px solid var(--rule);
+    padding: clamp(1.5rem, 3.5vw, 2.5rem) 0 clamp(3rem, 6vw, 4.5rem);
     background: var(--bg);
+  }
+  .supporters.hero-supporters {
+    border-top: 0;
+    padding-top: 0;
   }
   .supporters-label {
     font-family: var(--font-mono);
@@ -595,7 +592,7 @@
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--muted);
-    margin-bottom: 1.75rem;
+    margin-bottom: 1.2rem;
     text-align: center;
   }
   .supporters-row {
@@ -714,13 +711,10 @@
 </nav>
 
 <aside class="section-sidebar" aria-label="Page sections">
-  <div class="section-sidebar-title">Sections</div>
   <a href="#top">Home</a>
-  <a href="#engine">Engine</a>
-  <a href="#pqc">PQC</a>
-  <a href="#agility">Agility</a>
-  <a href="#labs">Labs</a>
-  <a href="#contact">Contact</a>
+  <a href="#pqc">Product</a>
+  <a href="#labs">R&amp;D</a>
+  <a href="#contact">Book a call</a>
 </aside>
 
 <!-- ─────────── HERO ─────────── -->
@@ -729,6 +723,9 @@
     <h1 class="reveal">
       Post-quantum cryptography <em>made simple</em>.
     </h1>
+    <p class="hero-subtitle reveal">
+      Future-proof your IT infrastructure against the quantum threat
+    </p>
   </div>
 </header>
 
@@ -1022,6 +1019,13 @@
 </footer>
 
 <script>
+  const hero = document.querySelector(".hero");
+  const supporters = document.querySelector(".supporters");
+  if (hero && supporters) {
+    supporters.classList.add("hero-supporters");
+    hero.insertAdjacentElement("afterend", supporters);
+  }
+
   const io = new IntersectionObserver((entries) => {
     for (const e of entries) {
       if (e.isIntersecting) {
