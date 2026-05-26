@@ -128,16 +128,15 @@
     position: sticky;
     top: 0;
     z-index: 100;
-    background: rgba(255, 255, 255, 0.88);
-    backdrop-filter: saturate(160%) blur(14px);
-    -webkit-backdrop-filter: saturate(160%) blur(14px);
+    background: #000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   }
   nav.site .row {
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    min-height: 68px;
+    min-height: 88px;
     max-width: 1120px;
     margin: 0 auto;
     padding: 0 var(--pad);
@@ -145,7 +144,7 @@
   }
   .brand-logo {
     display: block;
-    height: 46px;
+    height: 64px;
     width: auto;
     border-radius: 6px;
   }
@@ -167,34 +166,34 @@
     align-items: center;
     gap: 6px;
     padding: 5px 11px;
-    border: 1px solid var(--rule-strong);
+    border: 1px solid rgba(255, 255, 255, 0.32);
     border-radius: 999px;
     font-family: var(--font-mono);
     font-size: 0.72rem;
     letter-spacing: 0.08em;
-    color: var(--muted);
+    color: rgba(255, 255, 255, 0.82);
     text-decoration: none;
     transition: all 0.18s ease;
   }
   .lang-switch:hover {
-    color: var(--ink);
-    border-color: var(--ink);
-    background: var(--bg-soft);
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.72);
+    background: rgba(255, 255, 255, 0.12);
   }
   .lang-icon { display: block; opacity: 0.85; }
 
   nav.site .nav-link {
     font-family: var(--font-mono);
     font-size: 0.78rem;
-    color: var(--muted);
+    color: rgba(255, 255, 255, 0.76);
     letter-spacing: 0.04em;
     border-bottom: 1px solid transparent;
     padding-bottom: 2px;
     transition: all 0.18s ease;
   }
   nav.site .nav-link:hover {
-    color: var(--ink);
-    border-bottom-color: var(--ink);
+    color: #fff;
+    border-bottom-color: #fff;
   }
 
   /* ─────────── PQC "WHY NOW" ASIDE ─────────── */
@@ -706,11 +705,11 @@
   }
 
   @media (max-width: 620px) {
-    nav.site .row { align-items: flex-start; padding-block: 0.75rem; }
+    nav.site .row { align-items: flex-start; padding-block: 1rem; }
     nav.site .nav-meta { width: 100%; justify-content: flex-start; }
     .nav-sections { gap: 0.65rem 0.9rem; }
     nav.site .nav-link { font-size: 0.72rem; }
-    .brand-logo { height: 38px; }
+    .brand-logo { height: 58px; }
     .cta-logo { width: 200px; }
     footer .foot-row { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
   }
