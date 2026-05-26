@@ -578,7 +578,16 @@
   }
   .supporters.hero-supporters {
     border-top: 0;
-    padding-top: 0;
+    padding-top: clamp(2.75rem, 6vw, 5rem);
+    padding-bottom: clamp(4rem, 7vw, 5.5rem);
+  }
+  .supporters.hero-supporters::before {
+    content: "";
+    display: block;
+    width: min(180px, 42vw);
+    height: 1px;
+    margin: 0 auto clamp(2rem, 4vw, 3rem);
+    background: var(--rule-strong);
   }
   .supporters-label {
     font-family: var(--font-mono);
@@ -603,9 +612,15 @@
     min-height: 72px;
     text-decoration: none;
     opacity: 0.92;
-    transition: opacity 0.2s ease;
+    animation: supporterFloat 5.5s ease-in-out infinite;
+    transition: opacity 0.2s ease, filter 0.2s ease;
+    will-change: transform;
   }
-  .supporter:hover { opacity: 1; }
+  .supporter:nth-child(2) { animation-delay: 0.8s; }
+  .supporter:hover {
+    opacity: 1;
+    filter: saturate(1.08);
+  }
   .supporter-badge {
     height: 72px;
     width: auto;
@@ -679,10 +694,15 @@
     transform-origin: center;
     animation: pulseRing 2.6s ease-out infinite;
   }
+  @keyframes supporterFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
 
   @media (prefers-reduced-motion: reduce) {
     .reveal { opacity: 1; transform: none; transition: none; }
     .pulse-ring { animation: none; opacity: 0; }
+    .supporter { animation: none; }
   }
 
   @media (max-width: 620px) {
